@@ -1,70 +1,129 @@
-Ressources & Documentation
-Laravel
 
-Documentation : https://laravel.com/docs/12.x
-Laracasts : https://laracasts.com
-Forums : https://laracasts.com/discuss
+# 📦 DigitalCMS-lrv12
 
-Packages
+Application **CMS  avec :
+- authentification Breeze (Blade)
+- gestion des rôles & permissions
+- backend CRUD complet
+- frontend Bootstrap 5
+- configuration Vite adaptée
+- seeders prêts à l’emploi
 
-Packagist (PHP) : https://packagist.org
-NPM Registry : https://www.npmjs.com
+---
 
-Communauté
+## 📚 Ressources & Documentation
 
-Laravel News : https://laravel-news.com
-Laravel Daily : https://laraveldaily.com
+### Laravel
+- Documentation officielle : https://laravel.com/docs/12.x  
+- Laracasts : https://laracasts.com  
+- Forum Laracasts : https://laracasts.com/discuss  
 
+### Packages
+- Packagist (PHP) : https://packagist.org  
+- NPM Registry : https://www.npmjs.com  
 
-# Installation Laravel 12
+### Communauté
+- Laravel News : https://laravel-news.com  
+- Laravel Daily : https://laraveldaily.com  
+
+---
+
+## 🚀 Installation Laravel 12
+
+### Création du projet
+```bash
 composer create-project laravel/laravel cmslarv "12.*"
 cd cmslarv
+````
 
+### Configuration de l’environnement
 
-# Configurer l'environnement
+```bash
 cp .env.example .env
 php artisan key:generate
+```
 
-# Configurer la base de données dans .env
-# DB_CONNECTION=mysql 
+Configurer la base de données dans `.env` :
 
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_db
+DB_USERNAME=your_user
+DB_PASSWORD=your_password
+```
 
-# migrations
+### Migrations
+
+```bash
 php artisan migrate
+```
 
-# serveur de développement
+### Serveur de développement
+
+```bash
 php artisan serve
+```
 
+---
 
-###  Structure d'un projet Laravel 12 vierge
+## 📂 Structure d’un projet Laravel 12 vierge
 
+Structure standard Laravel 12 avec :
 
-# dépendances NPM
+* `app/` (Models, Controllers, Middleware)
+* `database/` (migrations, seeders)
+* `resources/` (Blade, JS, CSS)
+* `routes/`
+* `storage/`
+* `public/`
+
+---
+
+## 🎨 Gestion des assets (Vite)
+
+### Dépendances NPM
+
+```bash
 npm install
+```
 
-# Compile les assets
+### Compilation des assets
+
+```bash
 npm run build
+```
 
-# serveur de développement avec Vite
+### Mode développement
+
+```bash
 npm run dev
+```
 
-# clé d'application
+---
+
+## ⚙️ Commandes utiles Laravel
+
+```bash
 php artisan key:generate
-
-# lien symbolique pour le storage
 php artisan storage:link
 
-# Vide cache
 php artisan cache:clear
 php artisan config:clear
 php artisan route:clear
 php artisan view:clear
 
-# routes disponibles
 php artisan route:list
+```
 
+---
 
-# Packages de production
+## 📦 Packages Composer
+
+### Production
+
+```bash
 composer require barryvdh/laravel-dompdf:^3.1
 composer require cviebrock/eloquent-sluggable:^12.0
 composer require intervention/image-laravel:^1.5
@@ -78,16 +137,23 @@ composer require spatie/laravel-medialibrary:^11.12
 composer require sqids/sqids:^0.5.0
 composer require unisharp/laravel-filemanager:^2.0
 composer require yajra/laravel-datatables-oracle:^12.0
+```
 
-# Packages de développement
+### Développement
+
+```bash
 composer require --dev barryvdh/laravel-debugbar:^3.15
 composer require --dev laravel/breeze:^2.3
 composer require --dev laravel/pail:^1.2
 composer require --dev laravel/pint:^1.21
 composer require --dev laravel/sail:^1.41
+```
 
+---
 
-# Dépendances de développement
+## 🧩 Dépendances Frontend (NPM)
+
+```bash
 npm install --save-dev @coreui/coreui@^5.4.3
 npm install --save-dev @fortawesome/fontawesome-free@^6.7.2
 npm install --save-dev @popperjs/core@^2.11.8
@@ -104,218 +170,192 @@ npm install --save-dev resolve-url-loader@^5.0.0
 npm install --save-dev sass@^1.92.1
 npm install --save-dev sass-loader@^16.0.5
 npm install --save-dev simplebar@^6.3.2
+```
 
+---
 
+## 🔐 Authentification Breeze (Blade)
 
-
-
-# Installer Breeze
+```bash
 php artisan breeze:install blade
-
-# Publier les migrations
-npm install && npm run build
+npm install
+npm run build
 php artisan migrate
+```
 
+* Dark mode : ❌ Non
+* Tests Pest : ❌ Non
 
+---
 
+## 🗄️ Ordre des migrations principales
 
-# Ordre des tables Migration
-php artisan make:migration create_users_table.php
-php artisan make:migration reate_cache_table.php
-php artisan make:migration create_jobs_table.php
-php artisan make:migration add_fields_to_users_table.php
-php artisan make:migration create_roles_table.php
-php artisan make:migration create_permissions_table.php
-php artisan make:migration create_role_user_table.php
-php artisan make:migration create_permission_user_table.php
-php artisan make:migration create_permission_role_table.php
+```bash
+php artisan make:migration create_users_table
+php artisan make:migration create_cache_table
+php artisan make:migration create_jobs_table
+php artisan make:migration add_fields_to_users_table
+php artisan make:migration create_roles_table
+php artisan make:migration create_permissions_table
+php artisan make:migration create_role_user_table
+php artisan make:migration create_permission_user_table
+php artisan make:migration create_permission_role_table
+```
 
+---
 
+## 🧠 Models
 
-
-# Creation Models
+```bash
 php artisan make:model Role
 php artisan make:model Permission
+```
 
+---
 
-# 1. Installer Breeze avec Blade
-php artisan breeze:install blade
+## 🎮 Controllers
 
-# 2. Installer les dépendances NPM
-npm install
-
-# 3. Compiler les assets
-npm run build
-
-# 4. Exécuter les migrations Breeze (si nécessaire)
-php artisan migrate
-
-Dark mode support ? No
-Pest tests ? No (ou Yes selon préférence)
-
-# Creation Controllers
+```bash
 php artisan make:controller RoleController --resource
 php artisan make:controller PermissionController --resource
 php artisan make:controller UserController --resource
 php artisan make:controller DashboardController
 php artisan make:controller ProfileController
 php artisan make:controller HomeController
+```
 
-Mise à jour du contenu de routes/web.php
+Routes configurées dans `routes/web.php`.
 
+---
 
+## 🌱 Seeders
+
+```bash
 php artisan make:seeder RoleSeeder
 php artisan make:seeder PermissionSeeder
 php artisan make:seeder RolePermissionSeeder
 php artisan make:seeder UserSeeder
+```
 
-Modification DatabaseSeeder.php avec ( RoleSeeder::class,
-            PermissionSeeder::class,
-            RolePermissionSeeder::class,
-            UserSeeder::class,)
+`DatabaseSeeder.php` :
 
+```php
+RoleSeeder::class,
+PermissionSeeder::class,
+RolePermissionSeeder::class,
+UserSeeder::class,
+```
 
+### Exécution
 
-
-# Exécution  des seeders
+```bash
 php artisan db:seed
+```
 
-# OU tout réinitialiser et re-seeder
+Ou reset complet :
+
+```bash
 php artisan migrate:fresh --seed
+```
 
+---
 
-Les comptes créés :
+## 👤 Comptes de test
 
-admin@sport.fr / password (Admin)
-hassan@nataswim.fr / password (Manager)
-marie@nataswim.fr / password (Editor)
-thomas@athlete.fr / password (User MNS)
-sophie@agent.fr / password (Agent)
-julien@tech.fr / password (Tech)
-lucas@nageur.fr / password (Amateur)
+| Rôle     | Email                                           | Mot de passe |
+| -------- | ----------------------------------------------- | ------------ |
+| Admin    | [admin@sport.fr](mailto:admin@sport.fr)         | password     |
+| Manager  | [hassan@nataswim.fr](mailto:hassan@nataswim.fr) | password     |
+| Editor   | [marie@nataswim.fr](mailto:marie@nataswim.fr)   | password     |
+| User MNS | [thomas@athlete.fr](mailto:thomas@athlete.fr)   | password     |
+| Agent    | [sophie@agent.fr](mailto:sophie@agent.fr)       | password     |
+| Tech     | [julien@tech.fr](mailto:julien@tech.fr)         | password     |
+| Amateur  | [lucas@nageur.fr](mailto:lucas@nageur.fr)       | password     |
 
+---
 
+## 🎨 Problème Vite / Tailwind / Bootstrap
 
-# Cre&tion pages
+### Problème
 
+Laravel Breeze installe Tailwind par défaut, mais l’interface utilise Bootstrap.
 
+### Solution — Configuration Bootstrap
 
+#### Supprimer Tailwind
 
-# #  Problème : Configuration Vite/Tailwind vs Bootstrap
-Explication : Laravel Breeze installe par défaut Tailwind CSS, mais nous avons créé toutes nos vues avec Bootstrap. Vite essaie de charger Tailwind qui n'est pas correctement configuré.
-Solution : Configurer pour Bootstrap
-# Étape 1 : Supprimer la config Tailwind
-Supprimer le fichier : postcss.config.js
-bashrm postcss.config.js
-Supprimer le fichier : tailwind.config.js
-bashrm tailwind.config.js
-# Étape 2 : Modifier resources/css/app.css
-Remplacer le contenu de resources/css/app.css :
-/* Bootstrap */
+```bash
+rm postcss.config.js
+rm tailwind.config.js
+```
+
+#### `resources/css/app.css`
+
+```css
 @import 'bootstrap/dist/css/bootstrap.min.css';
-
-/* Font Awesome */
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 
-/* Styles personnalisés */
 body {
     font-family: 'Figtree', sans-serif;
 }
+```
 
-.bg-primary-subtle {
-    background-color: rgba(13, 110, 253, 0.1) !important;
-}
+#### `resources/js/app.js`
 
-.bg-success-subtle {
-    background-color: rgba(25, 135, 84, 0.1) !important;
-}
-
-.bg-info-subtle {
-    background-color: rgba(13, 202, 240, 0.1) !important;
-}
-
-.bg-warning-subtle {
-    background-color: rgba(255, 193, 7, 0.1) !important;
-}
-
-.bg-danger-subtle {
-    background-color: rgba(220, 53, 69, 0.1) !important;
-}
-
-.bg-secondary-subtle {
-    background-color: rgba(108, 117, 125, 0.1) !important;
-}
-
-.text-primary-subtle {
-    color: #0d6efd !important;
-}
-
-.text-success-subtle {
-    color: #198754 !important;
-}
-
-.text-info-subtle {
-    color: #0dcaf0 !important;
-}
-
-.text-warning-subtle {
-    color: #ffc107 !important;
-}
-
-.text-danger-subtle {
-    color: #dc3545 !important;
-}
-
-.text-secondary-subtle {
-    color: #6c757d !important;
-}
-
-# Étape 3 : Modifier resources/js/app.js
-Remplacer le contenu de resources/js/app.js :
-jsimport './bootstrap';
+```js
+import './bootstrap';
 import 'bootstrap';
-# Étape 4 : Installer Bootstrap
-bashnpm install bootstrap @fortawesome/fontawesome-free --save
-# Étape 5 : Recompiler
-bash# Nettoyer le cache
+```
+
+#### Installer Bootstrap
+
+```bash
+npm install bootstrap @fortawesome/fontawesome-free --save
+```
+
+#### Recompiler
+
+```bash
 rm -rf node_modules/.vite
-
-# Recompiler
 npm run build
+```
 
-# Ou pour le mode développement
-npm run dev
+---
+
+## 📄 Pagination Bootstrap 5
+
+✔ `Paginator::useBootstrapFive()` dans `AppServiceProvider`
+✔ Vue pagination Bootstrap publiée
+✔ CSS personnalisé
+✔ Assets recompilés
+
+---
+
+## 🎉 Fonctionnalités finales
+
+### Backend
+
+* Base de données relationnelle
+* Models : User, Role, Permission
+* Seeders : 7 rôles, 32 permissions, 7 utilisateurs
+* CRUD complets
+* Middleware de permissions
+* Authentification Breeze
+
+### Frontend
+
+* Header double niveau
+* Footer global
+* 15 vues admin
+* 5 vues auth
+* 5 pages publiques
+* Dashboard
+* Profil utilisateur
+* Bootstrap 5 + Font Awesome
+* Pagination corrigée
+* Responsive design
+
+---
 
 
-
-Récapitulatif de la solution pour la pagination
-
-✅ Ajout de Paginator::useBootstrapFive(); dans AppServiceProvider
-✅ Publication et personnalisation de la vue Bootstrap 5
-✅ Ajout des styles CSS personnalisés
-✅ Compilation des assets avec npm run build
-
-
-🎉 application CMS Laravel 12 avec
-Backend
-
-✅ Base de données (migrations, relations)
-✅ Models (User, Role, Permission)
-✅ Seeders (7 rôles, 32 permissions, 7 utilisateurs)
-✅ Controllers CRUD complets
-✅ Middleware de permissions
-✅ Système d'authentification Breeze
-
-Frontend
-
-✅ Layout avec Header à 2 niveaux (navigation globale + contextuelle)
-✅ Footer général
-✅ 15 vues admin (users, roles, permissions)
-✅ 5 vues authentification (login, register, forgot, reset, verify)
-✅ 5 pages publiques (home, about, contact, privacy, terms)
-✅ Page profil utilisateur
-✅ Dashboard
-✅ Design Bootstrap 5 + Font Awesome
-✅ Pagination Bootstrap 5 corrigée
-✅ Responsive design
 
