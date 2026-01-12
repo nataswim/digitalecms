@@ -36,7 +36,7 @@ cat .gitignore | grep "\.env"
 
 1. Cliquer `+` → `New repository`
 2. Nom : `digital-sos`
-3. Description : `CMS Laravel 12 pour contenu sportif`
+3. Description : `Digital’SOS (Digital Sport Organisation System) est la plateforme tout-en-un`
 4. Public ou Private
 5. **NE PAS** cocher "Add a README"
 6. **NE PAS** cocher "Add .gitignore"

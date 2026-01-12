@@ -1,0 +1,285 @@
+/**
+ * ============================================================================
+ * VARIABLES CSS - CHARTE GRAPHIQUE AQUATIQUE
+ * ============================================================================
+ * Inspiré de nataswim.fr et temposwim.com
+ * Thème : Natation / Aquatique
+ * ============================================================================
+ */
+
+:root {
+    /* ========================================
+       COULEURS PRINCIPALES
+       ======================================== */
+    
+    /* Primaires (Bleu aquatique) */
+    --color-primary: #0173b4;
+    --color-primary-light: #00acc0;
+    --color-primary-dark: #0f5c78;
+    --color-primary-darker: #093b4d;
+    
+    /* Secondaires (Bleu vague) */
+    --color-secondary: #00acc0;
+    --color-secondary-light: #1c7ca0;
+    --color-secondary-dark: #6c8fa0;
+    
+    /* Aqua (Tons bleus profonds) */
+    --color-aqua-light: #d0e6ed;
+    --color-aqua: #0f5c78;
+    --color-aqua-dark: #093b4d;
+    --color-wave-blue: #1c7ca0;
+    --color-deep-blue: #6c8fa0;
+    
+    /* États */
+    --color-success: #10b981;
+    --color-info: #06b6d4;
+    --color-warning: #ffc107;
+    --color-danger: #ef4444;
+    
+    /* Neutres */
+    --color-light: #f9f5f4;
+    --color-lighter: #ffffff;
+    --color-dark: #1e293b;
+    --color-darker: #0f172a;
+    
+    /* Gris */
+    --color-gray-100: #f8f9fa;
+    --color-gray-200: #e9ecef;
+    --color-gray-300: #dee2e6;
+    --color-gray-400: #ced4da;
+    --color-gray-500: #adb5bd;
+    --color-gray-600: #6c757d;
+    --color-gray-700: #495057;
+    --color-gray-800: #343a40;
+    --color-gray-900: #212529;
+    
+    /* ========================================
+       GRADIENTS AQUATIQUES
+       ======================================== */
+    
+    --gradient-primary: linear-gradient(135deg, #0ea5e9, #3b82f6);
+    --gradient-secondary: linear-gradient(135deg, #6c8fa0, #0f5c78);
+    --gradient-aqua: linear-gradient(176deg, #0f5c78 0%, #02a1c8 100%);
+    --gradient-wave: linear-gradient(111deg, #049ee3 5%, #1477c4 90%, #009fe4 30%);
+    --gradient-ocean: linear-gradient(45deg, #00acc0 85%, #367f91 0);
+    --gradient-deep: linear-gradient(41deg, #0f5c78 0%, #0f4d72 21%, #1a95c2 43%, #105975 64%, #105374 83%, #1990bd 100%);
+    
+    /* Gradients radiaux */
+    --gradient-radial-aqua: radial-gradient(circle farthest-side at center bottom, #0ab29e, #1d8e80 125%);
+    --gradient-radial-blue: radial-gradient(circle farthest-side at center bottom, #0ea5e9, #067fba 95%);
+    
+    /* ========================================
+       TYPOGRAPHIE
+       ======================================== */
+    
+    --font-family-primary: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-family-secondary: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    
+    /* Tailles de police */
+    --font-size-xs: 0.75rem;      /* 12px */
+    --font-size-sm: 0.875rem;     /* 14px */
+    --font-size-base: 1rem;       /* 16px */
+    --font-size-lg: 1.125rem;     /* 18px */
+    --font-size-xl: 1.25rem;      /* 20px */
+    --font-size-2xl: 1.5rem;      /* 24px */
+    --font-size-3xl: 1.875rem;    /* 30px */
+    --font-size-4xl: 2.25rem;     /* 36px */
+    
+    /* Poids de police */
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    /* Hauteur de ligne */
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+    --line-height-loose: 2;
+    
+    /* ========================================
+       ESPACEMENTS
+       ======================================== */
+    
+    --spacing-0: 0;
+    --spacing-1: 0.25rem;    /* 4px */
+    --spacing-2: 0.5rem;     /* 8px */
+    --spacing-3: 0.75rem;    /* 12px */
+    --spacing-4: 1rem;       /* 16px */
+    --spacing-5: 1.25rem;    /* 20px */
+    --spacing-6: 1.5rem;     /* 24px */
+    --spacing-8: 2rem;       /* 32px */
+    --spacing-10: 2.5rem;    /* 40px */
+    --spacing-12: 3rem;      /* 48px */
+    --spacing-16: 4rem;      /* 64px */
+    --spacing-20: 5rem;      /* 80px */
+    
+    /* ========================================
+       BORDURES
+       ======================================== */
+    
+    --border-radius-none: 0;
+    --border-radius-sm: 0.375rem;    /* 6px */
+    --border-radius-base: 0.5rem;    /* 8px */
+    --border-radius-md: 0.75rem;     /* 12px */
+    --border-radius-lg: 1rem;        /* 16px */
+    --border-radius-xl: 1.5rem;      /* 24px */
+    --border-radius-2xl: 2rem;       /* 32px */
+    --border-radius-full: 9999px;
+    
+    --border-width-0: 0;
+    --border-width-1: 1px;
+    --border-width-2: 2px;
+    --border-width-4: 4px;
+    --border-width-8: 8px;
+    
+    --border-color: var(--color-gray-300);
+    --border-color-light: var(--color-gray-200);
+    --border-color-dark: var(--color-gray-400);
+    
+    /* ========================================
+       OMBRES
+       ======================================== */
+    
+    --shadow-none: none;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
+    --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.2);
+    
+    /* Ombres aquatiques */
+    --shadow-aqua: 0 10px 25px rgba(15, 92, 120, 0.2);
+    --shadow-aqua-lg: 0 20px 40px rgba(15, 92, 120, 0.25);
+    
+    /* ========================================
+       TRANSITIONS
+       ======================================== */
+    
+    --transition-fast: 150ms ease-in-out;
+    --transition-base: 200ms ease-in-out;
+    --transition-slow: 300ms ease-in-out;
+    --transition-slower: 500ms ease-in-out;
+    
+    --transition-all: all var(--transition-base);
+    --transition-colors: color var(--transition-base), background-color var(--transition-base), border-color var(--transition-base);
+    --transition-transform: transform var(--transition-base);
+    --transition-opacity: opacity var(--transition-base);
+    
+    /* ========================================
+       Z-INDEX
+       ======================================== */
+    
+    --z-index-dropdown: 1000;
+    --z-index-sticky: 1020;
+    --z-index-fixed: 1030;
+    --z-index-modal-backdrop: 1040;
+    --z-index-modal: 1050;
+    --z-index-popover: 1060;
+    --z-index-tooltip: 1070;
+    
+    /* ========================================
+       BREAKPOINTS (pour référence JavaScript)
+       ======================================== */
+    
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --breakpoint-xxl: 1400px;
+    
+    /* ========================================
+       COMPOSANTS
+       ======================================== */
+    
+    /* Cards */
+    --card-bg: var(--color-lighter);
+    --card-border: var(--border-color);
+    --card-border-radius: var(--border-radius-lg);
+    --card-shadow: var(--shadow-md);
+    --card-hover-shadow: var(--shadow-lg);
+    
+    /* Buttons */
+    --btn-border-radius: var(--border-radius-base);
+    --btn-padding-x: 1.5rem;
+    --btn-padding-y: 0.625rem;
+    --btn-font-weight: var(--font-weight-medium);
+    
+    /* Forms */
+    --form-control-border-radius: var(--border-radius-base);
+    --form-control-border-color: var(--border-color);
+    --form-control-focus-border: var(--color-primary);
+    --form-control-focus-shadow: 0 0 0 0.2rem rgba(1, 115, 180, 0.25);
+    
+    /* Navigation */
+    --nav-link-color: var(--color-dark);
+    --nav-link-hover-color: var(--color-primary);
+    --nav-link-active-color: var(--color-primary);
+    --nav-link-active-bg: rgba(1, 115, 180, 0.1);
+    
+    /* Footer */
+    --footer-bg: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+    --footer-text: var(--color-gray-600);
+    --footer-link-hover: var(--color-primary);
+    
+    /* ========================================
+       ANIMATIONS
+       ======================================== */
+    
+    --animation-duration-fast: 150ms;
+    --animation-duration-base: 300ms;
+    --animation-duration-slow: 500ms;
+    
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================================
+   DARK MODE (Préparation)
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-light: #1f2937;
+        --color-lighter: #111827;
+        --color-dark: #f9fafb;
+        --color-darker: #ffffff;
+        
+        --card-bg: #1f2937;
+        --card-border: #374151;
+        
+        --border-color: #374151;
+        --border-color-light: #4b5563;
+        
+        --footer-bg: linear-gradient(to bottom, #1f2937 0%, #111827 100%);
+        --footer-text: #9ca3af;
+    }
+}
+
+/* ============================================================================
+   UTILITAIRES POUR ACCÈS FACILE
+   ============================================================================ */
+
+/* Classe pour afficher toutes les variables (debug) */
+.debug-vars {
+    font-family: monospace;
+    font-size: 0.75rem;
+    padding: 1rem;
+    background: var(--color-gray-100);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-base);
+    overflow-x: auto;
+}
+
+.debug-vars::before {
+    content: '🎨 Variables CSS disponibles';
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+}

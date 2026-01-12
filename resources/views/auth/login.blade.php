@@ -12,7 +12,7 @@
                     <div class="mb-3">
                         <i class="fas fa-swimmer text-primary" style="font-size: 3rem;"></i>
                     </div>
-                    <h2 class="fw-bold mb-2">MyCreaNet Digital Solutions</h2>
+                    <h2 class="fw-bold mb-2">Digital’SOS </h2>
                     <p class="text-muted">Connectez-vous pour accéder à votre compte</p>
                 </div>
 

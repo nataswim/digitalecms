@@ -25,7 +25,7 @@
                                     <div class="d-flex align-items-start">
                                         <i class="fas fa-info-circle text-info me-3 mt-1"></i>
                                         <p class="mb-0">
-                                            Cette politique de confidentialité décrit comment MyCreaNet Digital Solutions collecte, 
+                                            Cette politique de confidentialité décrit comment Digital’SOS (Digital Sport Organisation System) collecte, 
                                             utilise et protège vos informations personnelles. En utilisant notre plateforme, 
                                             vous acceptez les pratiques décrites dans cette politique.
                                         </p>

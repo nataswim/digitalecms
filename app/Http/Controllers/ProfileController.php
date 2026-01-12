@@ -12,6 +12,9 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    /**
+     * Afficher le profil de l'utilisateur (route standard)
+     */
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -19,6 +22,19 @@ class ProfileController extends Controller
         ]);
     }
 
+    /**
+     * Afficher le profil admin
+     */
+    public function adminShow(Request $request): View
+    {
+        return view('profile.edit', [
+            'user' => $request->user(),
+        ]);
+    }
+
+    /**
+     * Mettre à jour le profil de l'utilisateur
+     */
     public function update(Request $request): RedirectResponse
     {
         $validated = $request->validate([
@@ -46,6 +62,9 @@ class ProfileController extends Controller
         return back()->with('success', 'Profil mis à jour avec succès.');
     }
 
+    /**
+     * Mettre à jour le mot de passe
+     */
     public function updatePassword(Request $request): RedirectResponse
     {
         $validated = $request->validate([
@@ -60,6 +79,9 @@ class ProfileController extends Controller
         return back()->with('success', 'Mot de passe modifié avec succès.');
     }
 
+    /**
+     * Supprimer le compte utilisateur
+     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validate([

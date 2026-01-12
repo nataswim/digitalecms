@@ -14,7 +14,7 @@ class PermissionController extends Controller
         $permissions = Permission::withCount('roles')
             ->orderBy('module')
             ->orderBy('name')
-            ->paginate(20);
+            ->paginate(50);
         
         return view('admin.permissions.index', compact('permissions'));
     }

@@ -13,7 +13,7 @@
                         <i class="fas fa-swimmer text-primary" style="font-size: 3rem;"></i>
                     </div>
                     <h2 class="fw-bold mb-2">Créer un compte</h2>
-                    <p class="text-muted">Rejoignez notre communauté sportive</p>
+                    <p class="text-muted">Rejoignez notre platforme</p>
                 </div>
 
                 <!-- Carte d'inscription -->

@@ -25,7 +25,7 @@
                                     <div class="d-flex align-items-start">
                                         <i class="fas fa-exclamation-triangle text-warning me-3 mt-1"></i>
                                         <p class="mb-0">
-                                            En accédant et en utilisant MyCreaNet Digital Solutions, vous acceptez d'être lié par ces 
+                                            En accédant et en utilisant Digital’SOS Digital Solutions, vous acceptez d'être lié par ces 
                                             conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez 
                                             ne pas utiliser notre plateforme.
                                         </p>
@@ -40,9 +40,9 @@
                                     1. Acceptation des conditions
                                 </h3>
                                 <p class="text-muted mb-0">
-                                    En créant un compte sur MyCreaNet Digital Solutions, vous confirmez que vous avez lu, compris et 
+                                    En créant un compte sur Digital’SOS Digital Solutions, vous confirmez que vous avez lu, compris et 
                                     accepté ces conditions d'utilisation ainsi que notre politique de confidentialité. 
-                                    Ces conditions constituent un accord légal entre vous et MyCreaNet Digital Solutions.
+                                    Ces conditions constituent un accord légal entre vous et Digital’SOS Digital Solutions.
                                 </p>
                             </div>
 
@@ -150,11 +150,11 @@
                                     5. Contenu utilisateur
                                 </h3>
                                 <p class="text-muted mb-3">
-                                    En publiant du contenu sur MyCreaNet Digital Solutions :
+                                    En publiant du contenu sur Digital’SOS Digital Solutions :
                                 </p>
                                 <ul class="text-muted">
                                     <li class="mb-2">Vous conservez la propriété de votre contenu</li>
-                                    <li class="mb-2">Vous accordez une licence d'utilisation à MyCreaNet Digital Solutions</li>
+                                    <li class="mb-2">Vous accordez une licence d'utilisation à Digital’SOS Digital Solutions</li>
                                     <li class="mb-2">Vous garantissez que le contenu ne viole aucun droit</li>
                                     <li class="mb-2">Vous êtes responsable de votre contenu</li>
                                 </ul>
@@ -186,7 +186,7 @@
                                     7. Propriété intellectuelle
                                 </h3>
                                 <p class="text-muted mb-0">
-                                    Tous les éléments de MyCreaNet Digital Solutions (logo, design, code, contenu) sont protégés par 
+                                    Tous les éléments de Digital’SOS Digital Solutions (logo, design, code, contenu) sont protégés par 
                                     les droits d'auteur et autres droits de propriété intellectuelle. Toute reproduction 
                                     non autorisée est interdite.
                                 </p>
@@ -199,7 +199,7 @@
                                     8. Limitation de responsabilité
                                 </h3>
                                 <p class="text-muted mb-3">
-                                    MyCreaNet Digital Solutions est fourni "tel quel". Nous ne garantissons pas :
+                                    Digital’SOS Digital Solutions est fourni "tel quel". Nous ne garantissons pas :
                                 </p>
                                 <ul class="text-muted">
                                     <li class="mb-2">L'absence d'interruptions ou d'erreurs</li>

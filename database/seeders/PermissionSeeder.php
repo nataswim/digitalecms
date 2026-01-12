@@ -58,6 +58,19 @@ class PermissionSeeder extends Seeder
             // Statistiques
             ['name' => 'Voir Statistiques', 'slug' => 'stats.view', 'module' => 'stats', 'description' => 'Voir les statistiques'],
             ['name' => 'Exporter Statistiques', 'slug' => 'stats.export', 'module' => 'stats', 'description' => 'Exporter les statistiques'],
+
+            // Permissions médias
+            ['name' => 'Voir les médias', 'slug' => 'media.view', 'module' => 'media'],
+            ['name' => 'Uploader des médias', 'slug' => 'media.upload', 'module' => 'media'],
+            ['name' => 'Gérer les médias', 'slug' => 'media.manage', 'module' => 'media'],
+            ['name' => 'Supprimer des médias', 'slug' => 'media.delete', 'module' => 'media'],
+
+            // Permissions fiches
+            ['name' => 'Voir les fiches', 'slug' => 'fiches.view', 'module' => 'fiches'],
+            ['name' => 'Créer des fiches', 'slug' => 'fiches.create', 'module' => 'fiches'],
+            ['name' => 'Modifier des fiches', 'slug' => 'fiches.edit', 'module' => 'fiches'],
+            ['name' => 'Supprimer des fiches', 'slug' => 'fiches.delete', 'module' => 'fiches'],
+            ['name' => 'Gérer les fiches', 'slug' => 'fiches.manage', 'module' => 'fiches'],
         ];
 
         foreach ($permissions as $permission) {
