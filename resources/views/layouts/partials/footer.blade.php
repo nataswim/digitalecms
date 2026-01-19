@@ -1,5 +1,6 @@
 
-<footer class="admin-footer mt-5" style="border-left: 20px solid #4dadc1;border-right: 20px solid #4dadc1;background-color: #4dadc1 !important;border-bottom: 20px solid #378399;border-top: 20px solid #378399;padding-top: 20px;">    
+<footer class="admin-footer mt-5" style="border-left: 20px solid #4fa79b;border-right: 20px solid #4fa79b;background-color: #303030 !important;border-bottom: 20px solid #f9f5f4;border-top: 20px solid #f9f5f4;padding-top: 20px;"> 
+
 
     <!-- Main Footer -->
     <div class="container py-5">
@@ -191,7 +192,7 @@ footer {
 }
 
 .btn-outline-light:hover {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
+    background-color: #11767e;
+    border-color: #11767e;
 }
 </style>

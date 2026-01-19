@@ -32,22 +32,8 @@
          CHARTE GRAPHIQUE AQUATIQUE - CSS PERSONNALISÉS
          ============================================ -->
     
-    <!-- 1. Variables CSS -->
-    <link rel="stylesheet" href="{{ asset('css/variables.css') }}">
-    
-    <!-- 2. Utilitaires -->
-    <link rel="stylesheet" href="{{ asset('css/utilities.css') }}">
-    
-    <!-- 3. Styles personnalisés -->
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    
-    <!-- 4. Composants -->
-    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
-    
-    <!-- 5. Animations -->
-    <link rel="stylesheet" href="{{ asset('css/animations.css') }}">
-    
-    <!-- Styles de page spécifiques -->
+<link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
     @stack('styles')
     
     <style>

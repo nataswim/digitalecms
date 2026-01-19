@@ -1,0 +1,57 @@
+graph TB
+    %% Styles
+    classDef core fill:#0173B4,stroke:#fff,stroke-width:3px,color:#fff
+    classDef p1 fill:#00ACC0,stroke:#fff,stroke-width:2px,color:#fff
+    classDef transverse fill:#367F91,stroke:#fff,stroke-width:2px,color:#fff
+    
+    %% Modules
+    M1[M1: Hiérarchie Spatiale<br/>Service > Structure > Espace > Zone]
+    M2[M2: Gestion des Agents<br/>Personnel & Compétences]
+    M3[M3: Planification<br/>Activités & Planning]
+    M4[M4: Gestion Matériel<br/>Inventaire & Traçabilité]
+    M5[M5: Fréquentation<br/>Statistiques & Analyses]
+    M6[M6: Carnet Sanitaire<br/>Conformité Aquatique]
+    M7[M7: Congés & Remplacements<br/>Workflows Absences]
+    M8[M8: Messagerie<br/>Communication Interne]
+    M9[M9: D2S Storage<br/>Documents & Fichiers]
+    
+    %% Dépendances M1 (fondation)
+    M1 -.->|Rattachement| M2
+    M1 -.->|Localisation| M4
+    M1 -.->|Zones| M3
+    M1 -.->|Mesures| M6
+    M1 -.->|Stats| M5
+    
+    %% Dépendances M2
+    M2 -->|Assignation| M3
+    M2 -->|Workflows| M7
+    M2 -->|Annuaire| M8
+    M2 -.->|Saisie| M5
+    M2 -.->|RBAC| M9
+    
+    %% Dépendances M3
+    M3 -->|Activités| M5
+    M3 -.->|Horaires| M6
+    M7 -->|Validation| M3
+    
+    %% Impacts transverses
+    M8 -.->|Notifications| M3
+    M8 -.->|Notifications| M7
+    M8 -.->|Alertes| M6
+    M8 -.->|Rapports| M5
+    
+    %% Styles
+    class M1,M2,M3,M6 core
+    class M4,M5,M7 p1
+    class M8,M9 transverse
+    
+    %% Légende
+    subgraph Légende
+        L1[P0 Core MVP]
+        L2[P1 MVP]
+        L3[Transverse]
+    end
+    
+    class L1 core
+    class L2 p1
+    class L3 transverse

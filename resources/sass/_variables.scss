@@ -1,0 +1,368 @@
+/**
+ * ============================================================================
+ * VARIABLES SCSS - DIGITAL'SOS CMS
+ * ============================================================================
+ * Charte graphique aquatique inspirée de nataswim.fr / temposwim.com
+ * Méthode M2PC : Matériel | Planning | Personnel | Contenu
+ * Version : Laravel 12 | Bootstrap 5 | Vite
+ * ============================================================================
+ */
+
+/* ============================================================================
+   PALETTE DE COULEURS - CHARTE DIGITAL'SOS
+   ============================================================================ */
+
+/**
+ * Couleurs principales aquatiques
+ */
+$color-primary: #38859b;              // Bleu-vert moyen (couleur signature)
+$color-primary-dark: #3d8993;         // Bleu-vert foncé (hover, actif)
+$color-primary-light: #5fa3b5;        // Bleu-vert clair (backgrounds subtils)
+$color-primary-lighter: #e8f4f7;      // Bleu très clair (cards, badges)
+
+$color-secondary: #49aaca;            // Bleu clair (accents, liens)
+$color-secondary-dark: #3a92b0;       // Bleu clair foncé
+$color-secondary-light: #6dbdd9;      // Bleu clair léger
+$color-secondary-lighter: #e9f6fb;    // Bleu clair très léger
+
+/**
+ * Couleurs de statut et feedback
+ */
+$color-success: #4fa79c;              // Vert d'eau (validation, succès)
+$color-success-dark: #3e8680;         // Vert d'eau foncé
+$color-success-light: #6fbdb3;        // Vert d'eau clair
+$color-success-lighter: #e9f6f4;      // Vert très clair
+
+$color-info: #49aaca;                 // Info (identique au secondary)
+$color-info-dark: #3a92b0;
+$color-info-light: #6dbdd9;
+$color-info-lighter: #e9f6fb;
+
+$color-warning: #f0ad4e;              // Orange (alertes, avertissements)
+$color-warning-dark: #ec971f;
+$color-warning-light: #f4c67b;
+$color-warning-lighter: #fef7ed;
+
+$color-danger: #d9534f;               // Rouge (erreurs, suppressions)
+$color-danger-dark: #c9302c;
+$color-danger-light: #e27c79;
+$color-danger-lighter: #fbeeed;
+
+/**
+ * Couleurs neutres
+ */
+$color-dark: #303030;                 // Gris très foncé (texte principal)
+$color-light: #f9f5f4;                // Beige clair (backgrounds)
+$color-white: #ffffff;                // Blanc pur
+$color-black: #000000;                // Noir pur
+
+/**
+ * Échelle de gris
+ */
+$color-gray-50: #fafafa;
+$color-gray-100: #f5f5f5;
+$color-gray-200: #eeeeee;
+$color-gray-300: #e0e0e0;
+$color-gray-400: #bdbdbd;
+$color-gray-500: #9e9e9e;
+$color-gray-600: #757575;
+$color-gray-700: #616161;
+$color-gray-800: #424242;
+$color-gray-900: #303030;             // Identique à $color-dark
+
+/**
+ * Couleurs de texte
+ */
+$text-primary: $color-dark;
+$text-secondary: $color-gray-600;
+$text-muted: $color-gray-500;
+$text-white: $color-white;
+$text-light: $color-gray-300;
+
+/**
+ * Couleurs de bordure
+ */
+$border-color: $color-gray-300;
+$border-color-light: $color-gray-200;
+$border-color-dark: $color-gray-400;
+
+/**
+ * Couleurs de fond
+ */
+$bg-body: $color-light;               // #f9f5f4
+$bg-white: $color-white;
+$bg-light: $color-gray-50;
+$bg-dark: $color-dark;
+
+/* ============================================================================
+   TYPOGRAPHIE
+   ============================================================================ */
+
+/**
+ * Familles de polices
+ */
+$font-family-primary: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+                      Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-secondary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-family-monospace: 'Fira Code', 'Courier New', monospace;
+
+/**
+ * Tailles de police
+ */
+$font-size-xs: 0.75rem;               // 12px
+$font-size-sm: 0.875rem;              // 14px
+$font-size-base: 1rem;                // 16px
+$font-size-lg: 1.125rem;              // 18px
+$font-size-xl: 1.25rem;               // 20px
+$font-size-2xl: 1.5rem;               // 24px
+$font-size-3xl: 1.875rem;             // 30px
+$font-size-4xl: 2.25rem;              // 36px
+$font-size-5xl: 3rem;                 // 48px
+
+/**
+ * Poids de police
+ */
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+/**
+ * Hauteurs de ligne
+ */
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+$line-height-loose: 2;
+
+/* ============================================================================
+   ESPACEMENTS (SPACING SCALE)
+   ============================================================================ */
+
+$spacing-0: 0;
+$spacing-1: 0.25rem;                  // 4px
+$spacing-2: 0.5rem;                   // 8px
+$spacing-3: 0.75rem;                  // 12px
+$spacing-4: 1rem;                     // 16px
+$spacing-5: 1.25rem;                  // 20px
+$spacing-6: 1.5rem;                   // 24px
+$spacing-8: 2rem;                     // 32px
+$spacing-10: 2.5rem;                  // 40px
+$spacing-12: 3rem;                    // 48px
+$spacing-16: 4rem;                    // 64px
+$spacing-20: 5rem;                    // 80px
+$spacing-24: 6rem;                    // 96px
+$spacing-32: 8rem;                    // 128px
+
+/* ============================================================================
+   BORDURES ET ARRONDIS
+   ============================================================================ */
+
+/**
+ * Rayons de bordure
+ */
+$border-radius-none: 0;
+$border-radius-sm: 0.25rem;           // 4px
+$border-radius-base: 0.375rem;        // 6px
+$border-radius-md: 0.5rem;            // 8px
+$border-radius-lg: 0.75rem;           // 12px
+$border-radius-xl: 1rem;              // 16px
+$border-radius-2xl: 1.5rem;           // 24px
+$border-radius-full: 9999px;          // Cercle/Pilule
+
+/**
+ * Largeurs de bordure
+ */
+$border-width-0: 0;
+$border-width-1: 1px;
+$border-width-2: 2px;
+$border-width-4: 4px;
+
+/* ============================================================================
+   OMBRES (BOX SHADOWS)
+   ============================================================================ */
+
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 
+              0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+            0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+            0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+            0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+$shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+$shadow-none: none;
+
+/**
+ * Ombre aquatique personnalisée (effet eau)
+ */
+$shadow-aqua: 0 4px 12px rgba(56, 133, 155, 0.15),
+              0 2px 6px rgba(56, 133, 155, 0.1);
+$shadow-aqua-lg: 0 10px 25px rgba(56, 133, 155, 0.2),
+                 0 6px 12px rgba(56, 133, 155, 0.15);
+
+/* ============================================================================
+   TRANSITIONS ET ANIMATIONS
+   ============================================================================ */
+
+/**
+ * Durées
+ */
+$transition-duration-fast: 150ms;
+$transition-duration-base: 250ms;
+$transition-duration-slow: 350ms;
+$transition-duration-slower: 500ms;
+
+/**
+ * Fonctions de timing
+ */
+$transition-ease: ease;
+$transition-ease-in: ease-in;
+$transition-ease-out: ease-out;
+$transition-ease-in-out: ease-in-out;
+
+/**
+ * Transitions prédéfinies
+ */
+$transition-all: all $transition-duration-base $transition-ease-in-out;
+$transition-colors: color $transition-duration-base $transition-ease-in-out,
+                    background-color $transition-duration-base $transition-ease-in-out,
+                    border-color $transition-duration-base $transition-ease-in-out;
+$transition-transform: transform $transition-duration-base $transition-ease-in-out;
+$transition-opacity: opacity $transition-duration-base $transition-ease-in-out;
+$transition-shadow: box-shadow $transition-duration-base $transition-ease-in-out;
+
+/* ============================================================================
+   Z-INDEX SCALE
+   ============================================================================ */
+
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+$z-index-notification: 1080;
+
+/* ============================================================================
+   BREAKPOINTS RESPONSIVE
+   ============================================================================ */
+
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+/* ============================================================================
+   CONTENEURS
+   ============================================================================ */
+
+$container-max-width-sm: 540px;
+$container-max-width-md: 720px;
+$container-max-width-lg: 960px;
+$container-max-width-xl: 1140px;
+$container-max-width-xxl: 1320px;
+
+/* ============================================================================
+   COMPOSANTS SPÉCIFIQUES
+   ============================================================================ */
+
+/**
+ * Hauteurs de header/footer
+ */
+$header-height: 64px;
+$footer-height: auto;
+
+/**
+ * Sidebar
+ */
+$sidebar-width: 280px;
+$sidebar-width-collapsed: 80px;
+
+/**
+ * Cards
+ */
+$card-border-radius: $border-radius-lg;
+$card-padding: $spacing-6;
+$card-shadow: $shadow-base;
+$card-shadow-hover: $shadow-md;
+
+/**
+ * Boutons
+ */
+$btn-border-radius: $border-radius-base;
+$btn-padding-y: $spacing-3;
+$btn-padding-x: $spacing-5;
+$btn-font-weight: $font-weight-medium;
+
+/**
+ * Inputs
+ */
+$input-border-radius: $border-radius-base;
+$input-padding-y: $spacing-3;
+$input-padding-x: $spacing-4;
+$input-border-color: $border-color;
+$input-focus-border-color: $color-primary;
+
+/**
+ * Tables
+ */
+$table-border-color: $border-color-light;
+$table-striped-bg: $color-gray-50;
+$table-hover-bg: $color-primary-lighter;
+
+/* ============================================================================
+   VARIABLES CSS (CUSTOM PROPERTIES)
+   ============================================================================ */
+
+:root {
+    /* Couleurs principales */
+    --color-primary: #{$color-primary};
+    --color-primary-dark: #{$color-primary-dark};
+    --color-primary-light: #{$color-primary-light};
+    --color-primary-lighter: #{$color-primary-lighter};
+    
+    --color-secondary: #{$color-secondary};
+    --color-secondary-dark: #{$color-secondary-dark};
+    --color-secondary-light: #{$color-secondary-light};
+    
+    --color-success: #{$color-success};
+    --color-info: #{$color-info};
+    --color-warning: #{$color-warning};
+    --color-danger: #{$color-danger};
+    
+    --color-dark: #{$color-dark};
+    --color-light: #{$color-light};
+    --color-white: #{$color-white};
+    
+    /* Typographie */
+    --font-family-primary: #{$font-family-primary};
+    --font-size-base: #{$font-size-base};
+    --line-height-normal: #{$line-height-normal};
+    
+    /* Espacements */
+    --spacing-base: #{$spacing-4};
+    
+    /* Bordures */
+    --border-radius-base: #{$border-radius-base};
+    --border-color: #{$border-color};
+    
+    /* Ombres */
+    --shadow-base: #{$shadow-base};
+    --shadow-aqua: #{$shadow-aqua};
+    
+    /* Transitions */
+    --transition-colors: #{$transition-colors};
+    --transition-duration-base: #{$transition-duration-base};
+}
+
+/* ============================================================================
+   FIN DU FICHIER
+   ============================================================================ */

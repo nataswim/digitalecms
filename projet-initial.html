@@ -1,0 +1,3849 @@
+<p><strong>D2S - Digital Sport Solutions</strong></p>
+<p><strong>Document de Sp&eacute;cifications Fonctionnelles et Techniques</strong></p>
+<p><strong>Version 1.0 | Janvier 2026</strong></p>
+<p><strong>TABLE DES MATI&Egrave;RES</strong></p>
+<ol>
+<li>Vue d'ensemble du projet</li>
+<li>Mod&egrave;le de donn&eacute;es et architecture</li>
+<li>Sp&eacute;cifications fonctionnelles par module</li>
+<li>Gestion des r&ocirc;les et permissions</li>
+<li>Architecture technique</li>
+<li>Int&eacute;grations et API</li>
+<li>Cas d'usage et sc&eacute;narios</li>
+<li>Interfaces utilisateur</li>
+<li>S&eacute;curit&eacute; et conformit&eacute;</li>
+<li>Roadmap et &eacute;volutions</li>
+</ol>
+<ol>
+<li><strong> VUE D'ENSEMBLE DU PROJET</strong></li>
+</ol>
+<p><strong>1.1 Contexte et objectifs</strong></p>
+<p><strong>D2S - Digital Sport Solutions</strong> est une plateforme SaaS de gestion int&eacute;gr&eacute;e pour complexes sportifs et aquatiques, con&ccedil;ue pour r&eacute;pondre aux d&eacute;fis op&eacute;rationnels suivants :</p>
+<p><strong>Probl&eacute;matiques identifi&eacute;es :</strong></p>
+<ul>
+<li>Planification manuelle chronophage (jusqu'&agrave; 2 jours par cycle)</li>
+<li>Gestion papier inefficace (documents perdus, mouill&eacute;s, dispers&eacute;s)</li>
+<li>Manque de visibilit&eacute; en temps r&eacute;el sur les op&eacute;rations</li>
+<li>Communication fragment&eacute;e entre &eacute;quipes</li>
+<li>Suivi difficile des certifications et conformit&eacute; r&eacute;glementaire</li>
+<li>Absence d'analyse de fr&eacute;quentation et d'optimisation des ressources</li>
+</ul>
+<p><strong>Objectifs de la solution :</strong></p>
+<ul>
+<li>R&eacute;duction de 80% du temps de planification</li>
+<li>Digitalisation compl&egrave;te des processus op&eacute;rationnels</li>
+<li>Visibilit&eacute; 24/7 sur l'ensemble des installations</li>
+<li>Tra&ccedil;abilit&eacute; et conformit&eacute; r&eacute;glementaire automatis&eacute;es</li>
+<li>Optimisation des ressources humaines et mat&eacute;rielles bas&eacute;e sur les donn&eacute;es</li>
+</ul>
+<p><strong>1.2 Public cible</strong></p>
+<p><strong>Clients primaires :</strong></p>
+<ul>
+<li>Centres aquatiques municipaux et priv&eacute;s</li>
+<li>Complexes sportifs multi-activit&eacute;s</li>
+<li>Salles de fitness et wellness</li>
+<li>Parcs aquatiques saisonniers</li>
+</ul>
+<p><strong>Utilisateurs finaux :</strong></p>
+<ul>
+<li>Directeurs d'&eacute;tablissements</li>
+<li>Managers de structures</li>
+<li>Agents op&eacute;rationnels (ma&icirc;tres-nageurs, coaches, etc.)</li>
+<li>Personnel administratif</li>
+</ul>
+<p><strong>1.3 P&eacute;rim&egrave;tre fonctionnel</strong></p>
+<p><strong>Modules principaux :</strong></p>
+<ol>
+<li>Planification du personnel (Core)</li>
+<li>Gestion des agents et comp&eacute;tences</li>
+<li>Gestion de la structure et des espaces</li>
+<li>Gestion du mat&eacute;riel</li>
+<li>Suivi de fr&eacute;quentation</li>
+<li>Registres chimiques (sp&eacute;cifique aquatique)</li>
+<li>Formulaires personnalis&eacute;s et rapports</li>
+<li>Messagerie et communication</li>
+<li>Stockage documentaire (D2S Storage)</li>
+<li>Administration et audit</li>
+</ol>
+<ol>
+<li><strong> MOD&Egrave;LE DE DONN&Eacute;ES ET ARCHITECTURE</strong></li>
+</ol>
+<p><strong>2.1 Hi&eacute;rarchie spatiale (4 niveaux)</strong></p>
+<p>Service (Sport)</p>
+<p>├── Structure(s) [1..N]</p>
+<p>│ ├── Espace(s) [1..N]</p>
+<p>│ │ └── Zone(s) [1..N]</p>
+<p><strong>D&eacute;finitions :</strong></p>
+<table>
+<thead>
+<tr>
+<td>
+<p><strong>Niveau</strong></p>
+</td>
+<td>
+<p><strong>Description</strong></p>
+</td>
+<td>
+<p><strong>Exemples</strong></p>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p><strong>Installation</strong></p>
+</td>
+<td>
+<p>Entit&eacute; juridique/administrative principale</p>
+</td>
+<td>
+<p>Complexe Aquatique Municipal de Lyon</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Structure</strong></p>
+</td>
+<td>
+<p>Division fonctionnelle majeure</p>
+</td>
+<td>
+<p>Centre aquatique, Salle fitness, Terrains ext&eacute;rieurs</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Espace</strong></p>
+</td>
+<td>
+<p>Subdivision th&eacute;matique/physique</p>
+</td>
+<td>
+<p>Piscine int&eacute;rieure, Zone musculation, Salle de cours</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Zone</strong></p>
+</td>
+<td>
+<p>Lieu physique pr&eacute;cis de l'activit&eacute;</p>
+</td>
+<td>
+<p>Bassin 25m, Zone cardio, Terrain foot 1</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>R&egrave;gles de gestion :</strong></p>
+<ul>
+<li>Une service contient minimum 1 Structure</li>
+<li>Une Structure contient minimum 1 Espace</li>
+<li>Un Espace contient minimum 1 Zone</li>
+<li>Les Agents sont rattach&eacute;s au niveau Structure (avec acc&egrave;s multi-structures possible)</li>
+<li>Les Activit&eacute;s sont planifi&eacute;es au niveau Zone</li>
+<li>Le Mat&eacute;riel est localis&eacute; au niveau Zone uniquement</li>
+</ul>
+<p><strong>2.2 Entit&eacute;s principales</strong></p>
+<p><strong>2.2.1 Agents (Personnel)</strong></p>
+<p><strong>Attributs de base :</strong></p>
+<ul>
+<li>Identit&eacute; : Nom, Pr&eacute;nom, Date de naissance, Photo</li>
+<li>Contact : Email, T&eacute;l&eacute;phone, Adresse</li>
+<li>Profil professionnel : Type d'agent, R&ocirc;le syst&egrave;me, Statut</li>
+</ul>
+<p><strong>Types d'agents (classification m&eacute;tier) :</strong></p>
+<p>Agent-T1 : Ma&icirc;tre-nageur sauveteur (MNS)</p>
+<p>Agent-T2 : Coach fitness</p>
+<p>Agent-T3 : BNSSA (Brevet National de S&eacute;curit&eacute; et Sauvetage Aquatique)</p>
+<p>Agent-T4 : Agent d'accueil</p>
+<p>Agent-T5 : Agent d'entretien</p>
+<p>Agent-T6 : Agent de maintenance technique</p>
+<p>Agent-T7 : Animateur sportif</p>
+<p>Autres : Types additionnels non cat&eacute;goris&eacute;s</p>
+<p><strong>Rattachements :</strong></p>
+<ul>
+<li>Relation N:N avec Structures via agent_structures</li>
+<li>Un agent peut &ecirc;tre affect&eacute; &agrave; plusieurs structures</li>
+<li>Date d'assignation trac&eacute;e pour historique</li>
+</ul>
+<p><strong>2.2.2 Activit&eacute;s</strong></p>
+<p><strong>Caract&eacute;ristiques :</strong></p>
+<ul>
+<li>Planifi&eacute;e dans une Zone unique</li>
+<li>Assign&eacute;e &agrave; 1..N agents</li>
+<li>Utilise 0..N mat&eacute;riels</li>
+<li>R&eacute;currence configurable (quotidienne, hebdomadaire, mensuelle, personnalis&eacute;e)</li>
+<li>Activit&eacute;s simultan&eacute;es autoris&eacute;es dans une m&ecirc;me zone</li>
+</ul>
+<p><strong>Relations :</strong></p>
+<p>Activit&eacute; N:N Agents (via activite_agents)</p>
+<p>Activit&eacute; N:N Mat&eacute;riel (via activite_materiel avec quantit&eacute;s)</p>
+<p>Activit&eacute; 1:1 Fr&eacute;quentation (via frequentations, optionnelle)</p>
+<p><strong>2.2.3 Mat&eacute;riel</strong></p>
+<p><strong>Attributs obligatoires :</strong></p>
+<ul>
+<li>Nom, Type (Mobile/Fixe), Quantit&eacute;</li>
+<li>Couleur (distinction visuelle)</li>
+<li>Marque, R&eacute;f&eacute;rence</li>
+<li>Zone de stockage (localisation UNIQUE par Zone)</li>
+</ul>
+<p><strong>Statuts possibles :</strong></p>
+<ul>
+<li>Disponible</li>
+<li>En maintenance</li>
+<li>En panne</li>
+<li>Obsol&egrave;te</li>
+</ul>
+<p><strong>Tra&ccedil;abilit&eacute; :</strong></p>
+<ul>
+<li>Historique des d&eacute;placements entre zones</li>
+<li>Dates de v&eacute;rification et maintenance</li>
+<li>Notes de maintenance</li>
+</ul>
+<p><strong>2.2.4 Comp&eacute;tences</strong></p>
+<p><strong>Types de comp&eacute;tences :</strong></p>
+<ul>
+<li>Certifications professionnelles (BNSSA, MNS, CQP, BPJEPS)</li>
+<li>Premiers secours (PSC1, PSE1, PSE2)</li>
+<li>Habilitations sp&eacute;cifiques (manipulation mat&eacute;riel, ouverture/fermeture)</li>
+</ul>
+<p><strong>Attributs :</strong></p>
+<ul>
+<li>Nom de la comp&eacute;tence</li>
+<li>Niveau de ma&icirc;trise (D&eacute;butant, Interm&eacute;diaire, Expert) - optionnel</li>
+<li>Date d'obtention</li>
+<li>Date d'expiration (avec alertes automatiques)</li>
+<li>Num&eacute;ro de certification</li>
+<li>Document PDF associ&eacute;</li>
+</ul>
+<p><strong>2.3 Sch&eacute;ma de base de donn&eacute;es</strong></p>
+<p><strong>21 tables principales organis&eacute;es par domaine :</strong></p>
+<table>
+<thead>
+<tr>
+<td>
+<p><strong>Domaine</strong></p>
+</td>
+<td>
+<p><strong>Tables</strong></p>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p><strong>Hi&eacute;rarchie spatiale</strong></p>
+</td>
+<td>
+<p>installations, structures, espaces, zones</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Gestion agents</strong></p>
+</td>
+<td>
+<p>agents, agent_structures</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Comp&eacute;tences</strong></p>
+</td>
+<td>
+<p>competences, agent_competences</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Contrats</strong></p>
+</td>
+<td>
+<p>contrats</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Activit&eacute;s</strong></p>
+</td>
+<td>
+<p>activites, activite_agents</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Mat&eacute;riel</strong></p>
+</td>
+<td>
+<p>materiel, activite_materiel</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Fr&eacute;quentation</strong></p>
+</td>
+<td>
+<p>frequentations</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Cong&eacute;s/Absences</strong></p>
+</td>
+<td>
+<p>conges_absences</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>T&acirc;ches</strong></p>
+</td>
+<td>
+<p>taches</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Messagerie</strong></p>
+</td>
+<td>
+<p>messages</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Contenu</strong></p>
+</td>
+<td>
+<p>categories_contenu, fiches, posts</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Audit</strong></p>
+</td>
+<td>
+<p>audit_logs</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Contraintes cl&eacute;s :</strong></p>
+<ul>
+<li>Utilisation d'ENUM pour valeurs pr&eacute;d&eacute;finies (types, statuts, r&ocirc;les)</li>
+<li>JSON pour donn&eacute;es flexibles (horaires, r&eacute;currence, configuration)</li>
+<li>CASCADE DELETE pour int&eacute;grit&eacute; r&eacute;f&eacute;rentielle</li>
+<li>Index sur toutes les cl&eacute;s &eacute;trang&egrave;res</li>
+<li>Timestamps automatiques (created_at, updated_at)</li>
+<li>Soft deletes pour tra&ccedil;abilit&eacute; (deleted_at)</li>
+</ul>
+<p><strong>Note :</strong> Le sch&eacute;ma SQL complet est disponible dans le document technique annexe D2S_Base_de_donnees.sql</p>
+<ol>
+<li><strong> SP&Eacute;CIFICATIONS FONCTIONNELLES PAR MODULE</strong></li>
+</ol>
+<p><strong>3.1 MODULE PLANIFICATION (CORE)</strong></p>
+<p><strong>Priorit&eacute; : P0 (Critique)</strong></p>
+<p><strong>3.1.1 Types de vues de planification</strong></p>
+<ol>
+<li><strong> Planification Globale</strong></li>
+</ol>
+<ul>
+<li><strong>Affichage :</strong> Vue calendrier agr&eacute;g&eacute;e de toutes les structures</li>
+<li><strong>Filtres disponibles :</strong></li>
+<ul>
+<li>Date (jour, semaine, mois)</li>
+<li>Structure(s)</li>
+<li>Espace(s)</li>
+<li>Zone(s)</li>
+<li>Agent(s)</li>
+<li>Type d'activit&eacute;</li>
+</ul>
+<li><strong>Formats d'affichage :</strong> Vue Gantt ou Calendrier</li>
+<li><strong>Permissions :</strong> Admin (RW), Manager (RW), Agent (RO)</li>
+</ul>
+<ol>
+<li><strong> Planification par Structure</strong></li>
+</ol>
+<ul>
+<li><strong>Affichage :</strong> Vue d&eacute;taill&eacute;e d'une structure sp&eacute;cifique</li>
+<li><strong>Informations visibles :</strong></li>
+<ul>
+<li>Activit&eacute;s planifi&eacute;es avec horaires</li>
+<li>Agents assign&eacute;s par activit&eacute;</li>
+<li>Zones occup&eacute;es et disponibles</li>
+<li>Mat&eacute;riel utilis&eacute; et disponible</li>
+</ul>
+<li><strong>Permissions :</strong> Admin (RW), Manager de la structure (RW), Agents de la structure (RO)</li>
+</ul>
+<ol>
+<li><strong> Planification Zone / Agent</strong></li>
+</ol>
+<ul>
+<li><strong>Vue Zone :</strong> Occupation par zone avec timeline heure par heure</li>
+<li><strong>Vue Agent :</strong> Planning individuel de l'agent avec toutes ses affectations</li>
+<li><strong>Permissions :</strong> Selon r&ocirc;le et rattachement</li>
+</ul>
+<p><strong>3.1.2 Cr&eacute;ation et param&eacute;trage d'activit&eacute;s</strong></p>
+<p><strong>Informations obligatoires :</strong></p>
+<ul>
+<li>Nom de l'activit&eacute;</li>
+<li>Zone assign&eacute;e</li>
+<li>Date et horaires (d&eacute;but, fin)</li>
+<li>Au moins 1 agent assign&eacute;</li>
+</ul>
+<p><strong>Informations optionnelles :</strong></p>
+<ul>
+<li>Description d&eacute;taill&eacute;e</li>
+<li>R&eacute;currence (quotidienne, hebdomadaire, mensuelle, personnalis&eacute;e)</li>
+<li>Mat&eacute;riel requis (avec quantit&eacute;s)</li>
+<li>Capacit&eacute; maximale (nombre de participants)</li>
+<li>Notes particuli&egrave;res</li>
+</ul>
+<p><strong>R&egrave;gles de validation :</strong></p>
+<ul>
+<li>V&eacute;rification disponibilit&eacute; agents (pas de double affectation)</li>
+<li>V&eacute;rification disponibilit&eacute; mat&eacute;riel (quantit&eacute;s suffisantes)</li>
+<li>Alerte si agent d&eacute;passe heures hebdomadaires planifi&eacute;es</li>
+<li>Alerte si agent mineur et respect l&eacute;gislation du travail</li>
+</ul>
+<p><strong>3.1.3 Planification automatique (Auto-Schedule)</strong></p>
+<p><strong>Fonctionnement :</strong></p>
+<ol>
+<li>Analyse des cr&eacute;neaux non attribu&eacute;s</li>
+<li>Consultation des disponibilit&eacute;s agents</li>
+<li>Prise en compte des demandes de cong&eacute;s valid&eacute;es</li>
+<li>Respect des heures souhait&eacute;es et maximales par agent</li>
+<li>Algorithme de r&eacute;partition &eacute;quitable</li>
+</ol>
+<p><strong>Algorithme de distribution :</strong></p>
+<p>POUR chaque cr&eacute;neau non attribu&eacute; :</p>
+<ol>
+<li>Filtrer agents disponibles (disponibilit&eacute; + pas en cong&eacute;)</li>
+<li>Exclure agents ayant atteint heures maximales</li>
+<li>Prioriser agents n'ayant pas atteint heures souhait&eacute;es</li>
+<li>Affecter en respectant &eacute;quilibre de charge</li>
+<li>V&eacute;rifier comp&eacute;tences requises si d&eacute;finies</li>
+</ol>
+<p>FIN POUR</p>
+<p><strong>Strat&eacute;gie d'utilisation :</strong></p>
+<ul>
+<li>L'administrateur d&eacute;finit d'abord les affectations prioritaires manuellement</li>
+<li>L'Auto-Schedule compl&egrave;te ensuite les cr&eacute;neaux restants</li>
+<li>Possibilit&eacute; d'ajustement manuel post-g&eacute;n&eacute;ration</li>
+</ul>
+<p><strong>3.1.4 Mod&egrave;les d'horaires (Templates)</strong></p>
+<p><strong>Cr&eacute;ation de mod&egrave;le :</strong></p>
+<ul>
+<li>Enregistrement d'une semaine type compl&egrave;te</li>
+<li>Choix : avec agents affect&eacute;s OU structure vide (zones et horaires uniquement)</li>
+<li>Nommage et cat&eacute;gorisation du mod&egrave;le</li>
+</ul>
+<p><strong>Utilisation de mod&egrave;le :</strong></p>
+<ul>
+<li>S&eacute;lection du mod&egrave;le depuis la biblioth&egrave;que</li>
+<li>Choix de la/les semaine(s) de destination</li>
+<li>Import en 1 clic de tous les cr&eacute;neaux</li>
+<li>Ajustements possibles avant publication</li>
+<li>Possibilit&eacute; de sauvegarder la version ajust&eacute;e comme nouveau mod&egrave;le</li>
+</ul>
+<p><strong>B&eacute;n&eacute;fice mesur&eacute; :</strong> Gain de 80% du temps de planification</p>
+<p><strong>3.1.5 Duplication hebdomadaire</strong></p>
+<p><strong>Processus :</strong></p>
+<ol>
+<li>S&eacute;lectionner semaine source (S-source)</li>
+<li>S&eacute;lectionner une ou plusieurs semaines destinations (S-dest)</li>
+<li>Choisir options de duplication :</li>
+<ul>
+<li>Avec agents : Copie int&eacute;grale (zones + agents + mat&eacute;riel + horaires)</li>
+<li>Sans agents : Copie structure uniquement (zones + horaires + mat&eacute;riel)</li>
+</ul>
+<li>Validation et duplication automatique</li>
+<li>Ajustements post-duplication possibles</li>
+</ol>
+<p><strong>R&egrave;gles de gestion :</strong></p>
+<ul>
+<li>Conservation int&eacute;grale des param&egrave;tres d'activit&eacute;</li>
+<li>V&eacute;rification automatique des conflits d'agents si duplication avec agents</li>
+<li>Alerte si mat&eacute;riel insuffisant sur p&eacute;riode destination</li>
+</ul>
+<p><strong>3.1.6 Disponibilit&eacute;s des agents</strong></p>
+<p><strong>Saisie par l'agent :</strong></p>
+<ul>
+<li>Interface : Grille horaire interactive (jours x cr&eacute;neaux)</li>
+<li>Granularit&eacute; : Par demi-journ&eacute;e ou heure</li>
+<li>Types : Disponible / Non disponible / Pr&eacute;f&eacute;rence</li>
+<li>R&eacute;currence : Possibilit&eacute; de d&eacute;finir disponibilit&eacute;s r&eacute;currentes (planning type)</li>
+</ul>
+<p><strong>Gestion par le manager :</strong></p>
+<ul>
+<li>Consultation en temps r&eacute;el des disponibilit&eacute;s</li>
+<li>Verrouillage temporaire (pendant cr&eacute;ation planning) pour &eacute;viter modifications</li>
+<li>Int&eacute;gration automatique dans l'outil de planification</li>
+</ul>
+<p><strong>Affichage dans le planning :</strong></p>
+<ul>
+<li>Code couleur : Disponible (vert), Non disponible (rouge), En cong&eacute; (orange)</li>
+<li>Filtrage rapide : "Montrer uniquement agents disponibles"</li>
+</ul>
+<p><strong>3.1.7 Demandes de cong&eacute;s et absences</strong></p>
+<p><strong>Workflow de demande :</strong></p>
+<p>Agent &rarr; Soumet demande (date d&eacute;but, fin, type, motif)</p>
+<p>&darr;</p>
+<p>Manager &rarr; Re&ccedil;oit notification (email + SMS)</p>
+<p>&darr;</p>
+<p>Manager &rarr; Approuve ou refuse (avec commentaire si refus)</p>
+<p>&darr;</p>
+<p>Agent &rarr; Re&ccedil;oit notification de d&eacute;cision (email + SMS)</p>
+<p>&darr;</p>
+<p>SI approuv&eacute;e &rarr; Int&eacute;gration automatique dans planning (agent indisponible)</p>
+<p><strong>Types de cong&eacute;s/absences :</strong></p>
+<ul>
+<li>Cong&eacute;s pay&eacute;s</li>
+<li>Maladie</li>
+<li>Formation professionnelle</li>
+<li>Absence exceptionnelle</li>
+<li>R&eacute;cup&eacute;ration</li>
+<li>Autre (&agrave; pr&eacute;ciser)</li>
+</ul>
+<p><strong>Statuts :</strong></p>
+<ul>
+<li>En attente</li>
+<li>Approuv&eacute;</li>
+<li>Refus&eacute;</li>
+<li>Annul&eacute;</li>
+</ul>
+<p><strong>R&egrave;gles de gestion :</strong></p>
+<ul>
+<li>Solde de cong&eacute;s pay&eacute;s d&eacute;cr&eacute;ment&eacute; automatiquement si approuv&eacute;</li>
+<li>Impossible de cr&eacute;er activit&eacute; sur p&eacute;riode de cong&eacute; valid&eacute;e</li>
+<li>Alerte si agent en cong&eacute; assign&eacute; &agrave; une activit&eacute; existante</li>
+</ul>
+<p><strong>3.1.8 Postes disponibles (Open Shifts)</strong></p>
+<p><strong>Publication d'un poste vacant :</strong></p>
+<ul>
+<li>Manager cr&eacute;e un cr&eacute;neau "ouvert" (non attribu&eacute; mais publiable)</li>
+<li>D&eacute;finition : Zone, Date, Horaires, Comp&eacute;tences requises (optionnel)</li>
+<li>Publication &rarr; Notification push &agrave; tous les agents &eacute;ligibles</li>
+</ul>
+<p><strong>Inscription par l'agent :</strong></p>
+<ul>
+<li>Agent consulte postes disponibles dans son planning</li>
+<li>Inscription en 1 clic</li>
+<li>Notification imm&eacute;diate au manager</li>
+</ul>
+<p><strong>Validation par le manager :</strong></p>
+<ul>
+<li>R&eacute;ception notification (email + SMS)</li>
+<li>Approbation ou refus</li>
+<li>SI approuv&eacute; &rarr; Affectation automatique + notification agent</li>
+<li>SI refus&eacute; &rarr; Poste reste disponible pour autres agents</li>
+</ul>
+<p><strong>R&egrave;gles de gestion :</strong></p>
+<ul>
+<li>V&eacute;rification automatique : Agent ne d&eacute;passe pas heures hebdomadaires</li>
+<li>V&eacute;rification comp&eacute;tences si d&eacute;finies</li>
+<li>Premier arriv&eacute;, premier servi (ou choix manager si plusieurs candidats)</li>
+</ul>
+<p><strong>3.1.9 Demandes de remplacement (Shift Swap)</strong></p>
+<p><strong>Workflow complet :</strong></p>
+<p>Agent A &rarr; Demande rempla&ccedil;ant pour son shift</p>
+<p>&darr;</p>
+<p>Syst&egrave;me &rarr; Identifie agents &eacute;ligibles (disponibles + comp&eacute;tences)</p>
+<p>&darr;</p>
+<p>Agents &eacute;ligibles &rarr; Re&ccedil;oivent notification</p>
+<p>&darr;</p>
+<p>Agent B &rarr; Accepte le remplacement</p>
+<p>&darr;</p>
+<p>Manager &rarr; Re&ccedil;oit notification de demande de validation</p>
+<p>&darr;</p>
+<p>Manager &rarr; Approuve ou refuse</p>
+<p>&darr;</p>
+<p>SI approuv&eacute; :</p>
+<p>- Planning mis &agrave; jour automatiquement (Agent B remplace Agent A)</p>
+<p>- Notifications Agent A + Agent B</p>
+<p>SI refus&eacute; :</p>
+<p>- Demande reste ouverte pour autres agents</p>
+<p>- Notification Agent B</p>
+<p><strong>Crit&egrave;res d'&eacute;ligibilit&eacute; automatique :</strong></p>
+<ul>
+<li>Agent disponible sur le cr&eacute;neau</li>
+<li>Comp&eacute;tences correspondantes (si d&eacute;finies)</li>
+<li>Pas de d&eacute;passement heures hebdomadaires</li>
+</ul>
+<p><strong>Avantages :</strong></p>
+<ul>
+<li>R&eacute;duction absent&eacute;isme</li>
+<li>Autonomie des agents</li>
+<li>Tra&ccedil;abilit&eacute; compl&egrave;te</li>
+</ul>
+<p><strong>3.1.10 Gestion multi-structures</strong></p>
+<p><strong>Principe :</strong></p>
+<ul>
+<li>Utilisation de "Structures" comme niveaux de s&eacute;paration</li>
+<li>Attribution agents &agrave; une ou plusieurs structures</li>
+<li>Permissions granulaires par structure</li>
+</ul>
+<p><strong>Configuration :</strong></p>
+<ul>
+<li>Cr&eacute;ation de structures distinctes (ex: Centre aquatique, Fitness, Terrains)</li>
+<li>Affectation managers par structure</li>
+<li>Affectation agents &agrave; structure(s) pertinente(s)</li>
+</ul>
+<p><strong>Visibilit&eacute; :</strong></p>
+<ul>
+<li>Admin : Voit toutes les structures</li>
+<li>Manager : Voit uniquement sa/ses structure(s) assign&eacute;e(s)</li>
+<li>Agent : Voit uniquement sa/ses structure(s) assign&eacute;e(s)</li>
+</ul>
+<p><strong>Partage de personnel :</strong></p>
+<ul>
+<li>Agent peut &ecirc;tre affect&eacute; &agrave; plusieurs structures</li>
+<li>Planning global agent = agr&eacute;gation de toutes ses structures</li>
+<li>Gestion des conflits inter-structures automatique</li>
+</ul>
+<p><strong>3.1.11 Gestion budg&eacute;taire et reporting</strong></p>
+<p><strong>Calcul des co&ucirc;ts de main-d'&oelig;uvre :</strong></p>
+<ul>
+<li>Saisie taux horaire par agent (ou taux par type de poste)</li>
+<li>Calcul automatique : Heures planifi&eacute;es &times; Taux horaire</li>
+<li>Vue pr&eacute;visionnelle : Co&ucirc;t semaine/mois avant publication</li>
+</ul>
+<p><strong>Rapports disponibles :</strong></p>
+<ol>
+<li><strong>Rapport hebdomadaire/mensuel :</strong></li>
+<ul>
+<li>Total heures par agent</li>
+<li>Total heures par structure/zone</li>
+<li>Co&ucirc;t total de main-d'&oelig;uvre</li>
+<li>R&eacute;partition par type d'agent</li>
+</ul>
+<li><strong>Analyse comparative :</strong></li>
+<ul>
+<li>&Eacute;volution co&ucirc;ts p&eacute;riode N vs N-1</li>
+<li>Identification d&eacute;passements budg&eacute;taires</li>
+</ul>
+<li><strong>Export :</strong></li>
+<ul>
+<li>Format Excel/CSV pour import logiciel paie</li>
+<li>Format PDF pour reporting direction</li>
+</ul>
+</ol>
+<p><strong>Alertes budg&eacute;taires :</strong></p>
+<ul>
+<li>Alerte si planification d&eacute;passe budget pr&eacute;visionnel</li>
+<li>Alerte heures suppl&eacute;mentaires imminentes (agent proche seuil)</li>
+</ul>
+<p><strong>3.1.12 Int&eacute;grations calendriers tiers</strong></p>
+<p><strong>Protocoles support&eacute;s :</strong></p>
+<ul>
+<li>iCal/ICS (standard)</li>
+<li>Google Calendar API</li>
+<li>Microsoft Outlook/Office 365 API</li>
+<li>Apple iCloud Calendar</li>
+</ul>
+<p><strong>Synchronisation :</strong></p>
+<ul>
+<li>Unidirectionnelle : D2S &rarr; Calendrier tiers (lecture seule pour agent)</li>
+<li>Mise &agrave; jour temps r&eacute;el lors modification planning</li>
+<li>G&eacute;n&eacute;ration lien d'abonnement unique par agent</li>
+</ul>
+<p><strong>Fonctionnalit&eacute;s :</strong></p>
+<ul>
+<li>Rappels natifs calendrier (notifications push sur mobile)</li>
+<li>Affichage informations activit&eacute; (lieu, horaires, notes)</li>
+<li>Acc&egrave;s itin&eacute;raire GPS depuis &eacute;v&eacute;nement calendrier</li>
+</ul>
+<p><strong>3.1.13 Notes et informations sur planning</strong></p>
+<p><strong>Fonctionnalit&eacute; :</strong></p>
+<ul>
+<li>Ajout de notes textuelles sur n'importe quel jour du planning</li>
+<li>Visibilit&eacute; : Tous les agents concern&eacute;s (structure ou activit&eacute;)</li>
+<li>Cas d'usage : &Eacute;v&eacute;nements sp&eacute;ciaux, consignes particuli&egrave;res, alertes</li>
+</ul>
+<p><strong>Affichage :</strong></p>
+<ul>
+<li>Ic&ocirc;ne distinctive sur le calendrier</li>
+<li>Consultation d&eacute;tails en 1 clic</li>
+<li>Notifications push si note ajout&eacute;e apr&egrave;s publication</li>
+</ul>
+<p><strong>3.1.14 Itin&eacute;raires et g&eacute;olocalisation</strong></p>
+<p><strong>Configuration :</strong></p>
+<ul>
+<li>Saisie adresse compl&egrave;te pour chaque Structure/Zone</li>
+<li>Validation automatique adresse (Google Maps API)</li>
+</ul>
+<p><strong>Utilisation agent :</strong></p>
+<ul>
+<li>Clic sur adresse dans planning &rarr; Ouverture navigation GPS</li>
+<li>Int&eacute;gration Google Maps / Apple Plans / Waze</li>
+<li>Affichage infos compl&eacute;mentaires : Codes acc&egrave;s, emplacement mat&eacute;riel, consignes</li>
+</ul>
+<p><strong>3.2 MODULE GESTION DES AGENTS</strong></p>
+<p><strong>Priorit&eacute; : P0 (Critique)</strong></p>
+<p><strong>3.2.1 Fiche agent compl&egrave;te</strong></p>
+<p><strong>Section Identit&eacute; :</strong></p>
+<ul>
+<li>Nom, Pr&eacute;nom</li>
+<li>Date de naissance (calcul automatique &acirc;ge + d&eacute;tection mineur)</li>
+<li>Photo de profil (upload + crop)</li>
+<li>Num&eacute;ro de s&eacute;curit&eacute; sociale (optionnel, chiffr&eacute;)</li>
+</ul>
+<p><strong>Section Contact :</strong></p>
+<ul>
+<li>Email (unique, validation format)</li>
+<li>T&eacute;l&eacute;phone principal</li>
+<li>T&eacute;l&eacute;phone secondaire (optionnel)</li>
+<li>Adresse postale compl&egrave;te</li>
+</ul>
+<p><strong>Section Profil professionnel :</strong></p>
+<ul>
+<li>Type d'agent (T1-T7, Autres)</li>
+<li>R&ocirc;le syst&egrave;me (Admin, Manager, Agent, &Eacute;diteur)</li>
+<li>Statut actuel (Temps plein, Temps partiel, CDD, CDI, Stagiaire)</li>
+<li>Date d'entr&eacute;e dans l'&eacute;tablissement</li>
+</ul>
+<p><strong>Section Rattachements :</strong></p>
+<ul>
+<li>Liste structures assign&eacute;es (multi-s&eacute;lection)</li>
+<li>Date d'assignation par structure (historique)</li>
+<li>Structure principale (par d&eacute;faut)</li>
+</ul>
+<p><strong>Section Informations compl&eacute;mentaires :</strong></p>
+<ul>
+<li>Taille uniformes (hauts, bas, chaussures)</li>
+<li>Allergies ou contraintes m&eacute;dicales (confidentiel)</li>
+<li>Coordonn&eacute;es personne &agrave; contacter (urgence)</li>
+<li>Documents administratifs (upload PDF)</li>
+</ul>
+<p><strong>3.2.2 Gestion des comp&eacute;tences et certifications</strong></p>
+<p><strong>Types de comp&eacute;tences :</strong></p>
+<table>
+<thead>
+<tr>
+<td>
+<p><strong>Cat&eacute;gorie</strong></p>
+</td>
+<td>
+<p><strong>Exemples</strong></p>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>Certifications aquatiques</p>
+</td>
+<td>
+<p>BNSSA, MNS, BPJEPS AAN</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Premiers secours</p>
+</td>
+<td>
+<p>PSC1, PSE1, PSE2, AFGSU</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Coaching fitness</p>
+</td>
+<td>
+<p>CQP ALS, BPJEPS AF, Certifications machines</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Habilitations techniques</p>
+</td>
+<td>
+<p>Manipulation chlore, &Eacute;lectricit&eacute;, Ouverture/Fermeture</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Formations sp&eacute;cifiques</p>
+</td>
+<td>
+<p>Aquabike, Aquagym, Natation b&eacute;b&eacute;s</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributs par comp&eacute;tence :</strong></p>
+<ul>
+<li>Nom de la comp&eacute;tence/certification</li>
+<li>Organisme d&eacute;livrant</li>
+<li>Niveau de ma&icirc;trise (D&eacute;butant, Interm&eacute;diaire, Expert) - optionnel</li>
+<li>Num&eacute;ro de certification</li>
+<li>Date d'obtention</li>
+<li>Date d'expiration (si applicable)</li>
+<li>Document PDF (scan carte/dipl&ocirc;me)</li>
+<li>Statut : Valide, Expire bient&ocirc;t (&lt;30j), Expir&eacute;e, &Agrave; renouveler</li>
+</ul>
+<p><strong>Alertes automatiques :</strong></p>
+<ul>
+<li>Email manager + agent : 60 jours avant expiration</li>
+<li>Email manager + agent : 30 jours avant expiration</li>
+<li>Email manager + agent : 7 jours avant expiration</li>
+<li>Notification in-app : Au login si certification expir&eacute;e</li>
+</ul>
+<p><strong>Tableau de bord certifications (Manager) :</strong></p>
+<ul>
+<li>Vue d'ensemble : Nombre certifications par statut</li>
+<li>Filtres : Par structure, par type de certification, par agent</li>
+<li>Export Excel : Liste agents + statuts certifications</li>
+</ul>
+<p><strong>3.2.3 Gestion des contrats</strong></p>
+<p><strong>Types de contrats :</strong></p>
+<ul>
+<li>CDI (Contrat &agrave; Dur&eacute;e Ind&eacute;termin&eacute;e)</li>
+<li>CDD (Contrat &agrave; Dur&eacute;e D&eacute;termin&eacute;e)</li>
+<li>Stage (Convention de stage)</li>
+<li>Alternance (Contrat apprentissage/professionnalisation)</li>
+<li>Vacation (Contrat ponctuel)</li>
+</ul>
+<p><strong>Informations contractuelles :</strong></p>
+<ul>
+<li>Type de contrat</li>
+<li>Date de d&eacute;but (obligatoire)</li>
+<li>Date de fin (obligatoire pour CDD, Stage, Vacation)</li>
+<li>Nombre d'heures hebdomadaires contractuelles</li>
+<li>Temps de travail : Temps plein / Temps partiel (% ETP)</li>
+<li>Taux horaire (pour calculs budg&eacute;taires)</li>
+<li>Statut contrat : Actif, Termin&eacute;, R&eacute;sili&eacute;, En attente</li>
+</ul>
+<p><strong>Historique multi-contrats :</strong></p>
+<ul>
+<li>Un agent peut avoir plusieurs contrats successifs</li>
+<li>Conservation historique complet (archivage)</li>
+<li>Calcul anciennet&eacute; globale</li>
+<li>R&eacute;activation agent = cr&eacute;ation nouveau contrat</li>
+</ul>
+<p><strong>R&egrave;gles de gestion :</strong></p>
+<ul>
+<li>Un seul contrat "Actif" &agrave; la fois par agent</li>
+<li>Alerte automatique 30 jours avant fin CDD</li>
+<li>Archivage automatique contrats termin&eacute;s</li>
+<li>Impossible de planifier agent sans contrat actif</li>
+</ul>
+<p><strong>3.2.4 Planning individuel agent</strong></p>
+<p><strong>Fonctionnalit&eacute;s :</strong></p>
+<ul>
+<li>Vue calendrier personnalis&eacute;e (journ&eacute;e, semaine, mois)</li>
+<li>Affichage toutes activit&eacute;s assign&eacute;es (toutes structures)</li>
+<li>Code couleur par structure ou par type d'activit&eacute;</li>
+<li>Synchronisation calendrier tiers (Google, Outlook, iCloud)</li>
+</ul>
+<p><strong>Actions possibles (agent) :</strong></p>
+<ul>
+<li>Consulter d&eacute;tails activit&eacute;</li>
+<li>Demander rempla&ccedil;ant (shift swap)</li>
+<li>S'inscrire sur postes disponibles (open shifts)</li>
+<li>Soumettre demande de cong&eacute;</li>
+<li>G&eacute;rer disponibilit&eacute;s r&eacute;currentes</li>
+</ul>
+<p><strong>3.2.5 Carnet de t&acirc;ches agent</strong></p>
+<p><strong>Fonctionnalit&eacute; :</strong></p>
+<ul>
+<li>Liste personnalis&eacute;e de t&acirc;ches assign&eacute;es &agrave; l'agent</li>
+<li>Cr&eacute;ation par : Manager, Admin, ou Agent lui-m&ecirc;me</li>
+</ul>
+<p><strong>Attributs t&acirc;che :</strong></p>
+<ul>
+<li>Titre</li>
+<li>Description d&eacute;taill&eacute;e</li>
+<li>Priorit&eacute; (Basse, Moyenne, Haute, Urgente)</li>
+<li>Date limite</li>
+<li>Statut : &Agrave; faire, En cours, Termin&eacute;e, Non r&eacute;alis&eacute;e</li>
+<li>Pi&egrave;ces jointes (photos, documents)</li>
+</ul>
+<p><strong>Actions agent :</strong></p>
+<ul>
+<li>Marquer t&acirc;che : En cours / Termin&eacute;e / Non r&eacute;alis&eacute;e (avec motif)</li>
+<li>Ajouter commentaires</li>
+<li>Uploader photos/preuves</li>
+</ul>
+<p><strong>Notifications :</strong></p>
+<ul>
+<li>Rappel 24h avant deadline</li>
+<li>Alerte si deadline d&eacute;pass&eacute;e (agent + manager)</li>
+</ul>
+<p><strong>3.2.6 Historique et statistiques agent</strong></p>
+<p><strong>Statistiques disponibles :</strong></p>
+<ol>
+<li><strong> Activit&eacute; professionnelle :</strong></li>
+</ol>
+<ul>
+<li>Total heures travaill&eacute;es (p&eacute;riode configurable)</li>
+<li>R&eacute;partition heures par structure</li>
+<li>R&eacute;partition heures par type d'activit&eacute;</li>
+<li>&Eacute;volution heures mois par mois (graphique)</li>
+</ul>
+<ol>
+<li><strong> Cong&eacute;s et absences :</strong></li>
+</ol>
+<ul>
+<li>Solde cong&eacute;s pay&eacute;s restants</li>
+<li>Historique demandes (approuv&eacute;es, refus&eacute;es)</li>
+<li>Total jours absences (maladie, formation, autre)</li>
+<li>Taux d'absent&eacute;isme</li>
+</ul>
+<ol>
+<li><strong> Missions et activit&eacute;s :</strong></li>
+</ol>
+<ul>
+<li>Nombre total activit&eacute;s encadr&eacute;es</li>
+<li>Types d'activit&eacute;s principales</li>
+<li>Taux de remplacement shift swap (donneur vs receveur)</li>
+</ul>
+<ol>
+<li><strong> Formations et comp&eacute;tences :</strong></li>
+</ol>
+<ul>
+<li>Liste formations suivies (date, type, organisme)</li>
+<li>&Eacute;volution comp&eacute;tences (nouvelles certifications)</li>
+<li>Prochaines formations pr&eacute;vues</li>
+</ul>
+<p><strong>Exports :</strong></p>
+<ul>
+<li>PDF : R&eacute;capitulatif mensuel/annuel</li>
+<li>Excel : Donn&eacute;es d&eacute;taill&eacute;es pour analyses personnelles</li>
+</ul>
+<p><strong>3.3 MODULE GESTION STRUCTURE &amp; ESPACES</strong></p>
+<p><strong>Priorit&eacute; : P1 (Important)</strong></p>
+<p><strong>3.3.1 Navigation hi&eacute;rarchique</strong></p>
+<p><strong>Arborescence interactive :</strong></p>
+<p>📍 Service (ex: Complexe Sportif Municipal)</p>
+<p>├── 🏊 Structure 1 (ex: Centre Aquatique)</p>
+<p>│ ├── 💧 Espace 1 (ex: Piscine Int&eacute;rieure)</p>
+<p>│ │ ├── Zone 1 (ex: Bassin 25m)</p>
+<p>│ │ ├── Zone 2 (ex: Bassin Ludique)</p>
+<p>│ │ └── Zone 3 (ex: Pataugeoire)</p>
+<p>│ └── 💧 Espace 2 (ex: Piscine Ext&eacute;rieure)</p>
+<p>│ └── Zone 1 (ex: Bassin 50m)</p>
+<p>├── 💪 Structure 2 (ex: Salle Fitness)</p>
+<p>│ ├── 🏋️ Espace 1 (ex: Musculation)</p>
+<p>│ │ ├── Zone 1 (ex: Zone Cardio)</p>
+<p>│ │ ├── Zone 2 (ex: Zone Halt&egrave;res)</p>
+<p>│ │ └── Zone 3 (ex: Zone Machines)</p>
+<p>│ └── 🧘 Espace 2 (ex: Cours Collectifs)</p>
+<p>│ └── Zone 1 (ex: Salle 1)</p>
+<p>└── ⚽ Structure 3 (ex: Terrains Ext&eacute;rieurs)</p>
+<p>└── ...</p>
+<p><strong>Fonctionnalit&eacute;s navigation :</strong></p>
+<ul>
+<li>Expand/Collapse niveaux</li>
+<li>Recherche rapide par nom</li>
+<li>Filtres : Statut (Actif, En maintenance, Ferm&eacute;)</li>
+<li>Indicateurs visuels occupation temps r&eacute;el</li>
+</ul>
+<p><strong>3.3.2 Fiche Structure</strong></p>
+<p><strong>Informations g&eacute;n&eacute;rales :</strong></p>
+<ul>
+<li>Nom de la structure</li>
+<li>Description / Pr&eacute;sentation</li>
+<li>Type (Aquatique, Fitness, Multisport, Terrains, Autre)</li>
+<li>Adresse compl&egrave;te (si diff&eacute;rente de l'installation)</li>
+<li>Coordonn&eacute;es GPS (latitude, longitude)</li>
+</ul>
+<p><strong>Horaires d'ouverture :</strong></p>
+<ul>
+<li>Configuration par jour de semaine</li>
+<li>Cr&eacute;neaux horaires (peut &ecirc;tre multiple par jour)</li>
+<li>Fermetures exceptionnelles (dates sp&eacute;cifiques)</li>
+<li>Horaires saisonniers (&eacute;t&eacute;/hiver) - optionnel</li>
+</ul>
+<p><strong>Capacit&eacute; et r&egrave;gles :</strong></p>
+<ul>
+<li>Capacit&eacute; totale structure (jauge max simultan&eacute;e)</li>
+<li>R&egrave;gles g&eacute;n&eacute;rales d'utilisation</li>
+<li>Consignes de s&eacute;curit&eacute;</li>
+<li>Restrictions d'acc&egrave;s (&acirc;ge, &eacute;quipements obligatoires)</li>
+</ul>
+<p><strong>Gestion :</strong></p>
+<ul>
+<li>Manager(s) responsable(s) assign&eacute;(s)</li>
+<li>Personnel rattach&eacute; (liste agents)</li>
+<li>Mat&eacute;riel fixe principal</li>
+</ul>
+<p><strong>3.3.3 Fiche Espace</strong></p>
+<p><strong>Informations g&eacute;n&eacute;rales :</strong></p>
+<ul>
+<li>Nom de l'espace</li>
+<li>Description / Caract&eacute;ristiques</li>
+<li>Type d'espace (ex: Piscine, Salle, Terrain, Vestiaire)</li>
+<li>Surface (m&sup2;)</li>
+</ul>
+<p><strong>Capacit&eacute; :</strong></p>
+<ul>
+<li>Nombre maximum de personnes simultan&eacute;es</li>
+<li>Jauge COVID ou r&eacute;glementaire (si applicable)</li>
+</ul>
+<p><strong>&Eacute;quipements fixes :</strong></p>
+<ul>
+<li>Liste &eacute;quipements permanents (non mobile)</li>
+<li>&Eacute;tat et dates de v&eacute;rification</li>
+</ul>
+<p><strong>R&egrave;gles sp&eacute;cifiques :</strong></p>
+<ul>
+<li>Consignes particuli&egrave;res</li>
+<li>&Eacute;quipements de protection obligatoires</li>
+<li>Restrictions d'utilisation</li>
+</ul>
+<p><strong>3.3.4 Fiche Zone</strong></p>
+<p><strong>Informations g&eacute;n&eacute;rales :</strong></p>
+<ul>
+<li>Nom de la zone</li>
+<li>Description / Fonction</li>
+<li>Dimensions (longueur &times; largeur &times; hauteur/profondeur)</li>
+</ul>
+<p><strong>Capacit&eacute; et r&egrave;gles :</strong></p>
+<ul>
+<li>Capacit&eacute; maximale simultan&eacute;e</li>
+<li>R&egrave;gles d'utilisation sp&eacute;cifiques</li>
+<li>Encadrement obligatoire (oui/non)</li>
+<li>Comp&eacute;tences requises pour encadrement (s&eacute;lection multi)</li>
+</ul>
+<p><strong>Mat&eacute;riel associ&eacute; :</strong></p>
+<ul>
+<li>Mat&eacute;riel fixe permanent (liste)</li>
+<li>Mat&eacute;riel mobile habituellement stock&eacute; (liste)</li>
+<li>Acc&egrave;s direct inventaire mat&eacute;riel zone</li>
+</ul>
+<p><strong>Maintenance :</strong></p>
+<ul>
+<li>Derni&egrave;re date entretien</li>
+<li>Prochaine maintenance planifi&eacute;e</li>
+<li>Historique interventions</li>
+</ul>
+<p><strong>3.3.5 Indicateurs d'occupation en temps r&eacute;el</strong></p>
+<p><strong>Dashboard Structure :</strong></p>
+<ul>
+<li>Vue d'ensemble occupation toutes zones</li>
+<li>Code couleur :</li>
+<ul>
+<li>🟢 Disponible</li>
+<li>🟡 Occupation partielle (&lt;80%)</li>
+<li>🔴 Occupation compl&egrave;te (&ge;80%)</li>
+<li>⚫ En maintenance</li>
+<li>🔵 R&eacute;serv&eacute; (activit&eacute; &agrave; venir &lt;1h)</li>
+</ul>
+</ul>
+<p><strong>Statistiques en direct :</strong></p>
+<ul>
+<li>Nombre visiteurs actuels / Capacit&eacute; max</li>
+<li>Taux d'occupation temps r&eacute;el (%)</li>
+<li>Zones les plus fr&eacute;quent&eacute;es</li>
+<li>Alertes si d&eacute;passement jauge</li>
+</ul>
+<p><strong>3.4 MODULE GESTION DU MAT&Eacute;RIEL</strong></p>
+<p><strong>Priorit&eacute; : P1 (Important)</strong></p>
+<p><strong>3.4.1 Inventaire complet</strong></p>
+<p><strong>Fiche mat&eacute;riel :</strong></p>
+<p><strong>Informations de base :</strong></p>
+<ul>
+<li>Nom / D&eacute;signation</li>
+<li>Type : Mobile (d&eacute;pla&ccedil;able) ou Fixe (installation permanente)</li>
+<li>Cat&eacute;gorie (Aquatique, Fitness, Sportif, S&eacute;curit&eacute;, Entretien, Autre)</li>
+<li>Quantit&eacute; totale disponible</li>
+<li>Couleur (pour distinction visuelle, ex: tapis rouges vs bleus)</li>
+<li>Marque / Fabricant</li>
+<li>Mod&egrave;le / R&eacute;f&eacute;rence produit</li>
+<li>Num&eacute;ro de s&eacute;rie (si unique)</li>
+<li>Date d'achat</li>
+<li>Prix d'achat (optionnel)</li>
+<li>Fournisseur</li>
+</ul>
+<p><strong>Localisation :</strong></p>
+<ul>
+<li>Zone de stockage actuelle (UNIQUE, obligatoire)</li>
+<li>Historique d&eacute;placements (tra&ccedil;abilit&eacute;)</li>
+</ul>
+<p><strong>&Eacute;tat et maintenance :</strong></p>
+<ul>
+<li>Statut actuel :</li>
+<ul>
+<li>✅ Disponible</li>
+<li>🔧 En maintenance</li>
+<li>❌ En panne</li>
+<li>📦 Obsol&egrave;te / &Agrave; remplacer</li>
+</ul>
+<li>Date derni&egrave;re v&eacute;rification</li>
+<li>Date prochaine maintenance pr&eacute;ventive</li>
+<li>Notes de maintenance (historique interventions)</li>
+<li>Co&ucirc;t maintenance cumul&eacute; (optionnel)</li>
+</ul>
+<p><strong>M&eacute;dias :</strong></p>
+<ul>
+<li>Photos du mat&eacute;riel (jusqu'&agrave; 5)</li>
+<li>Documents associ&eacute;s (notice, certificats conformit&eacute;)</li>
+</ul>
+<p><strong>3.4.2 Assignation mat&eacute;riel aux activit&eacute;s</strong></p>
+<p><strong>Processus :</strong></p>
+<ol>
+<li>Lors de cr&eacute;ation/modification activit&eacute;</li>
+<li>S&eacute;lection mat&eacute;riel requis (multi-s&eacute;lection)</li>
+<li>Indication quantit&eacute; n&eacute;cessaire par mat&eacute;riel</li>
+<li>Validation disponibilit&eacute; automatique</li>
+</ol>
+<p><strong>V&eacute;rification disponibilit&eacute; :</strong></p>
+<p>Quantit&eacute; requise &le; (Quantit&eacute; totale - Quantit&eacute; d&eacute;j&agrave; assign&eacute;e sur m&ecirc;me cr&eacute;neau)</p>
+<p><strong>Alertes :</strong></p>
+<ul>
+<li>⚠️ Mat&eacute;riel insuffisant : Quantit&eacute; disponible &lt; Quantit&eacute; requise</li>
+<li>⚠️ Mat&eacute;riel en panne : Statut &ne; Disponible</li>
+<li>⚠️ Mat&eacute;riel localis&eacute; dans autre zone (info d&eacute;placement n&eacute;cessaire)</li>
+</ul>
+<p><strong>Gestion conflits :</strong></p>
+<ul>
+<li>Si mat&eacute;riel d&eacute;j&agrave; assign&eacute; totalement &rarr; Proposition mat&eacute;riel alternatif</li>
+<li>Possibilit&eacute; de pr&eacute;-r&eacute;server mat&eacute;riel pour activit&eacute;s r&eacute;currentes</li>
+</ul>
+<p><strong>3.4.3 Tra&ccedil;abilit&eacute; des d&eacute;placements</strong></p>
+<p><strong>Fonctionnalit&eacute; :</strong></p>
+<ul>
+<li>Changement zone stockage &rarr; Enregistrement historique automatique</li>
+<li>Informations trac&eacute;es :</li>
+<ul>
+<li>Date/Heure d&eacute;placement</li>
+<li>Zone origine &rarr; Zone destination</li>
+<li>Utilisateur ayant effectu&eacute; l'action</li>
+<li>Motif (optionnel)</li>
+</ul>
+</ul>
+<p><strong>Rapport d&eacute;placements :</strong></p>
+<ul>
+<li>Historique complet par mat&eacute;riel</li>
+<li>Vue globale d&eacute;placements sur p&eacute;riode</li>
+<li>Identification mat&eacute;riel "nomade" (nombreux d&eacute;placements)</li>
+</ul>
+<p><strong>3.4.4 Maintenance pr&eacute;ventive</strong></p>
+<p><strong>Planification maintenance :</strong></p>
+<ul>
+<li>Configuration intervalle maintenance par type mat&eacute;riel (ex: tous les 6 mois)</li>
+<li>Calcul automatique date prochaine maintenance</li>
+<li>G&eacute;n&eacute;ration t&acirc;che maintenance automatique dans module T&acirc;ches</li>
+</ul>
+<p><strong>Alertes maintenance :</strong></p>
+<ul>
+<li>Email/SMS manager : 30 jours avant maintenance pr&eacute;ventive</li>
+<li>Email/SMS manager : 7 jours avant maintenance pr&eacute;ventive</li>
+<li>Notification in-app : Maintenance d&eacute;pass&eacute;e</li>
+</ul>
+<p><strong>Suivi interventions :</strong></p>
+<ul>
+<li>Cr&eacute;ation fiche intervention (date, type, technicien, co&ucirc;t, remarques)</li>
+<li>Upload photos avant/apr&egrave;s</li>
+<li>Changement statut mat&eacute;riel si n&eacute;cessaire</li>
+<li>Historique complet interventions</li>
+</ul>
+<p><strong>3.4.5 Rapports et statistiques mat&eacute;riel</strong></p>
+<p><strong>Tableaux de bord :</strong></p>
+<ol>
+<li><strong> Vue d'ensemble parc mat&eacute;riel :</strong></li>
+</ol>
+<ul>
+<li>Nombre total &eacute;quipements</li>
+<li>R&eacute;partition par cat&eacute;gorie</li>
+<li>R&eacute;partition par statut (disponible, maintenance, panne)</li>
+<li>Valeur totale parc (si prix renseign&eacute;s)</li>
+</ul>
+<ol>
+<li><strong> Mat&eacute;riel n&eacute;cessitant attention :</strong></li>
+</ol>
+<ul>
+<li>Liste mat&eacute;riel en panne</li>
+<li>Liste mat&eacute;riel maintenance pr&eacute;vue &lt;30j</li>
+<li>Liste mat&eacute;riel obsol&egrave;te</li>
+</ul>
+<ol>
+<li><strong> Statistiques d'utilisation :</strong></li>
+</ol>
+<ul>
+<li>Mat&eacute;riel le plus utilis&eacute; (nombre assignations activit&eacute;s)</li>
+<li>Mat&eacute;riel sous-utilis&eacute;</li>
+<li>Taux d'utilisation par zone</li>
+</ul>
+<ol>
+<li><strong> Co&ucirc;ts de maintenance :</strong></li>
+</ol>
+<ul>
+<li>Co&ucirc;t total maintenance sur p&eacute;riode</li>
+<li>Co&ucirc;t par &eacute;quipement</li>
+<li>Tendances (augmentation/diminution)</li>
+</ul>
+<p><strong>Exports :</strong></p>
+<ul>
+<li>Excel : Inventaire complet</li>
+<li>PDF : &Eacute;tat du parc pour direction</li>
+<li>CSV : Import vers outil comptabilit&eacute;</li>
+</ul>
+<p><strong>3.5 MODULE SUIVI DE FR&Eacute;QUENTATION</strong></p>
+<p><strong>Priorit&eacute; : P1 (Important)</strong></p>
+<p><strong>3.5.1 Objectifs du module</strong></p>
+<ul>
+<li>Suivre fr&eacute;quentation r&eacute;elle vs capacit&eacute; pr&eacute;vue</li>
+<li>G&eacute;n&eacute;rer statistiques d'occupation pour optimisation planning</li>
+<li>Identifier activit&eacute;s populaires et sous-utilis&eacute;es</li>
+<li>Aide &agrave; la d&eacute;cision pour programmation future</li>
+<li>Justification aupr&egrave;s tutelles (subventions, rapports activit&eacute;)</li>
+</ul>
+<p><strong>3.5.2 Saisie de fr&eacute;quentation</strong></p>
+<p><strong>Qui peut saisir :</strong></p>
+<ul>
+<li>Agent : Pour activit&eacute;s auxquelles il est assign&eacute;</li>
+<li>Manager : Pour toutes activit&eacute;s de sa structure</li>
+<li>Admin : Pour toutes activit&eacute;s</li>
+</ul>
+<p><strong>Donn&eacute;es saisies :</strong></p>
+<ul>
+<li>Nombre de participants (obligatoire, entier)</li>
+<li>Comparaison automatique avec capacit&eacute; maximale activit&eacute;</li>
+<li>Calcul automatique taux de remplissage (%)</li>
+<li>Notes optionnelles (remarques, incidents, observations)</li>
+<li>Horodatage automatique de la saisie</li>
+</ul>
+<p><strong>Contraintes :</strong></p>
+<ul>
+<li>Une seule saisie par activit&eacute; (modification possible par saisisseur ou sup&eacute;rieur hi&eacute;rarchique)</li>
+<li>Saisie possible pendant ou apr&egrave;s activit&eacute; (jusqu'&agrave; 7 jours apr&egrave;s)</li>
+<li>Impossible de saisir pour activit&eacute; annul&eacute;e</li>
+</ul>
+<p><strong>Interface saisie :</strong></p>
+<ul>
+<li>Acc&egrave;s rapide depuis planning (bouton sur chaque activit&eacute;)</li>
+<li>Saisie group&eacute;e : Liste activit&eacute;s du jour avec input direct</li>
+<li>Mode mobile optimis&eacute; (saisie rapide terrain)</li>
+</ul>
+<p><strong>3.5.3 Statistiques et rapports</strong></p>
+<p><strong>Taux d'occupation :</strong></p>
+<p><strong>Par activit&eacute; :</strong></p>
+<ul>
+<li>Taux moyen sur p&eacute;riode s&eacute;lectionn&eacute;e</li>
+<li>Tendance (&eacute;volution p&eacute;riode N vs N-1)</li>
+<li>D&eacute;tails par occurrence (chaque session)</li>
+</ul>
+<p><strong>Par zone :</strong></p>
+<ul>
+<li>Fr&eacute;quentation totale cumul&eacute;e</li>
+<li>Taux d'occupation moyen</li>
+<li>R&eacute;partition par type d'activit&eacute;</li>
+</ul>
+<p><strong>Par structure :</strong></p>
+<ul>
+<li>Vue d'ensemble globale</li>
+<li>Comparaison entre espaces/zones</li>
+<li>Identification zones sous/sur-utilis&eacute;es</li>
+</ul>
+<p><strong>Fr&eacute;quentation moyenne :</strong></p>
+<ul>
+<li>Quotidienne (moyenne par jour semaine)</li>
+<li>Hebdomadaire (total et moyenne)</li>
+<li>Mensuelle (&eacute;volution mois par mois)</li>
+<li>Annuelle (totaux et tendances)</li>
+<li>Filtres : Par type d'activit&eacute;, par tranche horaire, par public</li>
+</ul>
+<p><strong>Identification heures de pointe/creuses :</strong></p>
+<ul>
+<li>Heatmap : Jour de semaine (ligne) &times; Heure (colonne) &rarr; Fr&eacute;quentation (couleur)</li>
+<li>Cr&eacute;neaux les plus demand&eacute;s (top 10)</li>
+<li>Cr&eacute;neaux les moins demand&eacute;s (identification opportunit&eacute;s)</li>
+</ul>
+<p><strong>Alertes automatiques (configurables) :</strong></p>
+<ul>
+<li>⚠️ Fr&eacute;quentation &lt; 30% capacit&eacute; &rarr; Activit&eacute; sous-utilis&eacute;e (recommandation: supprimer ou r&eacute;orienter)</li>
+<li>✓ Fr&eacute;quentation &gt; 90% capacit&eacute; &rarr; Activit&eacute; satur&eacute;e (recommandation: ajouter cr&eacute;neaux)</li>
+<li>❌ Capacit&eacute; d&eacute;pass&eacute;e &rarr; Action requise (s&eacute;curit&eacute;, conformit&eacute;)</li>
+</ul>
+<p><strong>3.5.4 Visualisations graphiques</strong></p>
+<p><strong>Types de graphiques :</strong></p>
+<ol>
+<li><strong> Graphiques en barres :</strong></li>
+</ol>
+<ul>
+<li>Fr&eacute;quentation par activit&eacute; (comparaison)</li>
+<li>Fr&eacute;quentation par zone</li>
+<li>Fr&eacute;quentation par jour de semaine</li>
+</ul>
+<ol>
+<li><strong> Graphiques en ligne :</strong></li>
+</ol>
+<ul>
+<li>&Eacute;volution temporelle (tendance sur plusieurs mois)</li>
+<li>Comparaison N vs N-1 (m&ecirc;me p&eacute;riode ann&eacute;e pr&eacute;c&eacute;dente)</li>
+</ul>
+<ol>
+<li><strong> Heatmap :</strong></li>
+</ol>
+<ul>
+<li>Grille Jour &times; Heure avec gradient couleur</li>
+<li>Identification visuelle imm&eacute;diate pics/creux</li>
+</ul>
+<ol>
+<li><strong> Camemberts :</strong></li>
+</ol>
+<ul>
+<li>R&eacute;partition fr&eacute;quentation par type d'activit&eacute;</li>
+<li>R&eacute;partition par structure</li>
+</ul>
+<ol>
+<li><strong> Indicateurs cl&eacute;s (KPI) :</strong></li>
+</ol>
+<ul>
+<li>Taux d'occupation global (%)</li>
+<li>Nombre total visiteurs p&eacute;riode</li>
+<li>Activit&eacute; la plus fr&eacute;quent&eacute;e</li>
+<li>Croissance vs p&eacute;riode pr&eacute;c&eacute;dente (%)</li>
+</ul>
+<p><strong>3.5.5 Exports et rapports</strong></p>
+<p><strong>Formats disponibles :</strong></p>
+<p><strong>PDF :</strong></p>
+<ul>
+<li>Rapport hebdomadaire automatique (envoi email managers tous les lundis)</li>
+<li>Rapport mensuel d&eacute;taill&eacute; (graphiques + tableaux + analyses)</li>
+<li>Rapport annuel (bilan complet pour direction)</li>
+</ul>
+<p><strong>Excel :</strong></p>
+<ul>
+<li>Donn&eacute;es brutes compl&egrave;tes (toutes saisies)</li>
+<li>Tableaux crois&eacute;s dynamiques pr&eacute;-configur&eacute;s</li>
+<li>Graphiques int&eacute;gr&eacute;s</li>
+</ul>
+<p><strong>CSV :</strong></p>
+<ul>
+<li>Export pour outils externes (BI, Excel, etc.)</li>
+<li>Format normalis&eacute; pour interop&eacute;rabilit&eacute;</li>
+</ul>
+<p><strong>Configuration rapports automatiques :</strong></p>
+<ul>
+<li>Fr&eacute;quence : Quotidien, Hebdomadaire, Mensuel</li>
+<li>Destinataires : S&eacute;lection emails</li>
+<li>Contenu personnalisable (choix KPI, graphiques)</li>
+</ul>
+<p><strong>3.6 MODULE REGISTRES CHIMIQUES (Sp&eacute;cifique Aquatique)</strong></p>
+<p><strong>Priorit&eacute; : P1 (Important pour clients aquatiques)</strong></p>
+<p><strong>3.6.1 Objectifs</strong></p>
+<ul>
+<li>Digitalisation carnets piscine papier</li>
+<li>Tra&ccedil;abilit&eacute; compl&egrave;te param&egrave;tres eau</li>
+<li>Conformit&eacute; r&eacute;glementaire automatis&eacute;e</li>
+<li>Alertes temps r&eacute;el anomalies</li>
+<li>Calcul automatique dosages correctifs</li>
+</ul>
+<p><strong>3.6.2 Param&egrave;tres suivis</strong></p>
+<p><strong>Param&egrave;tres standards obligatoires :</strong></p>
+<ul>
+<li>pH (plage normale: 7.2 - 7.8)</li>
+<li>Chlore libre (mg/L, plage: 0.4 - 1.4)</li>
+<li>Chlore total (mg/L)</li>
+<li>Chlore combin&eacute; (calcul automatique: Total - Libre)</li>
+<li>Temp&eacute;rature eau (&deg;C)</li>
+<li>Temp&eacute;rature air (&deg;C)</li>
+</ul>
+<p><strong>Param&egrave;tres additionnels (configurables) :</strong></p>
+<ul>
+<li>TAC (Titre Alcalim&eacute;trique Complet) mg/L</li>
+<li>TH (Titre Hydrotim&eacute;trique / Duret&eacute;) &deg;f</li>
+<li>Stabilisant (Acide cyanurique) mg/L</li>
+<li>Pression filtres (bars)</li>
+<li>D&eacute;bit filtration (m&sup3;/h)</li>
+<li>Redox (mV) - si sonde automatique</li>
+<li>Fr&eacute;quentation bassins (nombre baigneurs)</li>
+<li>Volume produits chimiques ajout&eacute;s</li>
+</ul>
+<p><strong>Param&egrave;tres personnalis&eacute;s :</strong></p>
+<ul>
+<li>Possibilit&eacute; d'ajouter champs sp&eacute;cifiques par &eacute;tablissement</li>
+<li>Types : Num&eacute;rique, Texte, Case &agrave; cocher, Liste d&eacute;roulante</li>
+</ul>
+<p><strong>3.6.3 Saisie des relev&eacute;s</strong></p>
+<p><strong>Fr&eacute;quence :</strong></p>
+<ul>
+<li>Configuration par zone (bassin)</li>
+<li>Typiquement : 2-4 fois par jour (ouverture, mi-journ&eacute;e, soir, fermeture)</li>
+<li>Rappels automatiques aux horaires d&eacute;finis</li>
+</ul>
+<p><strong>Interface saisie :</strong></p>
+<ul>
+<li>Formulaire adaptatif (uniquement champs configur&eacute;s)</li>
+<li>Pr&eacute;-remplissage avec derni&egrave;res valeurs (gain de temps)</li>
+<li>Saisie mobile optimis&eacute;e (tablette ou smartphone)</li>
+<li>Mode hors-ligne (synchronisation &agrave; la reconnexion)</li>
+</ul>
+<p><strong>Validation automatique :</strong></p>
+<ul>
+<li>V&eacute;rification valeurs dans plages normales</li>
+<li>Alerte imm&eacute;diate si hors plage &rarr; Confirmation demand&eacute;e</li>
+<li>Impossibilit&eacute; de valider si champs obligatoires vides</li>
+</ul>
+<p><strong>3.6.4 Calcul automatique indice de saturation</strong></p>
+<p><strong>Formule utilis&eacute;e :</strong></p>
+<p>Indice de Langelier (LSI) = pH - pHs</p>
+<p>o&ugrave; pHs (pH de saturation) d&eacute;pend de : Temp&eacute;rature, TAC, TH, TDS</p>
+<p><strong>Interpr&eacute;tation automatique :</strong></p>
+<ul>
+<li>LSI &lt; -0.3 : Eau agressive (corrosive)</li>
+<li>LSI entre -0.3 et +0.3 : Eau &eacute;quilibr&eacute;e ✓</li>
+<li>LSI &gt; +0.3 : Eau entartrante</li>
+</ul>
+<p><strong>Recommandations automatiques :</strong></p>
+<ul>
+<li>Affichage actions correctrices</li>
+<li>Calcul quantit&eacute;s produits &agrave; ajouter (bas&eacute; sur volume bassin)</li>
+</ul>
+<p><strong>3.6.5 Dosages correctifs automatis&eacute;s</strong></p>
+<p><strong>Principe :</strong></p>
+<ul>
+<li>Saisie valeur mesur&eacute;e hors plage</li>
+<li>Syst&egrave;me calcule &eacute;cart vs valeur cible</li>
+<li>Calcul dose produit n&eacute;cessaire (bas&eacute; sur volume bassin)</li>
+</ul>
+<p><strong>Exemples calculs :</strong></p>
+<p><strong>Correction pH :</strong></p>
+<p>SI pH trop &eacute;lev&eacute; (&gt;7.8) :</p>
+<p>Dose pH- (kg) = (pH mesur&eacute; - pH cible) &times; Volume bassin (m&sup3;) &times; 0.01</p>
+<p>SI pH trop bas (&lt;7.2) :</p>
+<p>Dose pH+ (kg) = (pH cible - pH mesur&eacute;) &times; Volume bassin (m&sup3;) &times; 0.015</p>
+<p><strong>Correction Chlore :</strong></p>
+<p>SI Chlore libre &lt; 0.4 mg/L :</p>
+<p>Dose Chlore (g) = (0.8 - Chlore mesur&eacute;) &times; Volume bassin (m&sup3;) &times; 1.5</p>
+<p><strong>Affichage recommandation :</strong></p>
+<ul>
+<li>Produit &agrave; utiliser</li>
+<li>Quantit&eacute; pr&eacute;cise (kg, L, ou pastilles)</li>
+<li>Mode d'emploi (dilution, zone d'ajout)</li>
+<li>D&eacute;lai avant re-mesure</li>
+</ul>
+<p><strong>3.6.6 Alertes automatiques</strong></p>
+<p><strong>D&eacute;clencheurs d'alerte :</strong></p>
+<ul>
+<li>Param&egrave;tre hors plage normale (imm&eacute;diat)</li>
+<li>Absence de relev&eacute; &agrave; horaire pr&eacute;vu (+30 min)</li>
+<li>D&eacute;rive tendance (ex: pH baisse constante)</li>
+<li>Chlore combin&eacute; &eacute;lev&eacute; (&gt;0.6 mg/L) &rarr; N&eacute;cessit&eacute; chloration choc</li>
+</ul>
+<p><strong>Canaux d'alerte :</strong></p>
+<ul>
+<li>Notification push in-app (temps r&eacute;el)</li>
+<li>Email (manager + agents concern&eacute;s)</li>
+<li>SMS (si criticit&eacute; haute, ex: chlore &lt;0.1 mg/L)</li>
+</ul>
+<p><strong>Gestion des alertes :</strong></p>
+<ul>
+<li>Accus&eacute; de r&eacute;ception obligatoire</li>
+<li>Suivi action corrective (horodat&eacute;e)</li>
+<li>Relance si non trait&eacute;e (d&eacute;lai configurable)</li>
+</ul>
+<p><strong>3.6.7 Historique et analyses</strong></p>
+<p><strong>Graphiques d'&eacute;volution :</strong></p>
+<ul>
+<li>Courbes par param&egrave;tre sur p&eacute;riode s&eacute;lectionn&eacute;e</li>
+<li>Multi-courbes (ex: pH + Temp&eacute;rature sur m&ecirc;me graphe)</li>
+<li>Bandes color&eacute;es (plages normales/anormales)</li>
+<li>Export image (PNG, PDF)</li>
+</ul>
+<p><strong>Rapports automatiques :</strong></p>
+<ul>
+<li>Rapport quotidien (r&eacute;sum&eacute; tous relev&eacute;s)</li>
+<li>Rapport hebdomadaire (moyennes, &eacute;carts, interventions)</li>
+<li>Rapport mensuel (conformit&eacute; r&eacute;glementaire, statistiques)</li>
+</ul>
+<p><strong>Analyses pr&eacute;dictives (roadmap future) :</strong></p>
+<ul>
+<li>D&eacute;tection tendances (ex: stabilisant s'accumule)</li>
+<li>Anticipation besoins produits chimiques</li>
+<li>Corr&eacute;lation fr&eacute;quentation &harr; consommation chlore</li>
+</ul>
+<p><strong>3.6.8 Conformit&eacute; r&eacute;glementaire</strong></p>
+<p><strong>Tra&ccedil;abilit&eacute; ARS (Agence R&eacute;gionale de Sant&eacute;) :</strong></p>
+<ul>
+<li>Conservation 5 ans minimum (archivage automatique)</li>
+<li>Export format r&eacute;glementaire (PDF horodat&eacute;, signature &eacute;lectronique)</li>
+<li>Preuves contr&ocirc;les disponibles instantan&eacute;ment</li>
+</ul>
+<p><strong>Rapports d'inspection :</strong></p>
+<ul>
+<li>G&eacute;n&eacute;ration rapport pr&eacute;-rempli pour contr&ocirc;les ARS</li>
+<li>Historique complet param&egrave;tres sur 12 mois</li>
+<li>Actions correctives document&eacute;es</li>
+</ul>
+<p><strong>3.6.9 Gestion stocks produits chimiques</strong></p>
+<p><strong>Fonctionnalit&eacute; :</strong></p>
+<ul>
+<li>Saisie stock initial par produit</li>
+<li>D&eacute;cr&eacute;mentation automatique lors ajout (si quantit&eacute; saisie)</li>
+<li>Alertes stock bas (seuil configurable)</li>
+<li>Historique consommation (analyse tendances)</li>
+</ul>
+<p><strong>Produits suivis :</strong></p>
+<ul>
+<li>Chlore (galets, liquide, granul&eacute;s)</li>
+<li>pH- (acide sulfurique, bisulfate)</li>
+<li>pH+ (carbonate de sodium)</li>
+<li>Floculant</li>
+<li>Anti-algues</li>
+<li>Autres (personnalisables)</li>
+</ul>
+<p><strong>3.7 MODULE FORMULAIRES PERSONNALIS&Eacute;S</strong></p>
+<p><strong>Priorit&eacute; : P2 (Utile)</strong></p>
+<p><strong>3.7.1 Objectifs</strong></p>
+<ul>
+<li>Digitalisation tous formulaires papier de l'&eacute;tablissement</li>
+<li>Standardisation processus administratifs</li>
+<li>Tra&ccedil;abilit&eacute; et archivage centralis&eacute;</li>
+<li>Workflow validation automatis&eacute;</li>
+</ul>
+<p><strong>3.7.2 Types de formulaires</strong></p>
+<p><strong>Formulaires pr&eacute;-configur&eacute;s (templates) :</strong></p>
+<ul>
+<li>Rapport d'incident / accident</li>
+<li>D&eacute;claration accident du travail</li>
+<li>Inspection quotidienne installations</li>
+<li>Check-list ouverture/fermeture</li>
+<li>Demande mat&eacute;riel</li>
+<li>Fiche entretien &eacute;quipement</li>
+<li>Feuille de pr&eacute;sence (activit&eacute;, formation)</li>
+</ul>
+<p><strong>Formulaires personnalis&eacute;s :</strong></p>
+<ul>
+<li>Cr&eacute;ation from scratch avec builder visuel</li>
+<li>Personnalisation compl&egrave;te (champs, mise en page, logique conditionnelle)</li>
+</ul>
+<p><strong>3.7.3 Builder de formulaires</strong></p>
+<p><strong>Types de champs disponibles :</strong></p>
+<table>
+<thead>
+<tr>
+<td>
+<p><strong>Type</strong></p>
+</td>
+<td>
+<p><strong>Description</strong></p>
+</td>
+<td>
+<p><strong>Options</strong></p>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p>Texte court</p>
+</td>
+<td>
+<p>Input 1 ligne</p>
+</td>
+<td>
+<p>Validation format (email, t&eacute;l&eacute;phone, etc.)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Texte long</p>
+</td>
+<td>
+<p>Textarea multiligne</p>
+</td>
+<td>
+<p>Nombre caract&egrave;res min/max</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Nombre</p>
+</td>
+<td>
+<p>Input num&eacute;rique</p>
+</td>
+<td>
+<p>Min, Max, D&eacute;cimales</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Date</p>
+</td>
+<td>
+<p>Date picker</p>
+</td>
+<td>
+<p>Date min, max, d&eacute;faut aujourd'hui</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Heure</p>
+</td>
+<td>
+<p>Time picker</p>
+</td>
+<td>
+<p>Format 24h</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Liste d&eacute;roulante</p>
+</td>
+<td>
+<p>Select simple</p>
+</td>
+<td>
+<p>Options pr&eacute;d&eacute;finies</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Cases &agrave; cocher</p>
+</td>
+<td>
+<p>Checkboxes multiples</p>
+</td>
+<td>
+<p>Min/Max s&eacute;lections</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Boutons radio</p>
+</td>
+<td>
+<p>Choix unique</p>
+</td>
+<td>
+<p>Options pr&eacute;d&eacute;finies</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Signature</p>
+</td>
+<td>
+<p>Pad signature tactile</p>
+</td>
+<td>
+<p>Obligatoire/Optionnel</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Photo</p>
+</td>
+<td>
+<p>Upload image</p>
+</td>
+<td>
+<p>Nombre max, R&eacute;solution</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Fichier</p>
+</td>
+<td>
+<p>Upload document</p>
+</td>
+<td>
+<p>Types accept&eacute;s, Taille max</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Section</p>
+</td>
+<td>
+<p>Titre s&eacute;parateur</p>
+</td>
+<td>
+<p>Mise en forme</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Texte informatif</p>
+</td>
+<td>
+<p>Paragraphe non &eacute;ditable</p>
+</td>
+<td>
+<p>Instructions, disclaimers</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fonctionnalit&eacute;s avanc&eacute;es :</strong></p>
+<ul>
+<li><strong>Logique conditionnelle :</strong> Afficher champ B si r&eacute;ponse A = X</li>
+<li><strong>Calculs automatiques :</strong> Total, Moyenne, Formules personnalis&eacute;es</li>
+<li><strong>Champs pr&eacute;-remplis :</strong> Date du jour, Nom utilisateur, Lieu, etc.</li>
+<li><strong>Validation :</strong> Champs obligatoires, Formats, Plages valeurs</li>
+</ul>
+<p><strong>3.7.4 Soumission et validation</strong></p>
+<p><strong>Processus de soumission :</strong></p>
+<ol>
+<li>Agent remplit formulaire (mobile ou desktop)</li>
+<li>Validation locale (champs obligatoires, formats)</li>
+<li>Soumission &rarr; Enregistrement BDD + G&eacute;n&eacute;ration PDF</li>
+<li>Notification destinataire(s) selon workflow</li>
+</ol>
+<p><strong>Workflow de validation (configurable) :</strong></p>
+<p>Soumission &rarr; Agent</p>
+<p>&darr;</p>
+<p>Validation Niveau 1 &rarr; Manager (optionnel)</p>
+<p>&darr;</p>
+<p>Validation Niveau 2 &rarr; Admin (optionnel)</p>
+<p>&darr;</p>
+<p>Archivage final + Notifications</p>
+<p><strong>Statuts formulaire :</strong></p>
+<ul>
+<li>Brouillon (sauvegarde temporaire)</li>
+<li>Soumis</li>
+<li>En cours de validation</li>
+<li>Valid&eacute;</li>
+<li>Refus&eacute; (avec motif)</li>
+</ul>
+<p><strong>3.7.5 Signature &eacute;lectronique</strong></p>
+<p><strong>Fonctionnalit&eacute; :</strong></p>
+<ul>
+<li>Pad tactile pour signature manuelle</li>
+<li>Capture sur mobile/tablette</li>
+<li>Horodatage automatique</li>
+<li>Associ&eacute;e &agrave; l'identit&eacute; utilisateur (tra&ccedil;abilit&eacute;)</li>
+</ul>
+<p><strong>Conformit&eacute; l&eacute;gale :</strong></p>
+<ul>
+<li>Signature &eacute;lectronique simple (non qualifi&eacute;e)</li>
+<li>Valeur probante (horodatage + identit&eacute;)</li>
+<li>Conservation PDF sign&eacute;</li>
+</ul>
+<p><strong>3.7.6 G&eacute;n&eacute;ration PDF</strong></p>
+<p><strong>Apr&egrave;s soumission/validation :</strong></p>
+<ul>
+<li>G&eacute;n&eacute;ration automatique PDF format&eacute;</li>
+<li>Template personnalisable (logo &eacute;tablissement, charte graphique)</li>
+<li>Contenu : Toutes r&eacute;ponses + signatures + horodatage + m&eacute;tadonn&eacute;es</li>
+</ul>
+<p><strong>Distribution automatique :</strong></p>
+<ul>
+<li>Email PDF aux destinataires configur&eacute;s</li>
+<li>Stockage D2S Storage (archivage centralis&eacute;)</li>
+<li>T&eacute;l&eacute;chargement direct depuis interface</li>
+</ul>
+<p><strong>3.7.7 Rapports et statistiques formulaires</strong></p>
+<p><strong>Tableaux de bord :</strong></p>
+<ul>
+<li>Nombre formulaires soumis (par type, par p&eacute;riode)</li>
+<li>Temps moyen traitement (soumission &rarr; validation)</li>
+<li>Taux de compl&eacute;tion (commenc&eacute;s vs soumis)</li>
+<li>Formulaires en attente validation</li>
+</ul>
+<p><strong>Analyses de contenu :</strong></p>
+<ul>
+<li>Agr&eacute;gation r&eacute;ponses (pour champs standardis&eacute;s)</li>
+<li>D&eacute;tection tendances (ex: types incidents r&eacute;currents)</li>
+<li>Export Excel pour analyses pouss&eacute;es</li>
+</ul>
+<p><strong>3.8 MODULE RAPPORTS DE SERVICE</strong></p>
+<p><strong>Priorit&eacute; : P2 (Utile)</strong></p>
+<p><strong>3.8.1 Objectif</strong></p>
+<ul>
+<li>Permettre aux agents de transmettre informations en temps r&eacute;el</li>
+<li>Faciliter communication terrain &rarr; management</li>
+<li>Tra&ccedil;abilit&eacute; &eacute;v&eacute;nements quotidiens</li>
+</ul>
+<p><strong>3.8.2 Cr&eacute;ation rapport de service</strong></p>
+<p><strong>Informations saisies :</strong></p>
+<ul>
+<li>Date/Heure (automatiques, modifiables)</li>
+<li>Shift/Service concern&eacute;</li>
+<li>Zone(s) concern&eacute;e(s) (multi-s&eacute;lection)</li>
+<li>Type de rapport :</li>
+<ul>
+<li>Compte rendu standard</li>
+<li>Incident mineur</li>
+<li>Observation importante</li>
+<li>Demande intervention</li>
+<li>Autre</li>
+</ul>
+<li>Titre (r&eacute;sum&eacute; court)</li>
+<li>Description d&eacute;taill&eacute;e (texte libre)</li>
+<li>Photos (jusqu'&agrave; 5)</li>
+<li>Fichiers joints (PDF, documents)</li>
+</ul>
+<p><strong>Soumission :</strong></p>
+<ul>
+<li>Agent cr&eacute;&eacute; rapport &rarr; Envoi automatique manager(s) structure</li>
+<li>Notification push + email manager</li>
+<li>Consultation imm&eacute;diate par management</li>
+</ul>
+<p><strong>3.8.3 Consultation et suivi</strong></p>
+<p><strong>Interface manager :</strong></p>
+<ul>
+<li>Timeline chronologique tous rapports</li>
+<li>Filtres : Date, Zone, Agent, Type, Statut</li>
+<li>Marquer comme "Lu", "Trait&eacute;", "Action requise"</li>
+<li>Commentaires et &eacute;changes possibles</li>
+</ul>
+<p><strong>Statistiques :</strong></p>
+<ul>
+<li>Nombre rapports par p&eacute;riode</li>
+<li>R&eacute;partition par type</li>
+<li>Identification zones/activit&eacute;s probl&eacute;matiques r&eacute;currentes</li>
+</ul>
+<p><strong>3.9 MODULE MESSAGERIE &amp; COMMUNICATION</strong></p>
+<p><strong>Priorit&eacute; : P1 (Important)</strong></p>
+<p><strong>3.9.1 Messagerie Email/SMS</strong></p>
+<p><strong>Destinataires possibles :</strong></p>
+<ul>
+<li>Agent individuel</li>
+<li>Groupe pr&eacute;d&eacute;fini :</li>
+<ul>
+<li>Tous agents d'une structure</li>
+<li>Tous agents d'un type (ex: tous ma&icirc;tres-nageurs)</li>
+<li>Tous managers</li>
+<li>Tous agents</li>
+</ul>
+<li>S&eacute;lection manuelle multi-agents</li>
+</ul>
+<p><strong>Fonctionnalit&eacute;s :</strong></p>
+<ul>
+<li>Objet + Message (texte enrichi pour email)</li>
+<li>Pi&egrave;ces jointes (email uniquement)</li>
+<li>Envoi imm&eacute;diat ou programm&eacute; (date/heure)</li>
+<li>Mod&egrave;les de messages (templates fr&eacute;quents)</li>
+</ul>
+<p><strong>Historique :</strong></p>
+<ul>
+<li>Conservation tous messages envoy&eacute;s</li>
+<li>Filtres : Date, Exp&eacute;diteur, Destinataires, Type (email/SMS)</li>
+<li>Recherche plein texte</li>
+<li>Accus&eacute;s de lecture (email uniquement, si client compatible)</li>
+</ul>
+<p><strong>R&egrave;gles de gestion :</strong></p>
+<ul>
+<li>SMS limit&eacute; 160 caract&egrave;res (alerte si d&eacute;passement)</li>
+<li>Co&ucirc;t SMS trac&eacute; (si facturation au SMS)</li>
+<li>Permissions : Admin et Manager peuvent envoyer &agrave; tous</li>
+</ul>
+<p><strong>3.9.2 Chat interne (Messagerie instantan&eacute;e)</strong></p>
+<p><strong>Fonctionnalit&eacute; :</strong></p>
+<ul>
+<li>Conversations bidirectionnelles ou groupes</li>
+<li>Cr&eacute;ation conversations par :</li>
+<ul>
+<li>Structure (tous membres structure)</li>
+<li>Poste (ex: tous ma&icirc;tres-nageurs)</li>
+<li>Employ&eacute; sp&eacute;cifique</li>
+<li>Personnalis&eacute;e (s&eacute;lection manuelle)</li>
+</ul>
+</ul>
+<p><strong>Gestion conversations :</strong></p>
+<ul>
+<li>Cr&eacute;ateur (Admin/Manager) peut :</li>
+<ul>
+<li>Ajouter/Retirer membres</li>
+<li>Renommer conversation</li>
+<li>Archiver conversation</li>
+<li>Supprimer conversation</li>
+</ul>
+<li>Membres peuvent :</li>
+<ul>
+<li>Envoyer messages, liens, &eacute;mojis</li>
+<li>Quitter conversation (sauf groupes automatiques)</li>
+</ul>
+</ul>
+<p><strong>Fonctionnalit&eacute;s avanc&eacute;es :</strong></p>
+<ul>
+<li>Notifications push temps r&eacute;el (desktop + mobile app)</li>
+<li>Accus&eacute;s de lecture ("Vu par X personnes")</li>
+<li>Indicateur "en train d'&eacute;crire..."</li>
+<li>Recherche dans historique conversations</li>
+<li>&Eacute;pinglage messages importants</li>
+</ul>
+<p><strong>Permissions :</strong></p>
+<ul>
+<li>Agents peuvent uniquement participer aux conversations dont ils sont membres</li>
+<li>Managers peuvent cr&eacute;er conversations pour leur(s) structure(s)</li>
+<li>Admins peuvent cr&eacute;er toutes conversations et consulter toutes</li>
+</ul>
+<p><strong>3.10 MODULE D2S STORAGE (Stockage documentaire)</strong></p>
+<p><strong>Priorit&eacute; : P2 (Utile)</strong></p>
+<p><strong>3.10.1 Objectif</strong></p>
+<ul>
+<li>Centraliser tous documents n&eacute;cessaires au personnel</li>
+<li>Remplacer classeurs, armoires, documents papier</li>
+<li>Acc&egrave;s instantan&eacute; 24/7 depuis n'importe quel appareil</li>
+</ul>
+<p><strong>3.10.2 Organisation</strong></p>
+<p><strong>Arborescence de dossiers :</strong></p>
+<p>📁 D2S Storage</p>
+<p>├── 📁 Administratif</p>
+<p>│ ├── 📄 R&egrave;glement int&eacute;rieur.pdf</p>
+<p>│ ├── 📄 Manuel de l'employ&eacute;.pdf</p>
+<p>│ └── 📄 Charte informatique.pdf</p>
+<p>├── 📁 S&eacute;curit&eacute;</p>
+<p>│ ├── 📄 Consignes s&eacute;curit&eacute; incendie.pdf</p>
+<p>│ ├── 📄 Plans &eacute;vacuation.pdf</p>
+<p>│ └── 📁 POSS (Plan Organisation Surveillance Secours)</p>
+<p>├── 📁 Fiches de Donn&eacute;es de S&eacute;curit&eacute; (FDS)</p>
+<p>│ ├── 📄 FDS Chlore.pdf</p>
+<p>│ ├── 📄 FDS pH-.pdf</p>
+<p>│ └── ...</p>
+<p>├── 📁 Maintenance</p>
+<p>│ ├── 📄 Proc&eacute;dures entretien filtres.pdf</p>
+<p>│ ├── 📄 Manuels &eacute;quipements.pdf</p>
+<p>│ └── ...</p>
+<p>├── 📁 Formation</p>
+<p>│ ├── 📁 Supports cours natation</p>
+<p>│ ├── 📁 Vid&eacute;os p&eacute;dagogiques</p>
+<p>│ └── ...</p>
+<p>└── 📁 Rapports &amp; Incidents</p>
+<p>└── [Archivage automatique formulaires]</p>
+<p><strong>Permissions par dossier :</strong></p>
+<ul>
+<li>Admin : Acc&egrave;s complet (CRUD)</li>
+<li>Manager : Lecture + Upload (selon dossiers)</li>
+<li>Agent : Lecture seule (selon besoins m&eacute;tier)</li>
+</ul>
+<p><strong>3.10.3 Fonctionnalit&eacute;s</strong></p>
+<p><strong>Upload documents :</strong></p>
+<ul>
+<li>Drag &amp; drop</li>
+<li>Upload multiple simultan&eacute;</li>
+<li>Formats accept&eacute;s : PDF, DOCX, XLSX, images, vid&eacute;os</li>
+<li>Taille max : 50 Mo par fichier (configurable)</li>
+</ul>
+<p><strong>Pr&eacute;visualisation :</strong></p>
+<ul>
+<li>Aper&ccedil;u direct dans navigateur (PDF, images)</li>
+<li>T&eacute;l&eacute;chargement si pr&eacute;visualisation impossible</li>
+</ul>
+<p><strong>Recherche :</strong></p>
+<ul>
+<li>Recherche par nom fichier</li>
+<li>Filtres : Type, Date upload, Dossier, Upload&eacute; par</li>
+<li>Tri : Nom, Date, Taille</li>
+</ul>
+<p><strong>Versioning (optionnel) :</strong></p>
+<ul>
+<li>Historique versions document</li>
+<li>Restauration version ant&eacute;rieure</li>
+</ul>
+<p><strong>Partage :</strong></p>
+<ul>
+<li>G&eacute;n&eacute;ration lien public temporaire (avec expiration)</li>
+<li>Partage interne (notification utilisateurs sp&eacute;cifiques)</li>
+</ul>
+<p><strong>3.10.4 Gestion de l'espace</strong></p>
+<p><strong>Quotas :</strong></p>
+<ul>
+<li>Espace total allou&eacute; par client (ex: 10 Go)</li>
+<li>Affichage consommation en temps r&eacute;el</li>
+<li>Alerte si seuil atteint (80%, 90%, 100%)</li>
+</ul>
+<p><strong>Nettoyage :</strong></p>
+<ul>
+<li>Identification fichiers non consult&eacute;s depuis X mois</li>
+<li>Suppression documents obsol&egrave;tes</li>
+<li>Corbeille (restauration possible 30 jours)</li>
+</ul>
+<p><strong>3.11 MODULE COURS DE NATATION</strong></p>
+<p><strong>Priorit&eacute; : P2 (Utile pour structures aquatiques avec enseignement)</strong></p>
+<p><strong>3.11.1 Demandes de cours (Formulaire public)</strong></p>
+<p><strong>Fonctionnalit&eacute; :</strong></p>
+<ul>
+<li>Formulaire public accessible via lien/iframe</li>
+<li>Utilisateurs externes soumettent demandes de cours priv&eacute;s ou semi-priv&eacute;s</li>
+</ul>
+<p><strong>Informations collect&eacute;es :</strong></p>
+<ul>
+<li>Nom, Pr&eacute;nom &eacute;l&egrave;ve</li>
+<li>&Acirc;ge / Date de naissance</li>
+<li>Coordonn&eacute;es parent/tuteur (si mineur)</li>
+<li>Niveau natation actuel (d&eacute;butant, interm&eacute;diaire, avanc&eacute;)</li>
+<li>Objectifs (apprentissage, perfectionnement, peur de l'eau, etc.)</li>
+<li>Disponibilit&eacute;s souhait&eacute;es (jours, horaires)</li>
+<li>Remarques compl&eacute;mentaires</li>
+</ul>
+<p><strong>Traitement demandes :</strong></p>
+<ul>
+<li>R&eacute;ception dans interface manager</li>
+<li>Attribution &agrave; instructeur disponible et qualifi&eacute;</li>
+<li>Notification instructeur</li>
+<li>Contact client pour planification</li>
+</ul>
+<p><strong>3.11.2 Gestion des cours collectifs</strong></p>
+<p><strong>Niveaux et comp&eacute;tences :</strong></p>
+<ul>
+<li>Cr&eacute;ation niveaux personnalis&eacute;s (ex: Niveau 1 - D&eacute;couverte, Niveau 2 - D&eacute;butant, etc.)</li>
+<li>D&eacute;finition comp&eacute;tences par niveau (liste skills &agrave; acqu&eacute;rir)</li>
+</ul>
+<p><strong>Sessions de cours :</strong></p>
+<ul>
+<li>Cr&eacute;ation session (ex: Session Printemps 2026)</li>
+<li>D&eacute;finition cr&eacute;neaux horaires par niveau</li>
+<li>Capacit&eacute; max par cours</li>
+<li>Instructeur assign&eacute;</li>
+</ul>
+<p><strong>Inscriptions &eacute;l&egrave;ves :</strong></p>
+<ul>
+<li>Ajout &eacute;l&egrave;ves &agrave; session/niveau</li>
+<li>Suivi pr&eacute;sence (&eacute;margement digital)</li>
+<li>Transfert niveau (si progression)</li>
+</ul>
+<p><strong>3.11.3 Carnets de suivi et bulletins</strong></p>
+<p><strong>Carnet de suivi individuel :</strong></p>
+<ul>
+<li>Liste comp&eacute;tences niveau actuel &eacute;l&egrave;ve</li>
+<li>Validation progressive comp&eacute;tences (acquis, en cours, non acquis)</li>
+<li>Notes instructeur (remarques, encouragements)</li>
+<li>Photos/vid&eacute;os (optionnel, avec autorisation parentale)</li>
+</ul>
+<p><strong>G&eacute;n&eacute;ration bulletins :</strong></p>
+<ul>
+<li>Bulletin automatique bas&eacute; sur carnets de suivi</li>
+<li>Template personnalisable (logo, charte graphique)</li>
+<li>Export PDF</li>
+<li>Envoi automatique email parents/&eacute;l&egrave;ves (en 1 clic)</li>
+</ul>
+<p><strong>Fr&eacute;quence :</strong></p>
+<ul>
+<li>&Agrave; la demande (instructeur d&eacute;cide)</li>
+<li>Automatique fin de session</li>
+<li>Interm&eacute;diaire (mi-session)</li>
+</ul>
+<p><strong>3.11.4 Communication avec familles</strong></p>
+<p><strong>Messagerie d&eacute;di&eacute;e :</strong></p>
+<ul>
+<li>Envoi emails cibl&eacute;s (parents d'un niveau, d'un cours)</li>
+<li>Informations pratiques (horaires, annulations, &eacute;v&eacute;nements)</li>
+<li>Rappels automatiques (ex: cours demain)</li>
+</ul>
+<p><strong>3.12 MODULE GESTION MEMBRES &amp; FAMILLES</strong></p>
+<p><strong>Priorit&eacute; : P2 (Utile pour structures avec abonnements/adh&eacute;sions)</strong></p>
+<p><strong>3.12.1 Objectif</strong></p>
+<ul>
+<li>G&eacute;rer base de donn&eacute;es membres/adh&eacute;rents</li>
+<li>Lien avec cours collectifs</li>
+<li>Suivi abonnements et historique</li>
+</ul>
+<p><strong>3.12.2 Fiche famille</strong></p>
+<p><strong>Informations famille :</strong></p>
+<ul>
+<li>Nom famille (r&eacute;f&eacute;rence)</li>
+<li>Adresse postale</li>
+<li>Coordonn&eacute;es principales (email, t&eacute;l&eacute;phone)</li>
+<li>Membres famille (relation parent/enfant)</li>
+</ul>
+<p><strong>Fiche membre individuel :</strong></p>
+<ul>
+<li>Nom, Pr&eacute;nom</li>
+<li>Date de naissance</li>
+<li>Relation (Parent, Enfant, Autre)</li>
+<li>Photo (optionnel)</li>
+<li>Coordonn&eacute;es propres (si majeur)</li>
+<li>Num&eacute;ro adh&eacute;rent/membre (g&eacute;n&eacute;r&eacute; automatiquement)</li>
+</ul>
+<p><strong>3.12.3 Abonnements et adh&eacute;sions</strong></p>
+<p><strong>Types d'abonnements :</strong></p>
+<ul>
+<li>Carte 10 entr&eacute;es</li>
+<li>Abonnement mensuel</li>
+<li>Abonnement annuel</li>
+<li>Cours collectifs (forfait session)</li>
+<li>Autre (personnalisable)</li>
+</ul>
+<p><strong>Gestion abonnements :</strong></p>
+<ul>
+<li>Date d&eacute;but, fin</li>
+<li>Statut : Actif, Expir&eacute;, Suspendu</li>
+<li>Solde restant (pour cartes entr&eacute;es)</li>
+<li>Renouvellement automatique (optionnel)</li>
+</ul>
+<p><strong>Historique :</strong></p>
+<ul>
+<li>Tous abonnements pass&eacute;s membre</li>
+<li>Visites/utilisations (si badgeage int&eacute;gr&eacute;)</li>
+</ul>
+<p><strong>3.12.4 Import depuis logiciel d'inscription</strong></p>
+<p><strong>Fonctionnalit&eacute; :</strong></p>
+<ul>
+<li>Import CSV/Excel depuis logiciels tiers (ex: Yurplan, Weezevent, etc.)</li>
+<li>Mapping colonnes (correspondance champs)</li>
+<li>Import en masse (cr&eacute;ation fiches membres automatique)</li>
+</ul>
+<p><strong>3.13 MODULE INSPECTION DES INSTALLATIONS</strong></p>
+<p><strong>Priorit&eacute; : P2 (Utile, important pour conformit&eacute; r&eacute;glementaire)</strong></p>
+<p><strong>3.13.1 Objectif</strong></p>
+<ul>
+<li>Digitaliser inspections quotidiennes/p&eacute;riodiques installations</li>
+<li>Tra&ccedil;abilit&eacute; conformit&eacute; r&eacute;glementaire</li>
+<li>G&eacute;n&eacute;ration automatique actions maintenance si probl&egrave;me d&eacute;tect&eacute;</li>
+</ul>
+<p><strong>3.13.2 Types d'inspections</strong></p>
+<p><strong>Inspection quotidienne installations :</strong></p>
+<ul>
+<li>Check-list ouverture/fermeture</li>
+<li>V&eacute;rification propret&eacute;, &eacute;clairage, signal&eacute;tique</li>
+<li>Test &eacute;quipements s&eacute;curit&eacute; (alarmes, t&eacute;l&eacute;phones urgence)</li>
+</ul>
+<p><strong>Inspection &eacute;quipements aquatiques :</strong></p>
+<ul>
+<li>Toboggans (stabilit&eacute;, fixations, surface glisse)</li>
+<li>Plongeoirs</li>
+<li>Lignes d'eau</li>
+<li>&Eacute;chelles, mains courantes</li>
+</ul>
+<p><strong>Inspection &eacute;quipements fitness :</strong></p>
+<ul>
+<li>Machines cardio (&eacute;tat, fonctionnement)</li>
+<li>Bancs, racks musculation</li>
+<li>Tapis de sol</li>
+<li>Poids, halt&egrave;res (usure, s&eacute;curit&eacute;)</li>
+</ul>
+<p><strong>Inspection s&eacute;curit&eacute; incendie :</strong></p>
+<ul>
+<li>Extincteurs (pression, date v&eacute;rification)</li>
+<li>Issues secours (d&eacute;gag&eacute;es, signal&eacute;es)</li>
+<li>&Eacute;clairage s&eacute;curit&eacute;</li>
+</ul>
+<p><strong>3.13.3 Cr&eacute;ation formulaires d'inspection</strong></p>
+<p><strong>Builder similaire formulaires personnalis&eacute;s :</strong></p>
+<ul>
+<li>Champs : Conforme/Non conforme, &Eacute;tat (Bon, Moyen, Mauvais), Commentaires, Photos</li>
+<li>Logique conditionnelle : Si "Non conforme" &rarr; Demander actions correctives</li>
+</ul>
+<p><strong>Programmation inspections :</strong></p>
+<ul>
+<li>R&eacute;currence : Quotidienne, Hebdomadaire, Mensuelle, Annuelle</li>
+<li>Rappels automatiques agent assign&eacute;</li>
+<li>Tra&ccedil;abilit&eacute; si inspection non r&eacute;alis&eacute;e (alerte manager)</li>
+</ul>
+<p><strong>3.13.4 R&eacute;sultats et actions</strong></p>
+<p><strong>Apr&egrave;s inspection :</strong></p>
+<ul>
+<li>Si "Conforme" partout &rarr; Archivage automatique</li>
+<li>Si "Non conforme" d&eacute;tect&eacute; :</li>
+<ul>
+<li>Cr&eacute;ation automatique t&acirc;che maintenance</li>
+<li>Attribution &agrave; agent maintenance</li>
+<li>Notification manager</li>
+<li>Suivi jusqu'&agrave; r&eacute;solution</li>
+</ul>
+</ul>
+<p><strong>Rapports d'inspection :</strong></p>
+<ul>
+<li>Export PDF horodat&eacute; et sign&eacute; (agent inspecteur)</li>
+<li>Compilation mensuelle (tous &eacute;quipements inspect&eacute;s, taux conformit&eacute;)</li>
+<li>Disponible pour contr&ocirc;les r&eacute;glementaires (ARS, SDIS, etc.)</li>
+</ul>
+<p><strong>3.14 MODULE ADMINISTRATION &amp; AUDIT</strong></p>
+<p><strong>Priorit&eacute; : P0 (Critique)</strong></p>
+<p><strong>3.14.1 Gestion des r&ocirc;les &amp; permissions</strong></p>
+<p><strong>Voir section 4 pour matrice compl&egrave;te</strong></p>
+<p><strong>3.14.2 Journal d'audit (Audit Logs)</strong></p>
+<p><strong>Principe :</strong></p>
+<ul>
+<li>Tra&ccedil;abilit&eacute; compl&egrave;te toutes actions syst&egrave;me</li>
+<li>Conformit&eacute; RGPD (droit &agrave; la portabilit&eacute;, tra&ccedil;abilit&eacute; acc&egrave;s donn&eacute;es)</li>
+</ul>
+<p><strong>Actions trac&eacute;es :</strong></p>
+<ul>
+<li>Connexion/D&eacute;connexion utilisateur</li>
+<li>Cr&eacute;ation enregistrement (agent, activit&eacute;, mat&eacute;riel, etc.)</li>
+<li>Modification enregistrement (avant/apr&egrave;s)</li>
+<li>Suppression enregistrement (soft delete)</li>
+<li>Consultation donn&eacute;es sensibles (fiches agents, contrats)</li>
+<li>Exports de donn&eacute;es</li>
+</ul>
+<p><strong>Informations enregistr&eacute;es :</strong></p>
+<ul>
+<li>Utilisateur (ID, nom)</li>
+<li>Action (CREATE, UPDATE, DELETE, LOGIN, LOGOUT, VIEW, EXPORT)</li>
+<li>Table concern&eacute;e</li>
+<li>ID enregistrement</li>
+<li>Ancien contenu (JSON) - si UPDATE</li>
+<li>Nouveau contenu (JSON) - si UPDATE/CREATE</li>
+<li>Adresse IP</li>
+<li>User-Agent (navigateur/appareil)</li>
+<li>Timestamp pr&eacute;cis (date + heure)</li>
+</ul>
+<p><strong>Consultation audit logs :</strong></p>
+<ul>
+<li>Interface admin uniquement</li>
+<li>Filtres puissants : Utilisateur, Action, Table, Date, IP</li>
+<li>Recherche plein texte</li>
+<li>Export (pour investigations)</li>
+</ul>
+<p><strong>R&eacute;tention :</strong></p>
+<ul>
+<li>Conservation 5 ans minimum (conformit&eacute; l&eacute;gale)</li>
+<li>Archivage automatique apr&egrave;s 2 ans (stockage froid)</li>
+</ul>
+<p><strong>3.14.3 Dashboards</strong></p>
+<p><strong>Dashboard Admin (Vue d'ensemble globale) :</strong></p>
+<p><strong>KPI principaux :</strong></p>
+<ul>
+<li>Nombre total agents actifs</li>
+<li>Nombre activit&eacute;s planifi&eacute;es semaine actuelle</li>
+<li>Taux occupation moyen zones (%)</li>
+<li>Mat&eacute;riel n&eacute;cessitant attention (nombre)</li>
+<li>Certifications expirant &lt;30j (nombre)</li>
+</ul>
+<p><strong>Graphiques :</strong></p>
+<ul>
+<li>&Eacute;volution heures travaill&eacute;es (mensuel, 12 derniers mois)</li>
+<li>R&eacute;partition agents par structure (camembert)</li>
+<li>Top 5 zones les plus utilis&eacute;es (barres)</li>
+<li>Fr&eacute;quentation globale (courbe tendance)</li>
+</ul>
+<p><strong>Alertes &amp; Actions requises :</strong></p>
+<ul>
+<li>Liste certifications expir&eacute;es (avec liens agents)</li>
+<li>Liste mat&eacute;riel en panne (avec liens fiches)</li>
+<li>Liste inspections non r&eacute;alis&eacute;es (avec liens)</li>
+<li>Liste cong&eacute;s en attente validation (avec liens)</li>
+</ul>
+<p><strong>Dashboard Manager (Vue structure) :</strong></p>
+<p><strong>KPI structure :</strong></p>
+<ul>
+<li>Nombre agents structure</li>
+<li>Heures planifi&eacute;es semaine actuelle</li>
+<li>Taux occupation zones structure (%)</li>
+<li>Nombre visiteurs semaine (si fr&eacute;quentation activ&eacute;e)</li>
+</ul>
+<p><strong>Graphiques :</strong></p>
+<ul>
+<li>Planning semaine (Gantt condens&eacute;)</li>
+<li>R&eacute;partition heures par agent (barres)</li>
+<li>Occupation zones par jour (heatmap)</li>
+</ul>
+<p><strong>Actions rapides :</strong></p>
+<ul>
+<li>Cr&eacute;er activit&eacute;</li>
+<li>Valider cong&eacute;s en attente</li>
+<li>Envoyer message &eacute;quipe</li>
+<li>Consulter rapports de service</li>
+</ul>
+<p><strong>Dashboard Agent (Vue personnelle) :</strong></p>
+<p><strong>Mon planning :</strong></p>
+<ul>
+<li>Prochaines activit&eacute;s (liste 5 prochaines)</li>
+<li>Heures semaine actuelle / Heures mois</li>
+<li>Cong&eacute;s restants</li>
+</ul>
+<p><strong>Mes t&acirc;ches :</strong></p>
+<ul>
+<li>T&acirc;ches &agrave; faire (nombre + liste)</li>
+<li>Rappels (deadlines proches)</li>
+</ul>
+<p><strong>Mes certifications :</strong></p>
+<ul>
+<li>Statut global (toutes valides, expirations proches)</li>
+<li>Liste d&eacute;taill&eacute;e avec dates</li>
+</ul>
+<p><strong>Mes statistiques :</strong></p>
+<ul>
+<li>Total heures travaill&eacute;es mois</li>
+<li>R&eacute;partition activit&eacute;s (types)</li>
+</ul>
+<p><strong>3.14.4 Exports globaux</strong></p>
+<p><strong>Formats :</strong></p>
+<ul>
+<li>Excel (.xlsx)</li>
+<li>CSV</li>
+<li>PDF (rapports mis en forme)</li>
+</ul>
+<p><strong>Exports disponibles :</strong></p>
+<p><strong>Planning :</strong></p>
+<ul>
+<li>Planning complet (toutes structures, p&eacute;riode s&eacute;lectionnable)</li>
+<li>Planning par structure</li>
+<li>Planning par agent</li>
+</ul>
+<p><strong>Agents :</strong></p>
+<ul>
+<li>Liste compl&egrave;te agents (coordonn&eacute;es, statuts, contrats)</li>
+<li>Liste agents par structure</li>
+<li>Matrice comp&eacute;tences (agents &times; certifications)</li>
+</ul>
+<p><strong>Mat&eacute;riel :</strong></p>
+<ul>
+<li>Inventaire complet</li>
+<li>Liste mat&eacute;riel par zone</li>
+<li>Liste mat&eacute;riel par statut (panne, maintenance)</li>
+</ul>
+<p><strong>Fr&eacute;quentation :</strong></p>
+<ul>
+<li>Donn&eacute;es brutes (toutes saisies)</li>
+<li>Statistiques agr&eacute;g&eacute;es (par p&eacute;riode, zone, activit&eacute;)</li>
+</ul>
+<p><strong>Registres chimiques :</strong></p>
+<ul>
+<li>Tous relev&eacute;s sur p&eacute;riode</li>
+<li>Rapport conformit&eacute; mensuel</li>
+</ul>
+<p><strong>Formulaires :</strong></p>
+<ul>
+<li>Tous formulaires soumis sur p&eacute;riode (par type)</li>
+</ul>
+<p><strong>Permissions exports :</strong></p>
+<ul>
+<li>Admin : Tous exports</li>
+<li>Manager : Exports sa/ses structure(s)</li>
+<li>Agent : Exports ses donn&eacute;es personnelles uniquement (RGPD)</li>
+</ul>
+<ol>
+<li><strong> GESTION DES R&Ocirc;LES ET PERMISSIONS</strong></li>
+</ol>
+<p><strong>4.1 R&ocirc;les syst&egrave;me</strong></p>
+<p><strong>4 r&ocirc;les pr&eacute;d&eacute;finis :</strong></p>
+<p><strong>Admin (Administrateur Global)</strong></p>
+<ul>
+<li><strong>P&eacute;rim&egrave;tre :</strong> Toutes structures, tous modules</li>
+<li><strong>Permissions :</strong> Lecture/&Eacute;criture totale</li>
+<li><strong>Responsabilit&eacute;s :</strong></li>
+<ul>
+<li>Configuration plateforme</li>
+<li>Gestion utilisateurs (cr&eacute;ation, modification, suppression)</li>
+<li>Acc&egrave;s audit logs</li>
+<li>Exports globaux</li>
+<li>Support utilisateurs</li>
+</ul>
+</ul>
+<p><strong>Manager (Responsable Structure)</strong></p>
+<ul>
+<li><strong>P&eacute;rim&egrave;tre :</strong> Sa/Ses structure(s) assign&eacute;e(s) uniquement</li>
+<li><strong>Permissions :</strong> Lecture/&Eacute;criture sur sa structure</li>
+<li><strong>Responsabilit&eacute;s :</strong></li>
+<ul>
+<li>Planification agents de sa structure</li>
+<li>Validation cong&eacute;s</li>
+<li>Gestion mat&eacute;riel structure</li>
+<li>Saisie fr&eacute;quentation</li>
+<li>Communication &eacute;quipe</li>
+<li>Rapports structure</li>
+</ul>
+</ul>
+<p><strong>Agent (Personnel op&eacute;rationnel)</strong></p>
+<ul>
+<li><strong>P&eacute;rim&egrave;tre :</strong> Sa/Ses structure(s) assign&eacute;e(s), ses donn&eacute;es personnelles</li>
+<li><strong>Permissions :</strong> Lecture planning, &Eacute;criture limit&eacute;e (t&acirc;ches, disponibilit&eacute;s, demandes)</li>
+<li><strong>Responsabilit&eacute;s :</strong></li>
+<ul>
+<li>Consultation planning personnel</li>
+<li>Gestion disponibilit&eacute;s et cong&eacute;s</li>
+<li>Saisie fr&eacute;quentation ses activit&eacute;s</li>
+<li>Carnet de t&acirc;ches</li>
+<li>Rapports de service</li>
+</ul>
+</ul>
+<p><strong>&Eacute;diteur (Gestion contenu)</strong></p>
+<ul>
+<li><strong>P&eacute;rim&egrave;tre :</strong> Contenu &eacute;ditorial (D2S Storage, fiches, posts)</li>
+<li><strong>Permissions :</strong> Lecture/&Eacute;criture contenu uniquement</li>
+<li><strong>Responsabilit&eacute;s :</strong></li>
+<ul>
+<li>Upload/Gestion documents D2S Storage</li>
+<li>Cr&eacute;ation/Modification fiches informatives</li>
+<li>Gestion posts (actualit&eacute;s, communications)</li>
+</ul>
+</ul>
+<p><strong>4.2 Matrice de permissions d&eacute;taill&eacute;e</strong></p>
+<table>
+<thead>
+<tr>
+<td>
+<p><strong>Fonctionnalit&eacute;</strong></p>
+</td>
+<td>
+<p><strong>Admin</strong></p>
+</td>
+<td>
+<p><strong>Manager</strong></p>
+</td>
+<td>
+<p><strong>Agent</strong></p>
+</td>
+<td>
+<p><strong>&Eacute;diteur</strong></p>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<p><strong>Planning Global</strong></p>
+</td>
+<td>
+<p>✅ RW</p>
+</td>
+<td>
+<p>✅ RW (sa structure)</p>
+</td>
+<td>
+<p>✅ RO</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Planning Structure</strong></p>
+</td>
+<td>
+<p>✅ RW</p>
+</td>
+<td>
+<p>✅ RW (sa structure)</p>
+</td>
+<td>
+<p>✅ RO</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Cr&eacute;er/Modifier Activit&eacute;s</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (sa structure)</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Supprimer Activit&eacute;s</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (sa structure)</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Auto-Schedule</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (sa structure)</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Dupliquer Planning</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (sa structure)</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>G&eacute;rer Disponibilit&eacute;s (propres)</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Voir Disponibilit&eacute;s (autres)</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (sa structure)</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Demander Cong&eacute;</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Valider/Refuser Cong&eacute;s</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (sa structure)</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Publier Postes Ouverts</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (sa structure)</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>S'inscrire Postes Ouverts</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Demander Remplacement</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Valider Remplacements</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (sa structure)</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Saisir Fr&eacute;quentation</strong></p>
+</td>
+<td>
+<p>✅ Toutes</p>
+</td>
+<td>
+<p>✅ Sa structure</p>
+</td>
+<td>
+<p>✅ Ses activit&eacute;s</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Consulter Statistiques Fr&eacute;quentation</strong></p>
+</td>
+<td>
+<p>✅ Toutes</p>
+</td>
+<td>
+<p>✅ Sa structure</p>
+</td>
+<td>
+<p>✅ Globales</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>G&eacute;rer Mat&eacute;riel</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (sa structure)</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Cr&eacute;er/Modifier Agents</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Consulter Fiches Agents</strong></p>
+</td>
+<td>
+<p>✅ Toutes</p>
+</td>
+<td>
+<p>✅ Sa structure</p>
+</td>
+<td>
+<p>✅ Sa propre fiche</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>G&eacute;rer Comp&eacute;tences (autres)</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>G&eacute;rer Comp&eacute;tences (propres)</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ Upload PDF</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>G&eacute;rer Contrats</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Saisir Registres Chimiques</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (sa structure)</p>
+</td>
+<td>
+<p>✅ Si assign&eacute;</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Cr&eacute;er Formulaires Personnalis&eacute;s</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Soumettre Formulaires</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Valider Formulaires</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (sa structure)</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Cr&eacute;er Rapports de Service</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Consulter Rapports Service (autres)</strong></p>
+</td>
+<td>
+<p>✅ Tous</p>
+</td>
+<td>
+<p>✅ Sa structure</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Envoyer Email/SMS</strong></p>
+</td>
+<td>
+<p>✅ &Agrave; tous</p>
+</td>
+<td>
+<p>✅ Sa structure</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Chat Interne</strong></p>
+</td>
+<td>
+<p>✅ Cr&eacute;er toute conversation</p>
+</td>
+<td>
+<p>✅ Cr&eacute;er pour sa structure</p>
+</td>
+<td>
+<p>✅ Participer uniquement</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>D2S Storage - Upload</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (selon dossiers)</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>D2S Storage - Lecture</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (selon besoins)</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>D2S Storage - Suppression</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>G&eacute;rer Cours Natation</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (sa structure)</p>
+</td>
+<td>
+<p>✅ Ses cours</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>G&eacute;rer Membres/Familles</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Cr&eacute;er Inspections</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ (sa structure)</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>R&eacute;aliser Inspections</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ Si assign&eacute;</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Audit Logs</strong></p>
+</td>
+<td>
+<p>✅ RO</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Exports Globaux</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>✅ Sa structure</p>
+</td>
+<td>
+<p>✅ Ses donn&eacute;es (RGPD)</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>Configuration Plateforme</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><strong>G&eacute;rer Utilisateurs</strong></p>
+</td>
+<td>
+<p>✅</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+<td>
+<p>❌</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>L&eacute;gende :</strong></p>
+<ul>
+<li>✅ = Autoris&eacute;</li>
+<li>❌ = Interdit</li>
+<li>RW = Lecture/&Eacute;criture</li>
+<li>RO = Lecture seule</li>
+</ul>
+<p><strong>4.3 Permissions granulaires additionnelles</strong></p>
+<p><strong>Possibilit&eacute; de personnaliser permissions par service :</strong></p>
+<ul>
+<li>Exemple : Manager peut aussi g&eacute;rer agents de sa structure (cr&eacute;ation, modification)</li>
+<li>Exemple : Agent peut saisir fr&eacute;quentation toutes activit&eacute;s (pas seulement siennes)</li>
+<li>Configuration dans interface Admin &rarr; R&ocirc;les &amp; Permissions</li>
+</ul>
+<ol>
+<li><strong> ARCHITECTURE TECHNIQUE</strong></li>
+</ol>
+<p><strong>5.1 Stack technologique</strong></p>
+<p><strong>Backend</strong></p>
+<p>Framework : Laravel 12 (PHP 8.3+)</p>
+<p>ORM : Eloquent</p>
+<p>Base donn&eacute;es : MySQL 8.0+ (recommand&eacute;) ou PostgreSQL 15+</p>
+<p>Cache : Redis 7+</p>
+<p>Queue : Redis (ou Database pour petites installations)</p>
+<p>Storage : Local ou S3-compatible (MinIO, AWS S3, etc.)</p>
+<p><strong>Frontend</strong></p>
+<p>Framework JS : Vue.js 3 (Composition API)</p>
+<p>Alternative : Alpine.js (pour interactions simples)</p>
+<p>CSS Framework : Tailwind CSS 3</p>
+<p>Build Tool : Vite</p>
+<p>Charts : Chart.js ou ApexCharts</p>
+<p>Maps : Leaflet + OpenStreetMap (ou Google Maps API)</p>
+<p><strong>Infrastructure</strong></p>
+<p>Serveur Web : Nginx 1.24+ (ou Apache 2.4+)</p>
+<p>OS : Ubuntu 22.04 LTS ou 24.04 LTS</p>
+<p>SSL : Let's Encrypt (certbot)</p>
+<p>Environnement : Docker (optionnel pour d&eacute;ploiement)</p>
+<p><strong>5.2 Architecture applicative</strong></p>
+<p><strong>Pattern MVC am&eacute;lior&eacute; :</strong></p>
+<p>app/</p>
+<p>├── Http/</p>
+<p>│ ├── Controllers/ # Contr&ocirc;leurs m&eacute;tier</p>
+<p>│ ├── Middleware/ # Guards, Auth, CORS</p>
+<p>│ └── Requests/ # Form Requests (validation)</p>
+<p>├── Models/ # Eloquent Models</p>
+<p>├── Services/ # Logique m&eacute;tier (AutoSchedule, Alerts, etc.)</p>
+<p>├── Repositories/ # Abstraction acc&egrave;s donn&eacute;es (optionnel)</p>
+<p>├── Jobs/ # Queued jobs (emails, exports)</p>
+<p>├── Events/ # Events (ActivityCreated, etc.)</p>
+<p>├── Listeners/ # Event Listeners (notifications)</p>
+<p>└── Notifications/ # Email, SMS, Push notifications</p>
+<p><strong>Design Patterns utilis&eacute;s :</strong></p>
+<ul>
+<li>Repository Pattern (abstraction BDD)</li>
+<li>Service Layer (logique m&eacute;tier complexe)</li>
+<li>Observer Pattern (Events/Listeners)</li>
+<li>Strategy Pattern (planification automatique)</li>
+<li>Factory Pattern (g&eacute;n&eacute;ration formulaires)</li>
+</ul>
+<p><strong>5.3 S&eacute;curit&eacute;</strong></p>
+<p><strong>Authentification</strong></p>
+<p>Package : Laravel Breeze ou Fortify</p>
+<p>M&eacute;thode : Session-based auth (web) + Token-based (API mobile)</p>
+<p>2FA : Laravel Fortify (TOTP) pour Admins (obligatoire)</p>
+<p><strong>Permissions</strong></p>
+<p>Package : Spatie Laravel Permission</p>
+<p>Mod&egrave;le : R&ocirc;les + Permissions</p>
+<p>Cache : Permissions en cache (performance)</p>
+<p><strong>Protection CSRF</strong></p>
+<p>Middleware : VerifyCsrfToken (activ&eacute; par d&eacute;faut)</p>
+<p>Tokens : R&eacute;g&eacute;n&eacute;ration &agrave; chaque requ&ecirc;te mutative</p>
+<p><strong>Rate Limiting</strong></p>
+<p>Middleware : throttle:60,1 (60 requ&ecirc;tes/minute par IP)</p>
+<p>API : throttle:api (configurable)</p>
+<p>Login : 5 tentatives/minute (protection brute-force)</p>
+<p><strong>Chiffrement</strong></p>
+<p>Donn&eacute;es sensibles : Chiffrement Laravel (encrypt/decrypt)</p>
+<p>Mots de passe : bcrypt (rounds=12)</p>
+<p>Tokens API : SHA256 hashing</p>
+<p><strong>Headers s&eacute;curit&eacute;</strong></p>
+<p>X-Frame-Options : SAMEORIGIN</p>
+<p>X-Content-Type-Options : nosniff</p>
+<p>X-XSS-Protection : 1; mode=block</p>
+<p>Strict-Transport-Security: max-age=31536000; includeSubDomains</p>
+<p>Content-Security-Policy : Configur&eacute; selon besoins</p>
+<p><strong>5.4 Performance</strong></p>
+<p><strong>Caching</strong></p>
+<p>Config Cache : php artisan config:cache</p>
+<p>Route Cache : php artisan route:cache</p>
+<p>View Cache : php artisan view:cache</p>
+<p>Opcache PHP : Activ&eacute; (php.ini)</p>
+<p>Redis Cache : Queries fr&eacute;quentes, sessions</p>
+<p>CDN : Cloudflare ou Bunny CDN (assets statiques)</p>
+<p><strong>Optimisation BDD</strong></p>
+<p>Index : Sur toutes cl&eacute;s &eacute;trang&egrave;res, colonnes recherche/tri</p>
+<p>Eager Loading : Relations charg&eacute;es proactivement (&eacute;viter N+1)</p>
+<p>Lazy Loading : Pagination syst&eacute;matique (&eacute;viter LIMIT &eacute;lev&eacute;es)</p>
+<p>Query Builder : Requ&ecirc;tes optimis&eacute;es (SELECT uniquement colonnes n&eacute;cessaires)</p>
+<p><strong>Assets</strong></p>
+<p>Minification : CSS/JS minifi&eacute;s en production (Vite)</p>
+<p>Compression : Gzip/Brotli activ&eacute;s (Nginx)</p>
+<p>Images : Compression/Redimensionnement automatiques (Intervention Image)</p>
+<p>Lazy Loading : Images charg&eacute;es au scroll</p>
+<p><strong>5.5 Tests &amp; Qualit&eacute;</strong></p>
+<p><strong>Framework Tests</strong></p>
+<p>PHPUnit : Tests unitaires + feature tests</p>
+<p>Coverage : Objectif &gt;70% code coverage</p>
+<p>CI/CD : GitHub Actions ou GitLab CI</p>
+<p><strong>Tests prioritaires</strong></p>
+<p>Unit Tests : Services m&eacute;tier (AutoSchedule, calculs, validations)</p>
+<p>Feature Tests : API endpoints, workflows critiques</p>
+<p>Browser Tests : Laravel Dusk (parcours utilisateur complets)</p>
+<p><strong>Analyse statique</strong></p>
+<p>PHPStan : Niveau 5+ (d&eacute;tection erreurs typage)</p>
+<p>Larastan : Extension PHPStan pour Laravel</p>
+<p><strong>Code Style</strong></p>
+<p>Standard : PSR-12</p>
+<p>Outil : Laravel Pint (formatting automatique)</p>
+<p>CI : V&eacute;rification style &agrave; chaque commit</p>
+<p><strong>5.6 Backups</strong></p>
+<p><strong>Package</strong></p>
+<p>Spatie Laravel Backup (https://spatie.be/docs/laravel-backup)</p>
+<p><strong>Strat&eacute;gie</strong></p>
+<p>Fr&eacute;quence Backup : Quotidien (3h du matin)</p>
+<p>Contenu : Base de donn&eacute;es + Storage (uploads)</p>
+<p>Stockage Local : 7 derniers jours</p>
+<p>Stockage Cloud : AWS S3, Google Cloud Storage, ou &eacute;quivalent</p>
+<p>R&eacute;tention Cloud :</p>
+<p>- Quotidien : 30 jours</p>
+<p>- Hebdomadaire : 12 semaines</p>
+<p>- Mensuel : 12 mois</p>
+<p>Notifications : Email admin si &eacute;chec backup</p>
+<p>Test Restauration : Mensuel (validation int&eacute;grit&eacute;)</p>
+<p><strong>Monitoring</strong></p>
+<p>Healthcheck : Endpoint /health (monitoring uptime)</p>
+<p>Logs : Centralis&eacute;s (Laravel Log, Sentry pour erreurs)</p>
+<p>Metrics : Performance queries (Laravel Telescope en dev)</p>
+<ol>
+<li><strong> INT&Eacute;GRATIONS ET API</strong></li>
+</ol>
+<p><strong>6.1 Int&eacute;grations calendriers</strong></p>
+<p><strong>Google Calendar</strong></p>
+<p>Protocole : OAuth 2.0 + Google Calendar API v3</p>
+<p>Sync : Unidirectionnelle (D2S &rarr; Google)</p>
+<p>Fr&eacute;quence : Temps r&eacute;el (webhook ou polling)</p>
+<p><strong>Microsoft Outlook / Office 365</strong></p>
+<p>Protocole : Microsoft Graph API + OAuth 2.0</p>
+<p>Sync : Unidirectionnelle (D2S &rarr; Outlook)</p>
+<p>Fr&eacute;quence : Temps r&eacute;el</p>
+<p><strong>iCal/ICS (Standard)</strong></p>
+<p>Format : RFC 5545 (iCalendar)</p>
+<p>G&eacute;n&eacute;ration: Lien abonnement unique par agent</p>
+<p>Sync : Pull par application calendrier (refresh auto)</p>
+<p>Compatible: Apple Calendar, Google Calendar, Outlook, Thunderbird, etc.</p>
+<p><strong>6.2 Webhooks</strong></p>
+<p><strong>&Eacute;v&eacute;nements expos&eacute;s :</strong></p>
+<p>planning.activity.created</p>
+<p>planning.activity.updated</p>
+<p>planning.activity.deleted</p>
+<p>agent.created</p>
+<p>agent.updated</p>
+<p>conge.requested</p>
+<p>conge.approved</p>
+<p>conge.rejected</p>
+<p>shift_swap.requested</p>
+<p>shift_swap.approved</p>
+<p>inspection.completed</p>
+<p><strong>Configuration :</strong></p>
+<ul>
+<li>URL webhook configurable par installation</li>
+<li>Authentification : HMAC signature (secret partag&eacute;)</li>
+<li>Payload : JSON</li>
+<li>Retry : 3 tentatives si &eacute;chec (backoff exponentiel)</li>
+</ul>
+<p><strong>Exemple payload :</strong></p>
+<p>{</p>
+<p>"event": "planning.activity.created",</p>
+<p>"timestamp": "2026-01-08T14:35:00Z",</p>
+<p>"data": {</p>
+<p>"activity_id": 12345,</p>
+<p>"name": "Aquagym",</p>
+<p>"zone": "Bassin Ludique",</p>
+<p>"start": "2026-01-15T10:00:00Z",</p>
+<p>"end": "2026-01-15T11:00:00Z",</p>
+<p>"agents": [567, 890]</p>
+<p>},</p>
+<p>"signature": "sha256=..."</p>
+<p>}</p>
+<p><strong>6.3 API RESTful (pour int&eacute;grations tierces)</strong></p>
+<p><strong>Endpoints principaux :</strong></p>
+<p>Authentication:</p>
+<p>POST /api/login</p>
+<p>POST /api/logout</p>
+<p>Planning:</p>
+<p>GET /api/activities</p>
+<p>POST /api/activities</p>
+<p>GET /api/activities/{id}</p>
+<p>PUT /api/activities/{id}</p>
+<p>DELETE /api/activities/{id}</p>
+<p>Agents:</p>
+<p>GET /api/agents</p>
+<p>GET /api/agents/{id}</p>
+<p>PUT /api/agents/{id}/availability</p>
+<p>Fr&eacute;quentation:</p>
+<p>POST /api/frequentations</p>
+<p>GET /api/frequentations</p>
+<p>Registres Chimiques:</p>
+<p>POST /api/registres-chimiques</p>
+<p>GET /api/registres-chimiques</p>
+<p><strong>Authentification API :</strong></p>
+<p>Type : Bearer Token (Laravel Sanctum)</p>
+<p>Header : Authorization: Bearer {token}</p>
+<p>Scope : Permissions bas&eacute;es sur utilisateur associ&eacute; au token</p>
+<p><strong>Rate Limiting API :</strong></p>
+<p>Limite : 60 requ&ecirc;tes/minute (configurable)</p>
+<p>Header : X-RateLimit-Limit, X-RateLimit-Remaining</p>
+<p><strong>Documentation :</strong></p>
+<p>Format : OpenAPI 3.0 (Swagger)</p>
+<p>Outil : L5-Swagger (g&eacute;n&eacute;ration automatique depuis annotations)</p>
+<p>URL : /api/documentation</p>
+<ol>
+<li><strong> CAS D'USAGE ET SC&Eacute;NARIOS</strong></li>
+</ol>
+<p><strong>7.1 Sc&eacute;nario Agent (Ma&icirc;tre-nageur)</strong></p>
+<p><strong>Connexion et consultation planning :</strong></p>
+<ol>
+<li>Agent ouvre application mobile D2S</li>
+<li>Connexion (email + mot de passe)</li>
+<li>Dashboard agent s'affiche :</li>
+<ul>
+<li>Prochaines activit&eacute;s (aujourd'hui + demain)</li>
+<li>T&acirc;ches &agrave; faire (3 en attente)</li>
+<li>Certification BNSSA expire dans 25 jours (alerte orange)</li>
+</ul>
+<li>Agent consulte planning semaine</li>
+<ul>
+<li>Vue calendrier personnelle (toutes activit&eacute;s assign&eacute;es)</li>
+<li>Code couleur par zone (bleu piscine int&eacute;rieure, vert ext&eacute;rieure)</li>
+</ul>
+</ol>
+<p><strong>Saisie fr&eacute;quentation :</strong></p>
+<ol>
+<li>Apr&egrave;s s&eacute;ance Aquagym (10h-11h, Bassin Ludique)</li>
+<li>Agent ouvre planning &rarr; Clic sur activit&eacute;</li>
+<li>Bouton "Saisir fr&eacute;quentation"</li>
+<li>Entre 18 participants (capacit&eacute; max 25)</li>
+<li>Syst&egrave;me calcule automatiquement taux remplissage : 72%</li>
+<li>Validation &rarr; Notification manager</li>
+</ol>
+<p><strong>Demande cong&eacute; :</strong></p>
+<ol>
+<li>Agent souhaite cong&eacute; 5 jours (23-27 janvier)</li>
+<li>Menu "Mes cong&eacute;s" &rarr; "Demander cong&eacute;"</li>
+<li>Formulaire : Type (Cong&eacute;s pay&eacute;s), Date d&eacute;but, Date fin</li>
+<li>Soumission &rarr; Notification SMS + Email manager</li>
+<li>Manager approuve &rarr; Agent re&ccedil;oit confirmation</li>
+<li>Planning mis &agrave; jour automatiquement (agent indisponible)</li>
+</ol>
+<p><strong>Carnet de t&acirc;ches :</strong></p>
+<ol>
+<li>Agent consulte t&acirc;ches du jour :</li>
+<ul>
+<li>"V&eacute;rifier chlore bassin 25m" (Haute priorit&eacute;) - &Agrave; faire</li>
+<li>"Nettoyer local mat&eacute;riel" (Moyenne) - &Agrave; faire</li>
+<li>"Remplir rapport mensuel" (Basse) - En cours</li>
+</ul>
+<li>Effectue v&eacute;rification chlore &rarr; Marque "Termin&eacute;e" + Upload photo test</li>
+<li>Notification manager (t&acirc;che compl&eacute;t&eacute;e)</li>
+</ol>
+<p><strong>7.2 Sc&eacute;nario Manager (Responsable Centre Aquatique)</strong></p>
+<p><strong>Planning hebdomadaire :</strong></p>
+<ol>
+<li>Manager ouvre D2S (desktop)</li>
+<li>Dashboard Manager &rarr; Vue planning semaine</li>
+<li>Constate cr&eacute;neaux non attribu&eacute;s :</li>
+<ul>
+<li>Lundi 10h-12h, Bassin 25m : Nage libre (pas d'agent)</li>
+<li>Mercredi 14h-16h, Bassin Ludique : Aquagym (pas d'agent)</li>
+</ul>
+</ol>
+<p><strong>Affectation manuelle :</strong></p>
+<ol>
+<li>Clic sur cr&eacute;neau Lundi 10h-12h</li>
+<li>Modal "Affecter agent"</li>
+<li>Filtre automatique : Agents disponibles + comp&eacute;tence MNS</li>
+<li>S&eacute;lection "Sophie Martin" (MNS, disponible)</li>
+<li>Validation &rarr; Sophie re&ccedil;oit notification</li>
+</ol>
+<p><strong>Planification automatique :</strong></p>
+<ol>
+<li>Manager clique "Auto-Schedule" pour semaine</li>
+<li>Syst&egrave;me analyse :</li>
+<ul>
+<li>12 cr&eacute;neaux non attribu&eacute;s</li>
+<li>8 agents disponibles</li>
+<li>Disponibilit&eacute;s, cong&eacute;s, heures souhait&eacute;es</li>
+</ul>
+<li>Algorithme g&eacute;n&egrave;re planning &eacute;quilibr&eacute;</li>
+<li>Manager r&eacute;vise propositions, ajuste 2 affectations manuellement</li>
+<li>Publication &rarr; Tous agents re&ccedil;oivent notification</li>
+</ol>
+<p><strong>Validation cong&eacute;s :</strong></p>
+<ol>
+<li>Manager re&ccedil;oit notification : "Marc Dubois demande cong&eacute; 15-17 janvier"</li>
+<li>Consultation planning &rarr; V&eacute;rification impact (2 activit&eacute;s affect&eacute;es)</li>
+<li>Recherche rempla&ccedil;ants disponibles</li>
+<li>Approbation cong&eacute; &rarr; Marc notifi&eacute;</li>
+<li>R&eacute;affectation 2 activit&eacute;s concern&eacute;es</li>
+</ol>
+<p><strong>Consultation statistiques fr&eacute;quentation :</strong></p>
+<ol>
+<li>Menu "Fr&eacute;quentation" &rarr; Dashboard</li>
+<li>Graphique barres : Taux occupation par activit&eacute; (semaine)</li>
+<li>Identification :</li>
+<ul>
+<li>✅ Aquagym : 92% (satur&eacute;) &rarr; Recommandation ajouter cr&eacute;neau</li>
+<li>⚠️ Natation b&eacute;b&eacute;s : 28% (sous-utilis&eacute;) &rarr; Analyse n&eacute;cessaire</li>
+</ul>
+<li>Export PDF rapport hebdomadaire pour direction</li>
+</ol>
+<p><strong>7.3 Sc&eacute;nario Admin (Directeur Complexe Sportif)</strong></p>
+<p><strong>Configuration nouvel agent :</strong></p>
+<ol>
+<li>Admin ouvre "Gestion Agents" &rarr; "Cr&eacute;er agent"</li>
+<li>Formulaire complet :</li>
+<ul>
+<li>Identit&eacute; : Julie Leroy, n&eacute;e 15/03/1995</li>
+<li>Contact : julie.leroy@email.com, 06.12.34.56.78</li>
+<li>Type : Agent-T2 (Coach fitness)</li>
+<li>R&ocirc;le : Agent</li>
+<li>Structures assign&eacute;es : Salle Fitness</li>
+</ul>
+<li>Cr&eacute;ation &rarr; Invitation automatique envoy&eacute;e (email + SMS)</li>
+<li>Julie re&ccedil;oit lien activation &rarr; D&eacute;finit mot de passe &rarr; Acc&egrave;s plateforme</li>
+</ol>
+<p><strong>Ajout comp&eacute;tence/certification :</strong></p>
+<ol>
+<li>Fiche Julie Leroy &rarr; Onglet "Comp&eacute;tences"</li>
+<li>"Ajouter certification"</li>
+<li>Formulaire :</li>
+<ul>
+<li>Type : CQP ALS (Animateur Loisir Sportif)</li>
+<li>Num&eacute;ro : CQP2024-12345</li>
+<li>Date obtention : 10/09/2024</li>
+<li>Date expiration : 10/09/2029</li>
+<li>Upload PDF carte certification</li>
+</ul>
+<li>Validation &rarr; Alerte automatique programm&eacute;e (60j avant expiration)</li>
+</ol>
+<p><strong>Cr&eacute;ation contrat :</strong></p>
+<ol>
+<li>Fiche Julie Leroy &rarr; Onglet "Contrats"</li>
+<li>"Cr&eacute;er contrat"</li>
+<li>Formulaire :</li>
+<ul>
+<li>Type : CDI</li>
+<li>Date d&eacute;but : 01/02/2026</li>
+<li>Heures hebdomadaires : 35h</li>
+<li>Temps : Temps plein</li>
+<li>Taux horaire : 15 &euro;/h (pour calculs budg&eacute;taires)</li>
+</ul>
+<li>Validation &rarr; Contrat actif, Julie planifiable</li>
+</ol>
+<p><strong>Consultation audit logs :</strong></p>
+<ol>
+<li>Admin &rarr; "Administration" &rarr; "Journal d'audit"</li>
+<li>Recherche : Utilisateur "Sophie Martin", Action "UPDATE", Table "activites"</li>
+<li>R&eacute;sultats :</li>
+<ul>
+<li>08/01/2026 14:23 - Sophie a modifi&eacute; activit&eacute; #456</li>
+<li>Avant : Aquagym 10h-11h, Bassin Ludique, Sophie + Marc</li>
+<li>Apr&egrave;s : Aquagym 10h-11h30, Bassin Ludique, Sophie + Marc + Julie</li>
+<li>IP : 192.168.1.45</li>
+</ul>
+<li>Tra&ccedil;abilit&eacute; compl&egrave;te pour investigation si n&eacute;cessaire</li>
+</ol>
+<p><strong>Configuration alertes globales :</strong></p>
+<ol>
+<li>Admin &rarr; "Configuration" &rarr; "Alertes"</li>
+<li>Configuration fr&eacute;quentation :</li>
+<ul>
+<li>Alerte si taux &lt; 30% : ✅ Activ&eacute; (Email managers)</li>
+<li>Alerte si taux &gt; 90% : ✅ Activ&eacute; (Email managers + Admin)</li>
+</ul>
+<li>Configuration certifications :</li>
+<ul>
+<li>Alerte 60j avant expiration : ✅ Activ&eacute; (Email agent + manager)</li>
+<li>Alerte 30j avant expiration : ✅ Activ&eacute; (Email agent + manager + Admin)</li>
+<li>Alerte expiration pass&eacute;e : ✅ Activ&eacute; (Email Admin + Blocage affectation)</li>
+</ul>
+</ol>
+<ol>
+<li><strong> INTERFACES UTILISATEUR</strong></li>
+</ol>
+<p><strong>8.1 Principes de design</strong></p>
+<p><strong>Design System :</strong></p>
+<ul>
+<li><strong>Identit&eacute; visuelle :</strong> Moderne, &eacute;pur&eacute;e, professionnelle</li>
+<li><strong>Couleurs principales :</strong></li>
+<ul>
+<li>Primaire : Bleu (#3B82F6) - Confiance, technologie</li>
+<li>Secondaire : Vert (#10B981) - Validation, succ&egrave;s</li>
+<li>Accent : Orange (#F59E0B) - Alertes, attention</li>
+<li>Danger : Rouge (#EF4444) - Erreurs, urgences</li>
+</ul>
+<li><strong>Typographie :</strong> Inter (sans-serif, excellente lisibilit&eacute; &eacute;crans)</li>
+<li><strong>Spacing :</strong> Syst&egrave;me 4/8px (coh&eacute;rence espaces)</li>
+<li><strong>Responsive :</strong> Mobile-first (breakpoints Tailwind standard)</li>
+</ul>
+<p><strong>UX Principles :</strong></p>
+<ul>
+<li><strong>Clarity :</strong> Information claire, hi&eacute;rarchie visuelle &eacute;vidente</li>
+<li><strong>Efficiency :</strong> Minimum clics pour actions fr&eacute;quentes</li>
+<li><strong>Feedback :</strong> Retours imm&eacute;diats sur actions (toasts, loaders)</li>
+<li><strong>Consistency :</strong> Patterns UI r&eacute;utilis&eacute;s (boutons, formulaires, modals)</li>
+<li><strong>Accessibility :</strong> WCAG 2.1 AA minimum (contraste, focus keyboard, aria)</li>
+</ul>
+<p><strong>8.2 &Eacute;crans principaux</strong></p>
+<p><strong>Dashboard Admin</strong></p>
+<p><strong>Layout :</strong></p>
+<p>┌─────────────────────────────────────────────────────────┐</p>
+<p>│ Header : Logo | Notifications (🔔) | Avatar + Menu │</p>
+<p>├───────────┬─────────────────────────────────────────────┤</p>
+<p>│ Sidebar │ Main Content │</p>
+<p>│ ───────── │ ───────────── │</p>
+<p>│ 📊 Dashboard│ Titre : Dashboard Administrateur │</p>
+<p>│ 📅 Planning│ │</p>
+<p>│ 👥 Agents │ [KPI Cards Row] │</p>
+<p>│ 🏊 Structures│ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ │</p>
+<p>│ 📦 Mat&eacute;riel│ │ 127 │ │ 89 │ │ 12 │ │ 3 │ │</p>
+<p>│ 📊 Fr&eacute;q. │ │Agents│ │Act. │ │Mat&eacute;riel│ │Alertes│ │</p>
+<p>│ ⚙️ Admin │ └─────┘ └─────┘ └─────┘ └─────┘ │</p>
+<p>│ │ │</p>
+<p>│ │ [Graphiques Row] │</p>
+<p>│ │ ┌──────────────┐ ┌──────────────┐ │</p>
+<p>│ │ │Heures/mois │ │Occupation zones│ │</p>
+<p>│ │ │[Line Chart] │ │[Bar Chart] │ │</p>
+<p>│ │ └──────────────┘ └──────────────┘ │</p>
+<p>│ │ │</p>
+<p>│ │ [Alertes &amp; Actions Row] │</p>
+<p>│ │ ⚠️ 3 certifications expirant &lt;30j │</p>
+<p>│ │ ❌ 2 &eacute;quipements en panne │</p>
+<p>│ │ ⏳ 5 cong&eacute;s en attente validation │</p>
+<p>└───────────┴─────────────────────────────────────────────┘</p>
+<p><strong>Planning Global (Vue Gantt)</strong></p>
+<p>┌─────────────────────────────────────────────────────────┐</p>
+<p>│ Filtres : [Structure ▼] [Espace ▼] [Zone ▼] [Agent ▼] │</p>
+<p>│ Vue : ◉ Gantt ○ Calendrier Semaine : ⬅️ S2 ➡️ │</p>
+<p>├─────────────────────────────────────────────────────────┤</p>
+<p>│ Zone │ Lun 8/01 │ Mar 9/01 │ Mer 10/01│... │</p>
+<p>├─────────────────┼──────────┼──────────┼──────────┼─────┤</p>
+<p>│ Bassin 25m │[████████]│[████████]│[████████]│ │</p>
+<p>│ │ 8h-12h │ 8h-12h │ 8h-12h │ │</p>
+<p>│ │ MNS: S.M │ MNS: M.D │ MNS: J.L │ │</p>
+<p>│ ├──────────┼──────────┼──────────┤ │</p>
+<p>│ │[████████]│[████████]│[ ]│ │</p>
+<p>│ │ 14h-18h │ 14h-18h │ Libre │ │</p>
+<p>├─────────────────┼──────────┼──────────┼──────────┤ │</p>
+<p>│ Bassin Ludique │[████████]│[████] │[████████]│ │</p>
+<p>│ │ 10h-12h │ 10h-11h │ 10h-12h │ │</p>
+<p>│ │Aquagym │B&eacute;b&eacute;s Nageurs│Aquagym│ │</p>
+<p>└─────────────────┴──────────┴──────────┴──────────┴─────┘</p>
+<p><strong>Fiche Agent (Onglets)</strong></p>
+<p>┌─────────────────────────────────────────────────────────┐</p>
+<p>│ ⬅️ Retour Liste Agents │</p>
+<p>│ │</p>
+<p>│ 👤 [Photo] Sophie MARTIN ⚙️ Actions ▼ │</p>
+<p>│ Ma&icirc;tre-Nageur Sauveteur (T1) │ ✏️ Modifier│</p>
+<p>│ sophie.martin@email.com │ 🗑️ D&eacute;sactiver│</p>
+<p>│ 📞 06.12.34.56.78 └───────────┘│</p>
+<p>│ │</p>
+<p>├─────────────────────────────────────────────────────────┤</p>
+<p>│ Onglets : │</p>
+<p>│ [📋 G&eacute;n&eacute;ral] [💼 Contrats] [🎓 Comp&eacute;tences] [📅 Planning]│</p>
+<p>│ [📊 Statistiques] [📝 T&acirc;ches] │</p>
+<p>├─────────────────────────────────────────────────────────┤</p>
+<p>│ (Contenu onglet actif) │</p>
+<p>│ │</p>
+<p>│ [Si Onglet Comp&eacute;tences] │</p>
+<p>│ │</p>
+<p>│ ✅ BNSSA - N&deg;BNSSA-2023-45678 │</p>
+<p>│ Obtenu : 15/03/2023 | Expire : 15/03/2028 │</p>
+<p>│ [📄 Voir PDF] │</p>
+<p>│ │</p>
+<p>│ ✅ PSE2 - N&deg;PSE2-2024-12345 │</p>
+<p>│ Obtenu : 10/06/2024 | Expire : 10/06/2029 │</p>
+<p>│ [📄 Voir PDF] │</p>
+<p>│ │</p>
+<p>│ ⚠️ PSC1 - N&deg;PSC1-2020-98765 │</p>
+<p>│ Obtenu : 20/01/2020 | Expire : 20/01/2025 (EXPIRE!) │</p>
+<p>│ [📄 Voir PDF] [🔄 Renouveler] │</p>
+<p>│ │</p>
+<p>│ [+ Ajouter Comp&eacute;tence] │</p>
+<p>└─────────────────────────────────────────────────────────┘</p>
+<p><strong>Mobile App - Planning Agent</strong></p>
+<p>┌──────────────────────┐</p>
+<p>│ D2S 🔔(2) 👤 │</p>
+<p>├──────────────────────┤</p>
+<p>│ Mon Planning │</p>
+<p>│ │</p>
+<p>│ ⬅️ Semaine S2 ➡️ │</p>
+<p>│ 8-14 Janvier 2026 │</p>
+<p>│ │</p>
+<p>│ ────── Lun 8/01 ──── │</p>
+<p>│ │</p>
+<p>│ 🏊 8h00 - 12h00 │</p>
+<p>│ Surveillance Bassin │</p>
+<p>│ 📍 Bassin 25m │</p>
+<p>│ [🔄 Demander rempl.] │</p>
+<p>│ │</p>
+<p>│ 🏊 14h00 - 16h00 │</p>
+<p>│ Aquagym │</p>
+<p>│ 📍 Bassin Ludique │</p>
+<p>│ 18/25 participants │</p>
+<p>│ [✏️ Saisir fr&eacute;q.] │</p>
+<p>│ │</p>
+<p>│ ────── Mar 9/01 ──── │</p>
+<p>│ │</p>
+<p>│ 🏊 10h00 - 12h00 │</p>
+<p>│ Cours natation enfants│</p>
+<p>│ 📍 Bassin Ludique │</p>
+<p>│ │</p>
+<p>│ ⚠️ Mer 10/01 │</p>
+<p>│ Cong&eacute; valid&eacute; ✅ │</p>
+<p>│ │</p>
+<p>│ [...suite...] │</p>
+<p>│ │</p>
+<p>│ ─────────────────────│</p>
+<p>│ [📅][👤][📊][⚙️] │</p>
+<p>│ Planning Profil Stats Param&egrave;tres│</p>
+<p>└──────────────────────┘</p>
+<p><strong>8.3 Composants UI r&eacute;utilisables</strong></p>
+<p><strong>Boutons :</strong></p>
+<p>Primaire : Fond bleu, texte blanc (actions principales)</p>
+<p>Secondaire: Fond blanc, bordure grise (actions secondaires)</p>
+<p>Danger : Fond rouge, texte blanc (suppressions, annulations)</p>
+<p>Ghost : Transparent, texte color&eacute; (actions tertiaires)</p>
+<p><strong>Cards :</strong></p>
+<p>Shadow + Border radius + Padding</p>
+<p>Usage : KPI, fiches r&eacute;sum&eacute;, conteneurs</p>
+<p><strong>Modals :</strong></p>
+<p>Overlay semi-transparent + Modal centr&eacute;</p>
+<p>Close : Croix + clic overlay + &Eacute;chap</p>
+<p>Usage : Formulaires, confirmations, d&eacute;tails</p>
+<p><strong>Toasts/Notifications :</strong></p>
+<p>Position : Top-right</p>
+<p>Types : Success (vert), Error (rouge), Warning (orange), Info (bleu)</p>
+<p>Dur&eacute;e : 3s (auto-dismiss) ou permanent (avec bouton close)</p>
+<p><strong>Tables :</strong></p>
+<p>Header sticky, Zebra striping, Hover rows</p>
+<p>Tri colonnes (&uarr;&darr;), Filtres, Pagination</p>
+<p>Actions : Ic&ocirc;nes (✏️ Modifier, 🗑️ Supprimer, 👁️ Voir)</p>
+<p><strong>Formulaires :</strong></p>
+<p>Labels clairs, Placeholders, Validation temps r&eacute;el</p>
+<p>Erreurs inline (sous champ), Success feedback</p>
+<p>Required (*), Tooltips (?) pour aide contextuelle</p>
+<ol>
+<li><strong> S&Eacute;CURIT&Eacute; ET CONFORMIT&Eacute;</strong></li>
+</ol>
+<p><strong>9.1 Conformit&eacute; RGPD</strong></p>
+<p><strong>Principes appliqu&eacute;s :</strong></p>
+<ol>
+<li><strong> Minimisation des donn&eacute;es :</strong></li>
+</ol>
+<ul>
+<li>Collecte uniquement donn&eacute;es n&eacute;cessaires au service</li>
+<li>Champs optionnels clairement identifi&eacute;s</li>
+<li>R&eacute;vision r&eacute;guli&egrave;re donn&eacute;es stock&eacute;es</li>
+</ul>
+<ol>
+<li><strong> Droit d'acc&egrave;s :</strong></li>
+</ol>
+<ul>
+<li>Agents peuvent consulter toutes leurs donn&eacute;es personnelles</li>
+<li>Export JSON/PDF sur demande (interface "Mes donn&eacute;es")</li>
+</ul>
+<ol>
+<li><strong> Droit de rectification :</strong></li>
+</ol>
+<ul>
+<li>Agents peuvent modifier leurs coordonn&eacute;es, photo, etc.</li>
+<li>Demande modification donn&eacute;es RH via formulaire (validation manager/admin)</li>
+</ul>
+<ol>
+<li><strong> Droit &agrave; l'effacement :</strong></li>
+</ol>
+<ul>
+<li>Suppression compte sur demande (soft delete initial)</li>
+<li>Hard delete apr&egrave;s 30 jours (ou conservation l&eacute;gale si obligations)</li>
+<li>Anonymisation donn&eacute;es apr&egrave;s d&eacute;part (conservation stats agr&eacute;g&eacute;es)</li>
+</ul>
+<ol>
+<li><strong> Portabilit&eacute; :</strong></li>
+</ol>
+<ul>
+<li>Export complet donn&eacute;es personnelles (format machine-readable JSON)</li>
+<li>Historique planning, comp&eacute;tences, statistiques</li>
+</ul>
+<ol>
+<li><strong> Limitation conservation :</strong></li>
+</ol>
+<ul>
+<li>Donn&eacute;es actives : Dur&eacute;e contrat + 5 ans (obligations l&eacute;gales)</li>
+<li>Audit logs : 5 ans (conformit&eacute;)</li>
+<li>Documents RH : Dur&eacute;es l&eacute;gales sp&eacute;cifiques</li>
+</ul>
+<ol>
+<li><strong> S&eacute;curit&eacute; :</strong></li>
+</ol>
+<ul>
+<li>Chiffrement transport (HTTPS/TLS 1.3)</li>
+<li>Chiffrement au repos (donn&eacute;es sensibles : num&eacute;ro SS, documents)</li>
+<li>Acc&egrave;s bas&eacute;s sur r&ocirc;les (least privilege)</li>
+<li>Authentification forte (2FA admins)</li>
+</ul>
+<ol>
+<li><strong> Tra&ccedil;abilit&eacute; :</strong></li>
+</ol>
+<ul>
+<li>Audit logs complets (qui acc&egrave;de &agrave; quoi, quand)</li>
+<li>Notifications acc&egrave;s donn&eacute;es sensibles</li>
+<li>Rapports RGPD disponibles (DPO)</li>
+</ul>
+<p><strong>Registre des traitements :</strong></p>
+<ul>
+<li>Tenu &agrave; jour (obligatoire RGPD)</li>
+<li>Accessible responsable conformit&eacute;</li>
+<li>D&eacute;crit : Finalit&eacute;s, bases l&eacute;gales, dur&eacute;es conservation, destinataires</li>
+</ul>
+<p><strong>9.2 H&eacute;bergement et infrastructure</strong></p>
+<p><strong>H&eacute;bergement en France/UE (recommand&eacute;) :</strong></p>
+<ul>
+<li>Conformit&eacute; RGPD (donn&eacute;es UE restent en UE)</li>
+<li>Providers sugg&eacute;r&eacute;s : OVH, Scaleway, Hetzner</li>
+</ul>
+<p><strong>Certifications infrastructure :</strong></p>
+<ul>
+<li>ISO 27001 (S&eacute;curit&eacute; information)</li>
+<li>HDS (H&eacute;bergement Donn&eacute;es Sant&eacute;) - si donn&eacute;es m&eacute;dicales</li>
+<li>TIER III/IV (Data centers)</li>
+</ul>
+<p><strong>Backups g&eacute;oredondants :</strong></p>
+<ul>
+<li>R&eacute;plication multi-zones (disponibilit&eacute;)</li>
+<li>Conservation hors site (disaster recovery)</li>
+</ul>
+<p><strong>9.3 Plan de Reprise d'Activit&eacute; (PRA)</strong></p>
+<p><strong>Objectifs :</strong></p>
+<ul>
+<li>RTO (Recovery Time Objective) : &lt;4 heures</li>
+<li>RPO (Recovery Point Objective) : &lt;1 heure (pertes max)</li>
+</ul>
+<p><strong>Proc&eacute;dures :</strong></p>
+<ol>
+<li>D&eacute;tection incident (monitoring automatique)</li>
+<li>Notification &eacute;quipe technique (alertes)</li>
+<li>&Eacute;valuation criticit&eacute;</li>
+<li>Activation PRA si n&eacute;cessaire :</li>
+<ul>
+<li>Basculement serveurs secours</li>
+<li>Restauration derniers backups</li>
+<li>V&eacute;rification int&eacute;grit&eacute; donn&eacute;es</li>
+<li>Tests fonctionnels</li>
+</ul>
+<li>Communication clients (status page)</li>
+<li>Retour normal + post-mortem</li>
+</ol>
+<ol>
+<li><strong> ROADMAP ET &Eacute;VOLUTIONS</strong></li>
+</ol>
+<p><strong>10.1 Version 1.0 (MVP - Livraison Q2 2026)</strong></p>
+<p><strong>Modules inclus :</strong></p>
+<ul>
+<li>✅ Planification du personnel (Core complet)</li>
+<li>✅ Gestion agents et comp&eacute;tences</li>
+<li>✅ Gestion structure/espaces/zones</li>
+<li>✅ Gestion mat&eacute;riel</li>
+<li>✅ Registres chimiques (aquatique)</li>
+<li>✅ Formulaires personnalis&eacute;s</li>
+<li>✅ Messagerie (email/SMS)</li>
+<li>✅ D2S Storage</li>
+<li>✅ Administration &amp; Audit</li>
+<li>✅ Application mobile responsive</li>
+</ul>
+<p><strong>Objectif :</strong> Lancement commercial, premiers clients pilotes</p>
+<p><strong>10.2 Version 1.1 (Q3 2026)</strong></p>
+<p><strong>Ajouts :</strong></p>
+<ul>
+<li>Module Fr&eacute;quentation (complet avec statistiques)</li>
+<li>Module Cours de natation</li>
+<li>Module Membres/Familles</li>
+<li>Chat interne (messagerie instantan&eacute;e)</li>
+<li>API RESTful publique (pour int&eacute;grations tierces)</li>
+</ul>
+<p><strong>10.3 Version 1.2 (Q4 2026)</strong></p>
+<p><strong>Ajouts :</strong></p>
+<ul>
+<li>Module Inspection installations</li>
+<li>Rapports de service</li>
+<li>Int&eacute;grations calendriers (Google, Outlook, iCal)</li>
+<li>Application mobile native (iOS + Android)</li>
+<li>Notifications push natives</li>
+</ul>
+<p><strong>10.4 Version 2.0 (2027)</strong></p>
+<p><strong>Innovations :</strong></p>
+<p><strong>Pr&eacute;visions intelligentes (IA) :</strong></p>
+<ul>
+<li>Pr&eacute;vision fr&eacute;quentation bas&eacute;e sur historique + m&eacute;t&eacute;o</li>
+<li>Recommandations planification optimale (agents, cr&eacute;neaux)</li>
+<li>D&eacute;tection anomalies (piscine : d&eacute;rives chimiques pr&eacute;dictives)</li>
+</ul>
+<p><strong>Automatisations avanc&eacute;es :</strong></p>
+<ul>
+<li>G&eacute;n&eacute;ration planning complet sur plusieurs semaines (IA)</li>
+<li>R&eacute;affectation automatique si absence impr&eacute;vue</li>
+<li>Optimisation budget main-d'&oelig;uvre (suggestions r&eacute;duction co&ucirc;ts)</li>
+</ul>
+<p><strong>Int&eacute;grations avanc&eacute;es :</strong></p>
+<ul>
+<li>Logiciels de paie (int&eacute;gration bidirectionnelle)</li>
+<li>Syst&egrave;mes contr&ocirc;le d'acc&egrave;s (badgeage automatique)</li>
+<li>Cam&eacute;ras/Compteurs (fr&eacute;quentation automatis&eacute;e)</li>
+</ul>
+<p><strong>Modules additionnels :</strong></p>
+<ul>
+<li>Gestion facturation et paiements (cours priv&eacute;s, abonnements)</li>
+<li>CRM l&eacute;ger (relation client, historique, relances)</li>
+<li>Module &eacute;v&eacute;nements (organisation comp&eacute;titions, stages)</li>
+</ul>
+<p><strong>10.5 Fonctionnalit&eacute;s futures (Backlog)</strong></p>
+<ul>
+<li><strong>Gamification :</strong> Badges agents (ponctualit&eacute;, polyvalence), Classements motivants</li>
+<li><strong>Formation en ligne :</strong> Modules e-learning int&eacute;gr&eacute;s (vid&eacute;os, quiz, certifications internes)</li>
+<li><strong>Gestion de crise :</strong> Protocoles incidents majeurs (&eacute;vacuation, accidents graves)</li>
+<li><strong>Multi-tenancy avanc&eacute; :</strong> 1 instance pour plusieurs clients (SaaS pur)</li>
+<li><strong>Marketplace addons :</strong> Extensions d&eacute;velopp&eacute;es par communaut&eacute;/partenaires</li>
+</ul>
+<p><strong>ANNEXES</strong></p>
+<p><strong>Annexe A : Glossaire</strong></p>
+<p><strong>Agent :</strong> Employ&eacute;/Personnel du complexe sportif<br /> <strong>Activit&eacute; :</strong> &Eacute;v&eacute;nement planifi&eacute; dans une zone (cours, surveillance, animation)<br /> <strong>Structure :</strong> Division fonctionnelle majeure (Centre aquatique, Salle fitness, etc.)<br /> <strong>Espace :</strong> Subdivision d'une structure (Piscine int&eacute;rieure, Zone musculation, etc.)<br /> <strong>Zone :</strong> Lieu physique pr&eacute;cis d'une activit&eacute; (Bassin 25m, Zone cardio, Terrain 1, etc.)<br /> <strong>Shift :</strong> Quart de travail, cr&eacute;neau horaire assign&eacute; &agrave; un agent<br /> <strong>Shift Swap :</strong> &Eacute;change de cr&eacute;neaux entre agents<br /> <strong>Open Shift :</strong> Poste disponible (cr&eacute;neau vacant publiable)<br /> <strong>MNS :</strong> Ma&icirc;tre-Nageur Sauveteur<br /> <strong>BNSSA :</strong> Brevet National de S&eacute;curit&eacute; et de Sauvetage Aquatique<br /> <strong>PSE :</strong> Premiers Secours en &Eacute;quipe<br /> <strong>POSS :</strong> Plan d'Organisation de la Surveillance et des Secours<br /> <strong>FDS :</strong> Fiche de Donn&eacute;es de S&eacute;curit&eacute;<br /> <strong>LSI :</strong> Langelier Saturation Index (indice saturation eau piscine)<br /> <strong>ETP :</strong> &Eacute;quivalent Temps Plein</p>
+<p><strong>Annexe B : Contacts et Support</strong></p>
+<p><strong>&Eacute;quipe projet :</strong></p>
+<ul>
+<li>Chef de projet : [Nom]</li>
+<li>Architecte technique : [Nom]</li>
+<li>Lead d&eacute;veloppeur Backend : [Nom]</li>
+<li>Lead d&eacute;veloppeur Frontend : [Nom]</li>
+<li>UX/UI Designer : [Nom]</li>
+<li>QA Lead : [Nom]</li>
+</ul>
+<p><strong>Support client (Post-lancement) :</strong></p>
+<ul>
+<li>Email : support@digitalsportsolutions.com</li>
+<li>T&eacute;l&eacute;phone : [Num&eacute;ro]</li>
+<li>Chat in-app : Intercom (temps r&eacute;ponse &lt;10min)</li>
+<li>Horaires : Lun-Ven 9h-18h, Urgences 24/7</li>
+</ul>
+<p><strong>Annexe C : R&eacute;f&eacute;rences et Inspirations</strong></p>
+<p><strong>Logiciels similaires analys&eacute;s :</strong></p>
+<ul>
+<li>Quatics (sp&eacute;cifique aquatique, US)</li>
+<li>PerfectMind (gestion centres sportifs, CA)</li>
+<li>ClubReady (fitness, US)</li>
+<li>TeamSnap (gestion &eacute;quipes sportives)</li>
+</ul>
+<p><strong>Diff&eacute;renciation D2S :</strong></p>
+<ul>
+<li>Sp&eacute;cialisation centres sportifs fran&ccedil;ais (conformit&eacute; ARS, r&eacute;glementations locales)</li>
+<li>Modulaire et adaptable (aquatique, fitness, multisport)</li>
+<li>UX moderne (mobile-first, interfaces fluides)</li>
+<li>Prix comp&eacute;titif (mod&egrave;le SaaS abordable TPE/PME)</li>
+</ul>
+<p><strong>FIN DU DOCUMENT DE SP&Eacute;CIFICATIONS</strong></p>
+<p><strong>Version 1.0 | Janvier 2026</strong><br /> <strong>Confidentiel - Usage Interne</strong></p>

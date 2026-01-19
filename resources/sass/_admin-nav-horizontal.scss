@@ -1,0 +1,758 @@
+/**
+ * ============================================================================
+ * ADMIN NAV HORIZONTAL SCSS - DIGITAL'SOS CMS
+ * ============================================================================
+ * Navigation horizontale pour l'interface admin
+ * Thématique aquatique Digital'SOS
+ * Version : Laravel 12 | Bootstrap 5 | Vite
+ * ============================================================================
+ */
+
+@import 'variables';
+
+/* ============================================================================
+   HEADER ADMIN
+   ============================================================================ */
+
+.admin-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $header-height;
+    background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+    box-shadow: $shadow-md;
+    z-index: $z-index-fixed;
+    
+    // Effet de vague en arrière-plan
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, 
+            $color-secondary 0%, 
+            $color-primary-light 50%, 
+            $color-secondary 100%
+        );
+    }
+}
+
+/**
+ * Container du header
+ */
+.admin-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 $spacing-6;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* ============================================================================
+   LOGO
+   ============================================================================ */
+
+.admin-logo {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+    text-decoration: none;
+    color: $color-white;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-lg;
+    transition: $transition-opacity;
+    flex-shrink: 0;
+    
+    &:hover {
+        opacity: 0.9;
+    }
+    
+    .admin-logo-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba($color-white, 0.2);
+        border-radius: $border-radius-lg;
+        font-size: $font-size-xl;
+        backdrop-filter: blur(4px);
+    }
+    
+    .admin-logo-text {
+        display: none;
+        
+        @media (min-width: $breakpoint-md) {
+            display: block;
+        }
+        
+        .logo-primary {
+            font-weight: $font-weight-extrabold;
+        }
+        
+        .logo-secondary {
+            font-weight: $font-weight-normal;
+            opacity: 0.9;
+        }
+    }
+}
+
+/* ============================================================================
+   NAVIGATION PRINCIPALE
+   ============================================================================ */
+
+.admin-nav {
+    display: none;
+    flex: 1;
+    justify-content: center;
+    padding: 0 $spacing-6;
+    
+    @media (min-width: $breakpoint-lg) {
+        display: flex;
+    }
+}
+
+.admin-nav-list {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-nav-item {
+    position: relative;
+    
+    &.active > .admin-nav-link {
+        background-color: rgba($color-white, 0.2);
+        
+        &::after {
+            width: 100%;
+        }
+    }
+}
+
+/**
+ * Liens de navigation
+ */
+.admin-nav-link {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    padding: $spacing-3 $spacing-4;
+    color: $color-white;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    border-radius: $border-radius-base;
+    transition: $transition-all;
+    position: relative;
+    white-space: nowrap;
+    
+    // Icône
+    i {
+        font-size: $font-size-base;
+    }
+    
+    // Indicateur actif en bas
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background-color: $color-white;
+        border-radius: $border-radius-full;
+        transition: width $transition-duration-base $transition-ease-out;
+    }
+    
+    &:hover {
+        background-color: rgba($color-white, 0.15);
+        
+        &::after {
+            width: 80%;
+        }
+    }
+}
+
+/* ============================================================================
+   DROPDOWN MENU
+   ============================================================================ */
+
+.admin-nav-item.has-dropdown {
+    &:hover .admin-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    .admin-nav-link::before {
+        content: '\f107'; // Chevron down
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        margin-left: $spacing-1;
+        font-size: $font-size-xs;
+    }
+}
+
+.admin-dropdown {
+    position: absolute;
+    top: calc(100% + $spacing-2);
+    left: 0;
+    min-width: 220px;
+    background-color: $color-white;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-xl;
+    padding: $spacing-2 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: $transition-all;
+    z-index: $z-index-dropdown;
+    
+    // Flèche en haut
+    &::before {
+        content: '';
+        position: absolute;
+        top: -6px;
+        left: $spacing-4;
+        width: 12px;
+        height: 12px;
+        background-color: $color-white;
+        transform: rotate(45deg);
+        box-shadow: -2px -2px 4px rgba($color-dark, 0.1);
+    }
+}
+
+.admin-dropdown-item {
+    display: block;
+    padding: $spacing-3 $spacing-5;
+    color: $color-dark;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    transition: $transition-colors;
+    
+    i {
+        margin-right: $spacing-2;
+        color: $color-primary;
+        width: 16px;
+    }
+    
+    &:hover {
+        background-color: $color-primary-lighter;
+        color: $color-primary-dark;
+    }
+    
+    &.active {
+        background-color: $color-primary-lighter;
+        color: $color-primary;
+        font-weight: $font-weight-medium;
+    }
+}
+
+.admin-dropdown-divider {
+    height: 1px;
+    margin: $spacing-2 0;
+    background-color: $border-color-light;
+}
+
+/* ============================================================================
+   ACTIONS (DROITE)
+   ============================================================================ */
+
+.admin-actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+}
+
+/**
+ * Bouton d'action (notifications, messages, etc.)
+ */
+.admin-action-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba($color-white, 0.1);
+    color: $color-white;
+    border: none;
+    border-radius: $border-radius-lg;
+    cursor: pointer;
+    transition: $transition-all;
+    font-size: $font-size-lg;
+    
+    &:hover {
+        background-color: rgba($color-white, 0.2);
+        transform: scale(1.05);
+    }
+    
+    // Badge de notification
+    .badge-count {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        min-width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $color-danger;
+        color: $color-white;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        border-radius: $border-radius-full;
+        padding: 0 $spacing-1;
+        box-shadow: $shadow-sm;
+        animation: pulse 2s ease-in-out infinite;
+    }
+}
+
+/* ============================================================================
+   PROFIL UTILISATEUR
+   ============================================================================ */
+
+.admin-user-menu {
+    position: relative;
+    
+    &:hover .admin-user-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+.admin-user-trigger {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    padding: $spacing-2 $spacing-3;
+    background-color: rgba($color-white, 0.1);
+    border: none;
+    border-radius: $border-radius-lg;
+    cursor: pointer;
+    transition: $transition-all;
+    
+    &:hover {
+        background-color: rgba($color-white, 0.2);
+    }
+    
+    .admin-user-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: $border-radius-full;
+        border: 2px solid rgba($color-white, 0.3);
+        object-fit: cover;
+        background-color: rgba($color-white, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $color-white;
+        font-weight: $font-weight-semibold;
+    }
+    
+    .admin-user-info {
+        display: none;
+        text-align: left;
+        
+        @media (min-width: $breakpoint-md) {
+            display: block;
+        }
+        
+        .admin-user-name {
+            display: block;
+            color: $color-white;
+            font-size: $font-size-sm;
+            font-weight: $font-weight-semibold;
+            line-height: 1.2;
+        }
+        
+        .admin-user-role {
+            display: block;
+            color: rgba($color-white, 0.8);
+            font-size: $font-size-xs;
+            line-height: 1.2;
+        }
+    }
+    
+    .admin-user-chevron {
+        display: none;
+        color: rgba($color-white, 0.8);
+        font-size: $font-size-xs;
+        margin-left: $spacing-1;
+        
+        @media (min-width: $breakpoint-md) {
+            display: block;
+        }
+    }
+}
+
+.admin-user-dropdown {
+    position: absolute;
+    top: calc(100% + $spacing-2);
+    right: 0;
+    min-width: 220px;
+    background-color: $color-white;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-xl;
+    padding: $spacing-3 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: $transition-all;
+    z-index: $z-index-dropdown;
+    
+    // Flèche en haut à droite
+    &::before {
+        content: '';
+        position: absolute;
+        top: -6px;
+        right: $spacing-4;
+        width: 12px;
+        height: 12px;
+        background-color: $color-white;
+        transform: rotate(45deg);
+        box-shadow: -2px -2px 4px rgba($color-dark, 0.1);
+    }
+}
+
+.admin-user-dropdown-header {
+    padding: $spacing-3 $spacing-4;
+    border-bottom: 1px solid $border-color-light;
+    
+    .user-dropdown-name {
+        font-size: $font-size-base;
+        font-weight: $font-weight-semibold;
+        color: $color-dark;
+        margin-bottom: $spacing-1;
+    }
+    
+    .user-dropdown-email {
+        font-size: $font-size-xs;
+        color: $text-muted;
+    }
+}
+
+.admin-user-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+    padding: $spacing-3 $spacing-4;
+    color: $color-dark;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    transition: $transition-colors;
+    
+    i {
+        width: 20px;
+        color: $color-primary;
+    }
+    
+    &:hover {
+        background-color: $color-primary-lighter;
+        color: $color-primary-dark;
+    }
+    
+    &.logout {
+        color: $color-danger;
+        
+        i {
+            color: $color-danger;
+        }
+        
+        &:hover {
+            background-color: $color-danger-lighter;
+        }
+    }
+}
+
+/* ============================================================================
+   MENU MOBILE (HAMBURGER)
+   ============================================================================ */
+
+.admin-mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba($color-white, 0.1);
+    border: none;
+    border-radius: $border-radius-lg;
+    cursor: pointer;
+    transition: $transition-all;
+    
+    @media (min-width: $breakpoint-lg) {
+        display: none;
+    }
+    
+    &:hover {
+        background-color: rgba($color-white, 0.2);
+    }
+    
+    .hamburger {
+        position: relative;
+        width: 24px;
+        height: 18px;
+        
+        span {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: $color-white;
+            border-radius: $border-radius-full;
+            transition: $transition-all;
+            
+            &:nth-child(1) {
+                top: 0;
+            }
+            
+            &:nth-child(2) {
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            &:nth-child(3) {
+                bottom: 0;
+            }
+        }
+    }
+    
+    &.active .hamburger {
+        span:nth-child(1) {
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+        
+        span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        span:nth-child(3) {
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
+        }
+    }
+}
+
+/* ============================================================================
+   MENU MOBILE SIDEBAR
+   ============================================================================ */
+
+.admin-mobile-menu {
+    position: fixed;
+    top: $header-height;
+    left: 0;
+    width: 280px;
+    height: calc(100vh - #{$header-height});
+    background-color: $color-white;
+    box-shadow: $shadow-xl;
+    transform: translateX(-100%);
+    transition: $transition-transform;
+    z-index: $z-index-fixed - 1;
+    overflow-y: auto;
+    
+    &.active {
+        transform: translateX(0);
+    }
+    
+    .admin-mobile-nav-list {
+        padding: $spacing-4;
+        list-style: none;
+        margin: 0;
+    }
+    
+    .admin-mobile-nav-item {
+        margin-bottom: $spacing-2;
+        
+        &.active > .admin-mobile-nav-link {
+            background-color: $color-primary-lighter;
+            color: $color-primary;
+            font-weight: $font-weight-semibold;
+        }
+    }
+    
+    .admin-mobile-nav-link {
+        display: flex;
+        align-items: center;
+        gap: $spacing-3;
+        padding: $spacing-3 $spacing-4;
+        color: $color-dark;
+        text-decoration: none;
+        font-size: $font-size-base;
+        border-radius: $border-radius-lg;
+        transition: $transition-colors;
+        
+        i {
+            width: 20px;
+            color: $color-primary;
+        }
+        
+        &:hover {
+            background-color: $color-primary-lighter;
+            color: $color-primary-dark;
+        }
+    }
+}
+
+/**
+ * Overlay mobile
+ */
+.admin-mobile-overlay {
+    position: fixed;
+    top: $header-height;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - #{$header-height});
+    background-color: rgba($color-dark, 0.5);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    transition: $transition-all;
+    z-index: $z-index-fixed - 2;
+    
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    @media (min-width: $breakpoint-lg) {
+        display: none;
+    }
+}
+
+/* ============================================================================
+   BREADCRUMB ADMIN
+   ============================================================================ */
+
+.admin-breadcrumb-wrapper {
+    padding: $spacing-4 $spacing-6;
+    background-color: $color-white;
+    border-bottom: 1px solid $border-color-light;
+    margin-top: $header-height;
+}
+
+.admin-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.admin-breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    font-size: $font-size-sm;
+    color: $text-muted;
+    
+    a {
+        color: $color-primary;
+        text-decoration: none;
+        transition: $transition-colors;
+        
+        &:hover {
+            color: $color-primary-dark;
+            text-decoration: underline;
+        }
+    }
+    
+    &.active {
+        color: $color-dark;
+        font-weight: $font-weight-medium;
+    }
+    
+    &:not(:last-child)::after {
+        content: '\f054'; // Chevron right
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        font-size: $font-size-xs;
+        color: $text-muted;
+        margin-left: $spacing-2;
+    }
+}
+
+/* ============================================================================
+   SEARCH BAR (OPTIONNELLE)
+   ============================================================================ */
+
+.admin-search {
+    display: none;
+    position: relative;
+    margin: 0 $spacing-4;
+    
+    @media (min-width: $breakpoint-lg) {
+        display: block;
+    }
+    
+    .admin-search-input {
+        width: 300px;
+        padding: $spacing-2 $spacing-4 $spacing-2 $spacing-10;
+        background-color: rgba($color-white, 0.15);
+        border: 1px solid rgba($color-white, 0.2);
+        border-radius: $border-radius-full;
+        color: $color-white;
+        font-size: $font-size-sm;
+        transition: $transition-all;
+        
+        &::placeholder {
+            color: rgba($color-white, 0.6);
+        }
+        
+        &:focus {
+            outline: none;
+            background-color: rgba($color-white, 0.25);
+            border-color: rgba($color-white, 0.4);
+            width: 400px;
+        }
+    }
+    
+    .admin-search-icon {
+        position: absolute;
+        left: $spacing-4;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba($color-white, 0.7);
+        pointer-events: none;
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================================ */
+
+@media (max-width: $breakpoint-lg - 1) {
+    .admin-header-container {
+        padding: 0 $spacing-4;
+    }
+}
+
+@media (max-width: $breakpoint-md - 1) {
+    .admin-actions {
+        gap: $spacing-1;
+    }
+    
+    .admin-action-btn {
+        width: 36px;
+        height: 36px;
+        font-size: $font-size-base;
+    }
+}
+
+/* ============================================================================
+   FIN DU FICHIER
+   ============================================================================ */

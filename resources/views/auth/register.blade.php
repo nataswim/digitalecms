@@ -180,7 +180,7 @@
 }
 
 .form-control:focus {
-    border-color: #0d6efd;
+    border-color: #11767e;
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
 }
 
@@ -194,8 +194,8 @@
 }
 
 .form-check-input:checked {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
+    background-color: #11767e;
+    border-color: #11767e;
 }
 
 @media (max-width: 768px) {

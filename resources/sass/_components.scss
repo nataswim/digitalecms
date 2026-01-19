@@ -1,0 +1,1113 @@
+/**
+ * ============================================================================
+ * COMPONENTS SCSS - DIGITAL'SOS CMS
+ * ============================================================================
+ * Composants UI : Boutons, Forms, Tables, Badges, Alerts, etc.
+ * Basés sur la charte aquatique Digital'SOS
+ * Version : Laravel 12 | Bootstrap 5 | Vite
+ * ============================================================================
+ */
+
+@import 'variables';
+
+/* ============================================================================
+   BOUTONS
+   ============================================================================ */
+
+/**
+ * Bouton de base
+ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-2;
+    padding: $btn-padding-y $btn-padding-x;
+    font-size: $font-size-base;
+    font-weight: $btn-font-weight;
+    line-height: $line-height-normal;
+    border-radius: $btn-border-radius;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: $transition-all;
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+    
+    &:focus {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        box-shadow: 0 0 0 3px rgba($color-primary, 0.2);
+    }
+    
+    &:disabled,
+    &.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
+
+/**
+ * Bouton primaire
+ */
+.btn-primary {
+    background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+    color: $color-white;
+    border-color: $color-primary;
+    box-shadow: $shadow-sm;
+    
+    &:hover:not(:disabled) {
+        background: linear-gradient(135deg, $color-primary-dark 0%, $color-primary 100%);
+        box-shadow: $shadow-md;
+        transform: translateY(-1px);
+    }
+    
+    &:active:not(:disabled) {
+        transform: translateY(0);
+        box-shadow: $shadow-sm;
+    }
+}
+
+/**
+ * Bouton secondaire
+ */
+.btn-secondary {
+    background: linear-gradient(135deg, $color-secondary 0%, $color-secondary-dark 100%);
+    color: $color-white;
+    border-color: $color-secondary;
+    box-shadow: $shadow-sm;
+    
+    &:hover:not(:disabled) {
+        background: linear-gradient(135deg, $color-secondary-dark 0%, $color-secondary 100%);
+        box-shadow: $shadow-md;
+        transform: translateY(-1px);
+    }
+    
+    &:active:not(:disabled) {
+        transform: translateY(0);
+        box-shadow: $shadow-sm;
+    }
+}
+
+/**
+ * Bouton succès
+ */
+.btn-success {
+    background: linear-gradient(135deg, $color-success 0%, $color-success-dark 100%);
+    color: $color-white;
+    border-color: $color-success;
+    box-shadow: $shadow-sm;
+    
+    &:hover:not(:disabled) {
+        background: linear-gradient(135deg, $color-success-dark 0%, $color-success 100%);
+        box-shadow: $shadow-md;
+        transform: translateY(-1px);
+    }
+}
+
+/**
+ * Bouton danger
+ */
+.btn-danger {
+    background: linear-gradient(135deg, $color-danger 0%, $color-danger-dark 100%);
+    color: $color-white;
+    border-color: $color-danger;
+    box-shadow: $shadow-sm;
+    
+    &:hover:not(:disabled) {
+        background: linear-gradient(135deg, $color-danger-dark 0%, $color-danger 100%);
+        box-shadow: $shadow-md;
+        transform: translateY(-1px);
+    }
+}
+
+/**
+ * Bouton warning
+ */
+.btn-warning {
+    background: linear-gradient(135deg, $color-warning 0%, $color-warning-dark 100%);
+    color: $color-white;
+    border-color: $color-warning;
+    box-shadow: $shadow-sm;
+    
+    &:hover:not(:disabled) {
+        background: linear-gradient(135deg, $color-warning-dark 0%, $color-warning 100%);
+        box-shadow: $shadow-md;
+        transform: translateY(-1px);
+    }
+}
+
+/**
+ * Bouton info
+ */
+.btn-info {
+    background: linear-gradient(135deg, $color-info 0%, $color-info-dark 100%);
+    color: $color-white;
+    border-color: $color-info;
+    box-shadow: $shadow-sm;
+    
+    &:hover:not(:disabled) {
+        background: linear-gradient(135deg, $color-info-dark 0%, $color-info 100%);
+        box-shadow: $shadow-md;
+        transform: translateY(-1px);
+    }
+}
+
+/**
+ * Bouton outline
+ */
+.btn-outline-primary {
+    background: transparent;
+    color: $color-primary;
+    border-color: $color-primary;
+    
+    &:hover:not(:disabled) {
+        background: $color-primary;
+        color: $color-white;
+    }
+}
+
+.btn-outline-secondary {
+    background: transparent;
+    color: $color-secondary;
+    border-color: $color-secondary;
+    
+    &:hover:not(:disabled) {
+        background: $color-secondary;
+        color: $color-white;
+    }
+}
+
+/**
+ * Bouton light (transparent)
+ */
+.btn-light {
+    background: $color-light;
+    color: $color-dark;
+    border-color: $border-color-light;
+    
+    &:hover:not(:disabled) {
+        background: $color-gray-200;
+        border-color: $border-color;
+    }
+}
+
+/**
+ * Bouton dark
+ */
+.btn-dark {
+    background: $color-dark;
+    color: $color-white;
+    border-color: $color-dark;
+    
+    &:hover:not(:disabled) {
+        background: $color-gray-800;
+    }
+}
+
+/**
+ * Tailles de boutons
+ */
+.btn-sm {
+    padding: $spacing-2 $spacing-4;
+    font-size: $font-size-sm;
+}
+
+.btn-lg {
+    padding: $spacing-4 $spacing-6;
+    font-size: $font-size-lg;
+}
+
+/**
+ * Bouton block (pleine largeur)
+ */
+.btn-block {
+    display: flex;
+    width: 100%;
+}
+
+/**
+ * Bouton icône uniquement
+ */
+.btn-icon {
+    padding: $spacing-3;
+    width: 40px;
+    height: 40px;
+    
+    &.btn-sm {
+        width: 32px;
+        height: 32px;
+        padding: $spacing-2;
+    }
+    
+    &.btn-lg {
+        width: 48px;
+        height: 48px;
+        padding: $spacing-4;
+    }
+}
+
+/* ============================================================================
+   FORMULAIRES
+   ============================================================================ */
+
+/**
+ * Labels
+ */
+.form-label {
+    display: inline-block;
+    margin-bottom: $spacing-2;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-dark;
+}
+
+.form-label-required::after {
+    content: ' *';
+    color: $color-danger;
+}
+
+/**
+ * Inputs de base
+ */
+.form-control {
+    display: block;
+    width: 100%;
+    padding: $input-padding-y $input-padding-x;
+    font-size: $font-size-base;
+    line-height: $line-height-normal;
+    color: $color-dark;
+    background-color: $color-white;
+    border: 1px solid $input-border-color;
+    border-radius: $input-border-radius;
+    transition: $transition-colors;
+    
+    &::placeholder {
+        color: $text-muted;
+        opacity: 0.7;
+    }
+    
+    &:focus {
+        outline: none;
+        border-color: $input-focus-border-color;
+        box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+    }
+    
+    &:disabled,
+    &[readonly] {
+        background-color: $color-gray-100;
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+    
+    &.is-invalid {
+        border-color: $color-danger;
+        
+        &:focus {
+            box-shadow: 0 0 0 3px rgba($color-danger, 0.1);
+        }
+    }
+    
+    &.is-valid {
+        border-color: $color-success;
+        
+        &:focus {
+            box-shadow: 0 0 0 3px rgba($color-success, 0.1);
+        }
+    }
+}
+
+/**
+ * Textarea
+ */
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/**
+ * Select
+ */
+select.form-control {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right $spacing-3 center;
+    background-size: 16px 12px;
+    padding-right: $spacing-8;
+}
+
+/**
+ * Tailles d'inputs
+ */
+.form-control-sm {
+    padding: $spacing-2 $spacing-3;
+    font-size: $font-size-sm;
+}
+
+.form-control-lg {
+    padding: $spacing-4 $spacing-5;
+    font-size: $font-size-lg;
+}
+
+/**
+ * Input groups
+ */
+.input-group {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    
+    .form-control {
+        flex: 1 1 auto;
+        
+        &:not(:first-child) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        
+        &:not(:last-child) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+}
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+    padding: $input-padding-y $input-padding-x;
+    font-size: $font-size-base;
+    font-weight: $font-weight-normal;
+    color: $color-dark;
+    background-color: $color-gray-100;
+    border: 1px solid $input-border-color;
+    
+    &:first-child {
+        border-top-left-radius: $input-border-radius;
+        border-bottom-left-radius: $input-border-radius;
+        border-right: 0;
+    }
+    
+    &:last-child {
+        border-top-right-radius: $input-border-radius;
+        border-bottom-right-radius: $input-border-radius;
+        border-left: 0;
+    }
+}
+
+/**
+ * Checkbox et Radio
+ */
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    margin-bottom: $spacing-3;
+}
+
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
+    border: 1px solid $border-color;
+    transition: $transition-all;
+    
+    &:checked {
+        background-color: $color-primary;
+        border-color: $color-primary;
+    }
+    
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+    }
+}
+
+.form-check-label {
+    cursor: pointer;
+    user-select: none;
+}
+
+/**
+ * Switch
+ */
+.form-switch .form-check-input {
+    width: 44px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+    background-position: left center;
+    border-radius: $border-radius-full;
+    
+    &:checked {
+        background-position: right center;
+    }
+}
+
+/**
+ * Messages de validation
+ */
+.invalid-feedback {
+    display: block;
+    margin-top: $spacing-1;
+    font-size: $font-size-sm;
+    color: $color-danger;
+}
+
+.valid-feedback {
+    display: block;
+    margin-top: $spacing-1;
+    font-size: $font-size-sm;
+    color: $color-success;
+}
+
+/**
+ * Texte d'aide
+ */
+.form-text {
+    display: block;
+    margin-top: $spacing-1;
+    font-size: $font-size-sm;
+    color: $text-muted;
+}
+
+/* ============================================================================
+   TABLES
+   ============================================================================ */
+
+.table {
+    width: 100%;
+    margin-bottom: $spacing-4;
+    color: $color-dark;
+    border-collapse: collapse;
+    
+    th,
+    td {
+        padding: $spacing-3 $spacing-4;
+        text-align: left;
+        border-bottom: 1px solid $table-border-color;
+    }
+    
+    thead th {
+        font-weight: $font-weight-semibold;
+        background-color: $color-gray-50;
+        border-bottom: 2px solid $border-color;
+        font-size: $font-size-sm;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: $color-dark;
+    }
+    
+    tbody tr {
+        transition: $transition-colors;
+        
+        &:hover {
+            background-color: $table-hover-bg;
+        }
+    }
+}
+
+/**
+ * Table striped
+ */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: $table-striped-bg;
+}
+
+/**
+ * Table bordered
+ */
+.table-bordered {
+    border: 1px solid $table-border-color;
+    
+    th,
+    td {
+        border: 1px solid $table-border-color;
+    }
+}
+
+/**
+ * Table responsive
+ */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/**
+ * Table aquatique
+ */
+.table-aqua {
+    @extend .table;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-base;
+    
+    thead th {
+        background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+        color: $color-white;
+        border-bottom: none;
+    }
+}
+
+/* ============================================================================
+   BADGES
+   ============================================================================ */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-1;
+    padding: $spacing-1 $spacing-3;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    line-height: 1;
+    border-radius: $border-radius-full;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.badge-primary {
+    background-color: $color-primary;
+    color: $color-white;
+}
+
+.badge-secondary {
+    background-color: $color-secondary;
+    color: $color-white;
+}
+
+.badge-success {
+    background-color: $color-success;
+    color: $color-white;
+}
+
+.badge-danger {
+    background-color: $color-danger;
+    color: $color-white;
+}
+
+.badge-warning {
+    background-color: $color-warning;
+    color: $color-white;
+}
+
+.badge-info {
+    background-color: $color-info;
+    color: $color-white;
+}
+
+.badge-light {
+    background-color: $color-gray-200;
+    color: $color-dark;
+}
+
+.badge-dark {
+    background-color: $color-dark;
+    color: $color-white;
+}
+
+/**
+ * Badge outline
+ */
+.badge-outline-primary {
+    background: transparent;
+    color: $color-primary;
+    border: 1px solid $color-primary;
+}
+
+.badge-outline-success {
+    background: transparent;
+    color: $color-success;
+    border: 1px solid $color-success;
+}
+
+.badge-outline-danger {
+    background: transparent;
+    color: $color-danger;
+    border: 1px solid $color-danger;
+}
+
+/* ============================================================================
+   ALERTS
+   ============================================================================ */
+
+.alert {
+    position: relative;
+    padding: $spacing-4 $spacing-5;
+    margin-bottom: $spacing-4;
+    border: 1px solid transparent;
+    border-radius: $border-radius-lg;
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-3;
+    
+    .alert-icon {
+        font-size: $font-size-xl;
+        flex-shrink: 0;
+    }
+    
+    .alert-content {
+        flex: 1;
+        
+        .alert-title {
+            font-weight: $font-weight-semibold;
+            margin-bottom: $spacing-1;
+        }
+        
+        .alert-message {
+            font-size: $font-size-sm;
+        }
+    }
+    
+    .alert-close {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: $font-size-xl;
+        padding: 0;
+        color: inherit;
+        opacity: 0.6;
+        transition: $transition-opacity;
+        
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+.alert-primary {
+    background-color: $color-primary-lighter;
+    color: $color-primary-dark;
+    border-color: $color-primary;
+}
+
+.alert-secondary {
+    background-color: $color-secondary-lighter;
+    color: $color-secondary-dark;
+    border-color: $color-secondary;
+}
+
+.alert-success {
+    background-color: $color-success-lighter;
+    color: $color-success-dark;
+    border-color: $color-success;
+}
+
+.alert-danger {
+    background-color: $color-danger-lighter;
+    color: $color-danger-dark;
+    border-color: $color-danger;
+}
+
+.alert-warning {
+    background-color: $color-warning-lighter;
+    color: $color-warning-dark;
+    border-color: $color-warning;
+}
+
+.alert-info {
+    background-color: $color-info-lighter;
+    color: $color-info-dark;
+    border-color: $color-info;
+}
+
+/* ============================================================================
+   BREADCRUMBS
+   ============================================================================ */
+
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: $spacing-3 0;
+    margin-bottom: $spacing-4;
+    list-style: none;
+    gap: $spacing-2;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    font-size: $font-size-sm;
+    
+    a {
+        color: $color-primary;
+        text-decoration: none;
+        transition: $transition-colors;
+        
+        &:hover {
+            color: $color-primary-dark;
+            text-decoration: underline;
+        }
+    }
+    
+    &.active {
+        color: $text-muted;
+    }
+    
+    &:not(:last-child)::after {
+        content: '/';
+        color: $text-muted;
+        margin-left: $spacing-2;
+    }
+}
+
+/* ============================================================================
+   PAGINATION
+   ============================================================================ */
+
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    gap: $spacing-1;
+}
+
+.page-item {
+    .page-link {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: $spacing-2 $spacing-4;
+        color: $color-primary;
+        text-decoration: none;
+        background-color: $color-white;
+        border: 1px solid $border-color;
+        border-radius: $border-radius-base;
+        transition: $transition-all;
+        min-width: 40px;
+        
+        &:hover {
+            color: $color-white;
+            background-color: $color-primary;
+            border-color: $color-primary;
+        }
+    }
+    
+    &.active .page-link {
+        color: $color-white;
+        background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+        border-color: $color-primary;
+    }
+    
+    &.disabled .page-link {
+        color: $text-muted;
+        pointer-events: none;
+        background-color: $color-gray-100;
+        border-color: $border-color-light;
+    }
+}
+
+/* ============================================================================
+   PROGRESS BARS
+   ============================================================================ */
+
+.progress {
+    height: 20px;
+    background-color: $color-gray-200;
+    border-radius: $border-radius-full;
+    overflow: hidden;
+    box-shadow: $shadow-inner;
+}
+
+.progress-bar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-white;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    background: linear-gradient(90deg, $color-primary 0%, $color-secondary 100%);
+    transition: width 0.6s ease;
+    border-radius: $border-radius-full;
+}
+
+.progress-bar-success {
+    background: linear-gradient(90deg, $color-success 0%, $color-success-light 100%);
+}
+
+.progress-bar-danger {
+    background: linear-gradient(90deg, $color-danger 0%, $color-danger-dark 100%);
+}
+
+.progress-bar-warning {
+    background: linear-gradient(90deg, $color-warning 0%, $color-warning-dark 100%);
+}
+
+/**
+ * Progress bar animée
+ */
+.progress-bar-animated {
+    animation: progress-bar-stripes 1s linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 40px 0;
+    }
+}
+
+/* ============================================================================
+   MODALES
+   ============================================================================ */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: $z-index-modal;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+    
+    &.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: $z-index-modal-backdrop;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color-dark, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: $spacing-4;
+    pointer-events: none;
+    
+    @media (min-width: $breakpoint-sm) {
+        max-width: 500px;
+        margin: $spacing-8 auto;
+    }
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: $color-white;
+    border-radius: $border-radius-xl;
+    box-shadow: $shadow-2xl;
+    outline: 0;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-5 $spacing-6;
+    border-bottom: 1px solid $border-color-light;
+    border-top-left-radius: $border-radius-xl;
+    border-top-right-radius: $border-radius-xl;
+    
+    .modal-title {
+        margin: 0;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-semibold;
+        color: $color-dark;
+    }
+    
+    .modal-close {
+        background: none;
+        border: none;
+        font-size: $font-size-2xl;
+        cursor: pointer;
+        color: $text-muted;
+        transition: $transition-colors;
+        padding: 0;
+        
+        &:hover {
+            color: $color-dark;
+        }
+    }
+}
+
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: $spacing-6;
+}
+
+.modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $spacing-3;
+    padding: $spacing-5 $spacing-6;
+    border-top: 1px solid $border-color-light;
+    border-bottom-left-radius: $border-radius-xl;
+    border-bottom-right-radius: $border-radius-xl;
+}
+
+/* ============================================================================
+   TOOLTIPS
+   ============================================================================ */
+
+.tooltip {
+    position: absolute;
+    z-index: $z-index-tooltip;
+    display: block;
+    padding: $spacing-2 $spacing-3;
+    font-size: $font-size-sm;
+    background-color: $color-dark;
+    color: $color-white;
+    border-radius: $border-radius-base;
+    box-shadow: $shadow-lg;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: $transition-opacity;
+    
+    &.show {
+        opacity: 1;
+    }
+}
+
+/* ============================================================================
+   DROPDOWNS
+   ============================================================================ */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: $z-index-dropdown;
+    display: none;
+    min-width: 200px;
+    padding: $spacing-2 0;
+    margin: $spacing-1 0 0;
+    background-color: $color-white;
+    border: 1px solid $border-color-light;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-lg;
+    
+    &.show {
+        display: block;
+    }
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: $spacing-2 $spacing-4;
+    clear: both;
+    font-weight: $font-weight-normal;
+    color: $color-dark;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    text-decoration: none;
+    transition: $transition-colors;
+    cursor: pointer;
+    
+    &:hover,
+    &:focus {
+        color: $color-primary;
+        background-color: $color-primary-lighter;
+    }
+    
+    &.active {
+        color: $color-white;
+        background-color: $color-primary;
+    }
+}
+
+.dropdown-divider {
+    height: 0;
+    margin: $spacing-2 0;
+    overflow: hidden;
+    border-top: 1px solid $border-color-light;
+}
+
+/* ============================================================================
+   ACCORDIONS
+   ============================================================================ */
+
+.accordion {
+    .accordion-item {
+        margin-bottom: $spacing-3;
+        border: 1px solid $border-color;
+        border-radius: $border-radius-lg;
+        overflow: hidden;
+    }
+    
+    .accordion-header {
+        .accordion-button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: $spacing-4 $spacing-5;
+            font-size: $font-size-base;
+            font-weight: $font-weight-semibold;
+            color: $color-dark;
+            background-color: $color-white;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            transition: $transition-colors;
+            
+            &:hover {
+                background-color: $color-gray-50;
+            }
+            
+            &::after {
+                content: '\f078';
+                font-family: 'Font Awesome 6 Free';
+                font-weight: 900;
+                transition: $transition-transform;
+            }
+            
+            &.collapsed::after {
+                transform: rotate(-90deg);
+            }
+        }
+    }
+    
+    .accordion-body {
+        padding: $spacing-5;
+        border-top: 1px solid $border-color-light;
+    }
+    
+    .accordion-collapse {
+        display: none;
+        
+        &.show {
+            display: block;
+        }
+    }
+}
+
+/* ============================================================================
+   FIN DU FICHIER
+   ============================================================================ */

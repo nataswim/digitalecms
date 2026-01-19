@@ -1,0 +1,556 @@
+/**
+ * ============================================================================
+ * APP.SCSS - DIGITAL'SOS CMS
+ * ============================================================================
+ * Fichier principal SCSS qui importe tous les composants
+ * Méthode M2PC : Matériel | Planning | Personnel | Contenu
+ * Charte aquatique Digital'SOS
+ * Version : Laravel 12 | Bootstrap 5 | Vite
+ * ============================================================================
+ */
+
+/* ============================================================================
+   FONTS
+   ============================================================================
+   Import de la police principale Figtree depuis Google Fonts
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&display=swap');
+
+/* ============================================================================
+   VARIABLES
+   ============================================================================
+   Variables globales : couleurs, typographie, espacements, etc.
+   IMPORTANT : Doit être importé en premier car utilisé partout
+   ============================================================================ */
+
+@import 'variables';
+
+/* ============================================================================
+   BOOTSTRAP 5
+   ============================================================================
+   Framework CSS de base
+   Note : Le ~ indique un module npm pour Laravel Mix
+   ============================================================================ */
+
+@import '~bootstrap/scss/bootstrap';
+
+/* ============================================================================
+   FONT AWESOME 6
+   ============================================================================
+   Bibliothèque d'icônes
+   Note : Le ~ indique un module npm pour Laravel Mix
+   ============================================================================ */
+
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+/* ============================================================================
+   UTILITIES
+   ============================================================================
+   Classes utilitaires : spacing, display, flex, text, colors, etc.
+   ============================================================================ */
+
+@import 'utilities';
+
+/* ============================================================================
+   CUSTOM STYLES
+   ============================================================================
+   Styles personnalisés Digital'SOS :
+   - Titres aquatiques
+   - Cards aquatiques
+   - Backgrounds animés
+   - Hero sections
+   - Méthode M2PC
+   - Timeline, tags, etc.
+   ============================================================================ */
+
+@import 'custom';
+
+/* ============================================================================
+   COMPONENTS
+   ============================================================================
+   Composants UI :
+   - Boutons
+   - Formulaires
+   - Tables
+   - Badges
+   - Alerts
+   - Breadcrumbs
+   - Pagination
+   - Progress bars
+   - Modales
+   - Tooltips
+   - Dropdowns
+   - Accordions
+   ============================================================================ */
+
+@import 'components';
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================
+   Animations et effets :
+   - Fade, Slide, Scale
+   - Pulse, Rotate, Bounce
+   - Shake, Wave (aquatique)
+   - Shimmer, Glow
+   - Loading spinners
+   - Hover effects
+   ============================================================================ */
+
+@import 'animations';
+
+/* ============================================================================
+   ADMIN - NAVIGATION HORIZONTALE
+   ============================================================================
+   Navigation admin avec header fixe, menu responsive, user menu
+   ============================================================================ */
+
+@import 'admin-nav-horizontal';
+
+/* ============================================================================
+   ADMIN - FOOTER
+   ============================================================================
+   Footer de l'interface admin
+   ============================================================================ */
+
+@import 'admin-footer';
+
+/* ============================================================================
+   MEDIA MANAGER
+   ============================================================================
+   Gestionnaire de médias : upload, galerie, preview
+   ============================================================================ */
+
+@import 'media-manager';
+
+/* ============================================================================
+   MEDIA SELECTOR
+   ============================================================================
+   Sélecteur de médias pour formulaires
+   ============================================================================ */
+
+@import 'media-selector';
+
+/* ============================================================================
+   QUILL EDITOR - ADVANCED
+   ============================================================================
+   Styles avancés pour l'éditeur WYSIWYG Quill
+   ============================================================================ */
+
+@import 'quill-advanced';
+
+/* ============================================================================
+   SOCIAL SHARE
+   ============================================================================
+   Boutons de partage sur réseaux sociaux
+   ============================================================================ */
+
+@import 'social-share';
+
+/* ============================================================================
+   GLOBAL OVERRIDES & FIXES
+   ============================================================================
+   Ajustements globaux et corrections spécifiques
+   ============================================================================ */
+
+/**
+ * Reset de base
+ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/**
+ * Amélioration du rendu des polices
+ */
+*,
+*::before,
+*::after {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/**
+ * Scroll fluide
+ */
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+/**
+ * Body par défaut
+ */
+body {
+    font-family: $font-family-primary;
+    background-color: $bg-body;
+    color: $text-primary;
+    line-height: $line-height-normal;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/**
+ * Container principal
+ */
+main {
+    flex: 1;
+    padding-top: $header-height; // Espace pour le header fixe
+}
+
+/**
+ * Liens par défaut
+ */
+a {
+    color: $color-primary;
+    text-decoration: none;
+    transition: $transition-colors;
+    
+    &:hover {
+        color: $color-primary-dark;
+    }
+}
+
+/**
+ * Focus visible pour l'accessibilité
+ */
+*:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+}
+
+/**
+ * Sélection de texte personnalisée
+ */
+::selection {
+    background-color: $color-primary;
+    color: $color-white;
+}
+
+::-moz-selection {
+    background-color: $color-primary;
+    color: $color-white;
+}
+
+/**
+ * Scrollbar personnalisée (Webkit)
+ */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: $color-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $color-gray-400;
+    border-radius: $border-radius-full;
+    
+    &:hover {
+        background: $color-primary;
+    }
+}
+
+/**
+ * Images responsives par défaut
+ */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/**
+ * Suppression des marges par défaut sur les titres
+ */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: $spacing-4;
+    font-weight: $font-weight-semibold;
+    color: $color-dark;
+    line-height: $line-height-tight;
+}
+
+h1 { font-size: $font-size-4xl; }
+h2 { font-size: $font-size-3xl; }
+h3 { font-size: $font-size-2xl; }
+h4 { font-size: $font-size-xl; }
+h5 { font-size: $font-size-lg; }
+h6 { font-size: $font-size-base; }
+
+/**
+ * Paragraphes
+ */
+p {
+    margin-bottom: $spacing-4;
+    line-height: $line-height-relaxed;
+}
+
+/**
+ * Listes
+ */
+ul, ol {
+    margin-bottom: $spacing-4;
+    padding-left: $spacing-6;
+}
+
+/**
+ * Code
+ */
+code {
+    font-family: $font-family-monospace;
+    background-color: $color-gray-100;
+    padding: $spacing-1 $spacing-2;
+    border-radius: $border-radius-sm;
+    font-size: 0.9em;
+}
+
+pre {
+    background-color: $color-dark;
+    color: $color-white;
+    padding: $spacing-4;
+    border-radius: $border-radius-lg;
+    overflow-x: auto;
+    
+    code {
+        background-color: transparent;
+        padding: 0;
+        color: inherit;
+    }
+}
+
+/**
+ * Tableaux
+ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/**
+ * Boutons reset
+ */
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/**
+ * Inputs reset
+ */
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+/* ============================================================================
+   LAYOUT HELPERS
+   ============================================================================ */
+
+/**
+ * Container max-width
+ */
+.container-fluid {
+    width: 100%;
+    padding-right: $spacing-4;
+    padding-left: $spacing-4;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.container {
+    @extend .container-fluid;
+    max-width: $container-max-width-xl;
+}
+
+/**
+ * Section avec padding
+ */
+.section {
+    padding: $spacing-12 0;
+    
+    @media (min-width: $breakpoint-md) {
+        padding: $spacing-16 0;
+    }
+    
+    @media (min-width: $breakpoint-lg) {
+        padding: $spacing-20 0;
+    }
+}
+
+.section-sm {
+    padding: $spacing-8 0;
+    
+    @media (min-width: $breakpoint-md) {
+        padding: $spacing-12 0;
+    }
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================
+   Styles pour l'impression
+   ============================================================================ */
+
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .no-print,
+    .admin-header,
+    .admin-footer,
+    nav,
+    .admin-nav,
+    .admin-actions,
+    .btn,
+    .admin-mobile-menu,
+    .admin-mobile-overlay {
+        display: none !important;
+    }
+    
+    main {
+        padding-top: 0;
+    }
+    
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+    
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+    
+    img {
+        max-width: 100%;
+        page-break-inside: avoid;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+    }
+}
+
+/* ============================================================================
+   DARK MODE (OPTIONNEL - PRÉPARÉ POUR FUTURE IMPLÉMENTATION)
+   ============================================================================ */
+
+/*
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: $color-dark;
+        color: $color-light;
+    }
+    
+    .card-aqua {
+        background-color: $color-gray-800;
+        border-color: $color-gray-700;
+    }
+    
+    // Ajouter d'autres styles dark mode ici
+}
+*/
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================
+   Améliorations pour l'accessibilité
+   ============================================================================ */
+
+/**
+ * Skip to main content link (pour les lecteurs d'écran)
+ */
+.skip-to-main {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    background: $color-primary;
+    color: $color-white;
+    padding: $spacing-3 $spacing-5;
+    text-decoration: none;
+    z-index: 9999;
+    
+    &:focus {
+        top: 0;
+    }
+}
+
+/**
+ * Screen reader only (masquer visuellement mais garder pour lecteurs d'écran)
+ */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/**
+ * Texte visible uniquement au focus (pour navigation clavier)
+ */
+.sr-only-focusable:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+
+/* ============================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================================================ */
+
+/**
+ * Will-change pour les éléments animés fréquemment
+ */
+.admin-mobile-menu,
+.admin-dropdown,
+.admin-user-dropdown,
+.modal {
+    will-change: transform, opacity;
+}
+
+/**
+ * GPU acceleration pour les transformations
+ */
+.card-aqua,
+.btn,
+.admin-nav-link {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* ============================================================================
+   FIN DU FICHIER - DIGITAL'SOS CMS
+   ============================================================================
+   
+   Pour personnaliser davantage :
+   1. Modifiez les variables dans _variables.scss
+   2. Ajoutez vos classes custom dans _custom.scss
+   3. Créez de nouveaux composants dans _components.scss
+   4. Ajoutez des animations dans _animations.scss
+   
+   Documentation Laravel 12 : https://laravel.com/docs/12.x
+   Documentation Bootstrap 5 : https://getbootstrap.com/docs/5.3/
+   Documentation Vite : https://vitejs.dev/
+   
+   Digital'SOS - La performance commence par une gestion maîtrisée
+   ============================================================================ */

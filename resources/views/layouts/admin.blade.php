@@ -25,22 +25,7 @@
          CHARTE GRAPHIQUE AQUATIQUE - CSS PERSONNALISÉS
          ============================================ -->
     
-    <!-- 1. Variables CSS (Couleurs, fonts, spacings) -->
-    <link rel="stylesheet" href="{{ asset('css/variables.css') }}">
-    
-    <!-- 2. Utilitaires (Classes helper) -->
-    <link rel="stylesheet" href="{{ asset('css/utilities.css') }}">
-    
-    <!-- 3. Styles personnalisés (Titres nataswim, backgrounds) -->
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    
-    <!-- 4. Composants (Cards, buttons, forms, tables) -->
-    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
-    
-    <!-- 5. Animations (Fade, slide, scale, wave) -->
-    <link rel="stylesheet" href="{{ asset('css/animations.css') }}">
-    
-    <!-- Styles de page spécifiques -->
+<link rel="stylesheet" href="{{ mix('css/app.css') }}">
     @stack('styles')
     
     <style>

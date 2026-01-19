@@ -15,31 +15,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- ============================================
-         CHARTE GRAPHIQUE AQUATIQUE - CSS PERSONNALISÉS
-         ============================================ -->
-    
-    <!-- 1. Variables CSS (Couleurs, fonts, spacings) -->
-    <link rel="stylesheet" href="{{ asset('css/variables.css') }}">
-    
-    <!-- 2. Utilitaires (Classes helper) -->
-    <link rel="stylesheet" href="{{ asset('css/utilities.css') }}">
-    
-    <!-- 3. Styles personnalisés (Titres nataswim, backgrounds) -->
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    
-    <!-- 4. Composants (Cards, buttons, forms, tables) -->
-    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
-    
-    <!-- 5. Animations (Fade, slide, scale, wave) -->
-    <link rel="stylesheet" href="{{ asset('css/animations.css') }}">
-    
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- Styles de page spécifiques -->
     @stack('styles')
     
@@ -242,6 +222,8 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     
     <!-- Scripts personnalisés -->
+
+    <script src="{{ mix('js/app.js') }}" defer></script>
     <script>
         // Auto-hide alerts après 5 secondes
         document.addEventListener('DOMContentLoaded', function() {

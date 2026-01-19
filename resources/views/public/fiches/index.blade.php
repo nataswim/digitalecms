@@ -166,7 +166,7 @@
                                                  class="category-image-fiche">
                                         @else
                                             <div class="category-image-placeholder-fiche d-flex align-items-center justify-content-center text-white"
-                                                 style="background: linear-gradient(135deg, {{ $loop->index % 4 == 0 ? '#0d6efd' : ($loop->index % 4 == 1 ? '#198754' : ($loop->index % 4 == 2 ? '#0dcaf0' : '#ffc107')) }} 0%, {{ $loop->index % 4 == 0 ? '#084298' : ($loop->index % 4 == 1 ? '#0f5132' : ($loop->index % 4 == 2 ? '#087990' : '#cc9a06')) }} 100%);">
+                                                 style="background: linear-gradient(135deg, {{ $loop->index % 4 == 0 ? '#11767e' : ($loop->index % 4 == 1 ? '#198754' : ($loop->index % 4 == 2 ? '#0dcaf0' : '#ffc107')) }} 0%, {{ $loop->index % 4 == 0 ? '#084298' : ($loop->index % 4 == 1 ? '#0f5132' : ($loop->index % 4 == 2 ? '#087990' : '#cc9a06')) }} 100%);">
                                                 <i class="fas fa-folder fa-4x"></i>
                                             </div>
                                         @endif

@@ -299,7 +299,7 @@
 @push('styles')
 <style>
 .media-item.selected {
-    border: 3px solid #0d6efd !important;
+    border: 3px solid #11767e !important;
     transform: scale(0.98);
 }
 

@@ -1,6 +1,7 @@
 {{-- Footer Public - Digital’SOS (Digital Sport Organisation System) - Plateforme tout-en-un --}}
 
-<footer class="admin-footer mt-5" style="border-left: 20px solid #4dadc1;border-right: 20px solid #4dadc1;background-color: #4dadc1 !important;border-bottom: 20px solid #378399;border-top: 20px solid #378399;padding-top: 20px;">    
+<footer class="admin-footer mt-5" style="border-left: 20px solid #4fa79b;border-right: 20px solid #4fa79b;background-color: #303030 !important;border-bottom: 20px solid #f9f5f4;border-top: 20px solid #f9f5f4;padding-top: 20px;"> 
+
 
 
     <!-- Contenu principal du footer -->
@@ -15,7 +16,7 @@
                             style="width: 50px; height: 50px;">
                             <i class="fas fa-water text-primary"></i>
                         </div>
-                        <h5 class="mb-0 text-white">{{ config('app.name') }}</h5>
+                        <h5 class="mb-0 text-white">Digital’SOS</h5>
                     </div>
                     <p class="text-light opacity-75 mb-4">
                         Digital Sport Organisation System - Plateforme tout-en-un -
@@ -23,26 +24,26 @@ Plateforme de gestion digitale.
                     </p>
                     <div class="text-light opacity-75">
                         <i class="fas fa-shield-alt me-2"></i>
-                        <small>Vos données sont en sécurité avec nous.</small>
+                        <small>Vos données sont en sécurité.</small>
                     </div>
                 </div>
 
                 <!-- Navigation -->
-                <div class="col-lg-2 col-md-6" style=" background-color: #fff; padding: 20px 10px; border: 20px solid #38849a; ">
+                <div class="col-lg-2 col-md-6">
                     <h6 class="text-white fw-semibold mb-3">Navigation</h6>
                     <ul class="list-unstyled">
                         <li class="mb-2">
-                            <a href="{{ route('home') }}" class="footer-link">
+                            <a href="{{ route('home') }}" class="footer-link text-light text-decoration-none">
                                 <i class="fas fa-home me-2"></i>Accueil
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="{{ route('about') }}" class="footer-link">
+                            <a href="{{ route('about') }}" class="footer-link text-light text-decoration-none">
                                 <i class="fas fa-info-circle me-2"></i>À propos
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="{{ route('contact') }}" class="footer-link">
+                            <a href="{{ route('contact') }}" class="footer-link text-light text-decoration-none">
                                 <i class="fas fa-envelope me-2"></i>Contact
                             </a>
                         </li>
@@ -50,29 +51,29 @@ Plateforme de gestion digitale.
                 </div>
 
                 <!-- Compte -->
-<div class="col-lg-3 col-md-6" style="background-color: #faf7f2;padding: 20px 10px;border-color: #faf7f2 #4dadc1 #38849a #4dadc1;border-width: 20px;border-style: solid;">
+<div class="col-lg-3 col-md-6">
     
                     <h6 class="text-white fw-semibold mb-3">Mon compte</h6>
                     <ul class="list-unstyled">
                         @auth
                         <li class="mb-2">
-                            <a href="{{ route('dashboard') }}" class="footer-link">
+                            <a href="{{ route('dashboard') }}" class="footer-link text-light text-decoration-none">
                                 <i class="fas fa-tachometer-alt me-2"></i>Mon espace
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="{{ route('profile.edit') }}" class="footer-link">
+                            <a href="{{ route('profile.edit') }}" class="footer-link text-light text-decoration-none">
                                 <i class="fas fa-user me-2"></i>Mon profil
                             </a>
                         </li>
                         @else
                         <li class="mb-2">
-                            <a href="{{ route('login') }}" class="footer-link">
+                            <a href="{{ route('login') }}" class="footer-link text-light text-decoration-none">
                                 <i class="fas fa-sign-in-alt me-2"></i>Connexion
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="{{ route('register') }}" class="footer-link">
+                            <a href="{{ route('register') }}" class="footer-link text-light text-decoration-none">
                                 <i class="fas fa-user-plus me-2"></i>Inscription
                             </a>
                         </li>
@@ -81,58 +82,39 @@ Plateforme de gestion digitale.
                 </div>
 
                 <!-- Informations légales -->
-<div class="col-lg-3 col-md-6" style="background-color: #faf7f2;padding: 20px 10px;border-color: #faf7f2 #4dadc1 #38849a #4dadc1;border-width: 20px;border-style: solid;">
+<div class="col-lg-3 col-md-6">
     
                     <h6 class="text-white fw-semibold mb-3">Informations</h6>
                     <ul class="list-unstyled">
                         <li class="mb-2">
-                            <a href="#" class="footer-link">
+                            <a href="#" class="footer-link text-light text-decoration-none">
                                 <i class="fas fa-gavel me-2"></i>Mentions légales
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="#" class="footer-link">
+                            <a href="#" class="footer-link text-light text-decoration-none">
                                 <i class="fas fa-shield-alt me-2"></i>Confidentialité
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="#" class="footer-link">
+                            <a href="#" class="footer-link text-light text-decoration-none">
                                 <i class="fas fa-cookie-bite me-2"></i>Cookies
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="#" class="footer-link">
+                            <a href="#" class="footer-link text-light text-decoration-none">
                                 <i class="fas fa-file-contract me-2"></i>CGU
                             </a>
                         </li>
                     </ul>
-
-                    <!-- Réseaux sociaux (optionnel) -->
-                    <div class="mt-4">
-                        <h6 class="text-white fw-semibold mb-3">Suivez-nous</h6>
-                        <div class="d-flex gap-2">
-                            <a href="#" class="btn btn-light btn-sm rounded-circle" style="width: 36px; height: 36px; padding: 0;" aria-label="Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="btn btn-light btn-sm rounded-circle" style="width: 36px; height: 36px; padding: 0;" aria-label="Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="btn btn-light btn-sm rounded-circle" style="width: 36px; height: 36px; padding: 0;" aria-label="LinkedIn">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="btn btn-light btn-sm rounded-circle" style="width: 36px; height: 36px; padding: 0;" aria-label="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Barre de copyright -->
-    <div style="background-color: #093b4d;">
-        <div class="container-lg py-4">
+<div style="background-color: #148992;border-top: 10px solid #45b2fb;border-bottom: 10px solid #3fa5eb;border-left: 10px solid #de9933;border-right: 10px solid #dd3b33;">
+            <div class="container-lg py-4">
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start">
                     <p class="mb-0 text-light opacity-75">

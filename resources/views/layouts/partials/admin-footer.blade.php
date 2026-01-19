@@ -1,13 +1,12 @@
 {{-- Footer Admin - Digital’SOS (Digital Sport Organisation System) est la plateforme tout-en-un --}}
 
-<footer class="admin-footer mt-5" style="border-left: 20px solid #4dadc1;border-right: 20px solid #4dadc1;background-color: #4dadc1 !important;border-bottom: 20px solid #378399;border-top: 20px solid #378399;padding-top: 20px;">    
-
+<footer class="admin-footer mt-5" style="border-left: 20px solid #4fa79b;border-right: 20px solid #4fa79b;background-color: #303030 !important;border-bottom: 20px solid #f9f5f4;border-top: 20px solid #f9f5f4;padding-top: 20px;"> 
+    
         <div class="row g-4">
             
             <!-- Colonne 1 : Navigation -->
 <div class="col-lg-3 col-md-6" style="background-color: #faf7f2;padding: 20px 10px;border-color: #faf7f2 #4dadc1 #38849a #4dadc1;border-width: 20px;border-style: solid;">
     
-
 <h6 class="footer-heading text-primary mb-3">
                     <i class="fas fa-sitemap me-2"></i>Navigation
                 </h6>

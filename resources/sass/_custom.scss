@@ -1,0 +1,719 @@
+/**
+ * ============================================================================
+ * CUSTOM SCSS - DIGITAL'SOS CMS
+ * ============================================================================
+ * Styles personnalisés Digital'SOS avec thématique aquatique
+ * Titres, cards, backgrounds animés, effets de vague
+ * Version : Laravel 12 | Bootstrap 5 | Vite
+ * ============================================================================
+ */
+
+@import 'variables';
+
+/* ============================================================================
+   TITRES AQUATIQUES - STYLE NATASWIM
+   ============================================================================ */
+
+/**
+ * Titre principal avec effet gradient aquatique
+ */
+.title-aqua {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: $spacing-6;
+    line-height: $line-height-tight;
+    
+    @media (min-width: $breakpoint-md) {
+        font-size: $font-size-4xl;
+    }
+    
+    @media (min-width: $breakpoint-lg) {
+        font-size: $font-size-5xl;
+    }
+}
+
+/**
+ * Titre secondaire aquatique
+ */
+.title-aqua-secondary {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-semibold;
+    color: $color-primary-dark;
+    margin-bottom: $spacing-4;
+    position: relative;
+    padding-bottom: $spacing-3;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, $color-primary 0%, $color-secondary 100%);
+        border-radius: $border-radius-full;
+    }
+    
+    @media (min-width: $breakpoint-md) {
+        font-size: $font-size-3xl;
+    }
+}
+
+/**
+ * Titre de section avec badge
+ */
+.title-section {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-dark;
+    margin-bottom: $spacing-5;
+    
+    &::before {
+        content: '';
+        display: inline-block;
+        width: 4px;
+        height: 24px;
+        background: linear-gradient(180deg, $color-primary 0%, $color-secondary 100%);
+        border-radius: $border-radius-full;
+    }
+}
+
+/**
+ * Badge M2PC (Matériel, Planning, Personnel, Contenu)
+ */
+.badge-m2pc {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-2 $spacing-4;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    border-radius: $border-radius-full;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: $transition-all;
+    
+    &.badge-materiel {
+        background-color: $color-primary-lighter;
+        color: $color-primary-dark;
+        border: 1px solid $color-primary;
+        
+        &:hover {
+            background-color: $color-primary;
+            color: $color-white;
+        }
+    }
+    
+    &.badge-planning {
+        background-color: $color-secondary-lighter;
+        color: $color-secondary-dark;
+        border: 1px solid $color-secondary;
+        
+        &:hover {
+            background-color: $color-secondary;
+            color: $color-white;
+        }
+    }
+    
+    &.badge-personnel {
+        background-color: $color-success-lighter;
+        color: $color-success-dark;
+        border: 1px solid $color-success;
+        
+        &:hover {
+            background-color: $color-success;
+            color: $color-white;
+        }
+    }
+    
+    &.badge-contenu {
+        background-color: $color-info-lighter;
+        color: $color-info-dark;
+        border: 1px solid $color-info;
+        
+        &:hover {
+            background-color: $color-info;
+            color: $color-white;
+        }
+    }
+}
+
+/* ============================================================================
+   CARDS AQUATIQUES
+   ============================================================================ */
+
+/**
+ * Card de base avec effet aquatique
+ */
+.card-aqua {
+    background: $color-white;
+    border-radius: $card-border-radius;
+    box-shadow: $shadow-aqua;
+    padding: $card-padding;
+    transition: $transition-all;
+    border: 1px solid rgba($color-primary, 0.1);
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, $color-primary 0%, $color-secondary 100%);
+    }
+    
+    &:hover {
+        box-shadow: $shadow-aqua-lg;
+        transform: translateY(-4px);
+        border-color: rgba($color-primary, 0.3);
+    }
+}
+
+/**
+ * Card avec icône
+ */
+.card-aqua-icon {
+    @extend .card-aqua;
+    
+    .card-icon {
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+        border-radius: $border-radius-lg;
+        color: $color-white;
+        font-size: $font-size-2xl;
+        margin-bottom: $spacing-4;
+        box-shadow: $shadow-md;
+    }
+    
+    .card-title {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-semibold;
+        color: $color-dark;
+        margin-bottom: $spacing-2;
+    }
+    
+    .card-description {
+        font-size: $font-size-sm;
+        color: $text-muted;
+        line-height: $line-height-relaxed;
+    }
+}
+
+/**
+ * Card statistique
+ */
+.card-stat {
+    @extend .card-aqua;
+    text-align: center;
+    
+    .stat-value {
+        font-size: $font-size-4xl;
+        font-weight: $font-weight-bold;
+        background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: $spacing-2;
+    }
+    
+    .stat-label {
+        font-size: $font-size-sm;
+        color: $text-muted;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: $font-weight-medium;
+    }
+    
+    .stat-icon {
+        font-size: $font-size-3xl;
+        color: $color-primary-light;
+        margin-bottom: $spacing-3;
+    }
+    
+    &:hover {
+        .stat-icon {
+            color: $color-primary;
+            animation: pulse 1s ease-in-out infinite;
+        }
+    }
+}
+
+/**
+ * Card avec image
+ */
+.card-aqua-image {
+    background: $color-white;
+    border-radius: $card-border-radius;
+    box-shadow: $shadow-aqua;
+    overflow: hidden;
+    transition: $transition-all;
+    
+    .card-image {
+        position: relative;
+        overflow: hidden;
+        height: 200px;
+        
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: $transition-transform;
+        }
+        
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba($color-dark, 0.7) 0%, transparent 100%);
+        }
+    }
+    
+    .card-content {
+        padding: $spacing-5;
+    }
+    
+    &:hover {
+        box-shadow: $shadow-aqua-lg;
+        
+        .card-image img {
+            transform: scale(1.05);
+        }
+    }
+}
+
+/* ============================================================================
+   BACKGROUNDS AQUATIQUES ANIMÉS
+   ============================================================================ */
+
+/**
+ * Background avec gradient animé
+ */
+.bg-aqua-gradient {
+    background: linear-gradient(135deg, $color-primary 0%, $color-secondary 50%, $color-primary-dark 100%);
+    background-size: 200% 200%;
+    animation: gradient-shift 15s ease infinite;
+    position: relative;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0c16.569 0 30 13.431 30 30 0 16.569-13.431 30-30 30C13.431 60 0 46.569 0 30 0 13.431 13.431 0 30 0z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");
+        opacity: 0.3;
+    }
+}
+
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/**
+ * Background avec effet vague
+ */
+.bg-aqua-wave {
+    position: relative;
+    background-color: $color-primary;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%2349aaca' fill-opacity='0.3'/%3E%3C/svg%3E");
+        background-size: 50% 100px;
+        animation: wave-animation 25s linear infinite;
+        opacity: 0.5;
+    }
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%234fa79c' fill-opacity='0.2'/%3E%3C/svg%3E");
+        background-size: 50% 100px;
+        animation: wave-animation 15s linear reverse infinite;
+        opacity: 0.3;
+    }
+}
+
+@keyframes wave-animation {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/**
+ * Background léger avec pattern
+ */
+.bg-aqua-light {
+    background-color: $color-light;
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba($color-primary, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba($color-secondary, 0.05) 0%, transparent 50%);
+}
+
+/* ============================================================================
+   HERO SECTION AQUATIQUE
+   ============================================================================ */
+
+.hero-aqua {
+    position: relative;
+    padding: $spacing-20 0;
+    background: linear-gradient(135deg, $color-primary 0%, $color-secondary 100%);
+    overflow: hidden;
+    
+    @media (min-width: $breakpoint-md) {
+        padding: $spacing-32 0;
+    }
+    
+    // Effet de vague en arrière-plan
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q 25 25, 50 50 T 100 50 V 100 H 0 Z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");
+        background-size: 200px 100px;
+        animation: wave-animation 20s linear infinite;
+        opacity: 0.4;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        color: $color-white;
+        text-align: center;
+        
+        h1 {
+            font-size: $font-size-3xl;
+            font-weight: $font-weight-extrabold;
+            margin-bottom: $spacing-4;
+            text-shadow: 0 2px 10px rgba($color-dark, 0.2);
+            
+            @media (min-width: $breakpoint-md) {
+                font-size: $font-size-5xl;
+            }
+        }
+        
+        p {
+            font-size: $font-size-lg;
+            max-width: 700px;
+            margin: 0 auto $spacing-8;
+            opacity: 0.95;
+            line-height: $line-height-relaxed;
+        }
+    }
+}
+
+/* ============================================================================
+   SECTION M2PC - MÉTHODE DIGITAL'SOS
+   ============================================================================ */
+
+/**
+ * Grid M2PC (Matériel | Planning | Personnel | Contenu)
+ */
+.m2pc-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-6;
+    margin-top: $spacing-8;
+    
+    @media (min-width: $breakpoint-md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (min-width: $breakpoint-lg) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/**
+ * Card M2PC
+ */
+.m2pc-card {
+    position: relative;
+    background: $color-white;
+    border-radius: $card-border-radius;
+    padding: $spacing-6;
+    box-shadow: $shadow-aqua;
+    transition: $transition-all;
+    overflow: hidden;
+    
+    // Barre de couleur en haut
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+    }
+    
+    &.m2pc-materiel::before {
+        background: linear-gradient(90deg, $color-primary 0%, $color-primary-light 100%);
+    }
+    
+    &.m2pc-planning::before {
+        background: linear-gradient(90deg, $color-secondary 0%, $color-secondary-light 100%);
+    }
+    
+    &.m2pc-personnel::before {
+        background: linear-gradient(90deg, $color-success 0%, $color-success-light 100%);
+    }
+    
+    &.m2pc-contenu::before {
+        background: linear-gradient(90deg, $color-info 0%, $color-info-light 100%);
+    }
+    
+    .m2pc-icon {
+        width: 64px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $border-radius-xl;
+        font-size: $font-size-3xl;
+        margin-bottom: $spacing-4;
+        color: $color-white;
+    }
+    
+    &.m2pc-materiel .m2pc-icon {
+        background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+    }
+    
+    &.m2pc-planning .m2pc-icon {
+        background: linear-gradient(135deg, $color-secondary 0%, $color-secondary-light 100%);
+    }
+    
+    &.m2pc-personnel .m2pc-icon {
+        background: linear-gradient(135deg, $color-success 0%, $color-success-light 100%);
+    }
+    
+    &.m2pc-contenu .m2pc-icon {
+        background: linear-gradient(135deg, $color-info 0%, $color-info-light 100%);
+    }
+    
+    .m2pc-title {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $color-dark;
+        margin-bottom: $spacing-2;
+    }
+    
+    .m2pc-description {
+        font-size: $font-size-sm;
+        color: $text-muted;
+        line-height: $line-height-relaxed;
+    }
+    
+    &:hover {
+        box-shadow: $shadow-aqua-lg;
+        transform: translateY(-6px);
+    }
+}
+
+/* ============================================================================
+   LISTE AVEC ICÔNES AQUATIQUES
+   ============================================================================ */
+
+.list-aqua {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+        position: relative;
+        padding-left: $spacing-8;
+        margin-bottom: $spacing-3;
+        color: $text-primary;
+        line-height: $line-height-relaxed;
+        
+        &::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: $color-success;
+            font-size: $font-size-lg;
+        }
+    }
+}
+
+/* ============================================================================
+   DIVIDER AQUATIQUE
+   ============================================================================ */
+
+.divider-aqua {
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, $color-primary 50%, transparent 100%);
+    margin: $spacing-8 0;
+    border: none;
+}
+
+/* ============================================================================
+   OVERLAY AQUATIQUE (pour modales, etc.)
+   ============================================================================ */
+
+.overlay-aqua {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba($color-primary-dark, 0.85);
+    backdrop-filter: blur(4px);
+    z-index: $z-index-modal-backdrop;
+    opacity: 0;
+    visibility: hidden;
+    transition: $transition-all;
+    
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* ============================================================================
+   TAGS & LABELS AQUATIQUES
+   ============================================================================ */
+
+.tag-aqua {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-1;
+    padding: $spacing-1 $spacing-3;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    border-radius: $border-radius-full;
+    background-color: $color-primary-lighter;
+    color: $color-primary-dark;
+    border: 1px solid $color-primary;
+    transition: $transition-colors;
+    
+    &:hover {
+        background-color: $color-primary;
+        color: $color-white;
+    }
+    
+    &.tag-secondary {
+        background-color: $color-secondary-lighter;
+        color: $color-secondary-dark;
+        border-color: $color-secondary;
+        
+        &:hover {
+            background-color: $color-secondary;
+            color: $color-white;
+        }
+    }
+    
+    &.tag-success {
+        background-color: $color-success-lighter;
+        color: $color-success-dark;
+        border-color: $color-success;
+        
+        &:hover {
+            background-color: $color-success;
+            color: $color-white;
+        }
+    }
+}
+
+/* ============================================================================
+   TIMELINE AQUATIQUE
+   ============================================================================ */
+
+.timeline-aqua {
+    position: relative;
+    padding-left: $spacing-8;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 3px;
+        height: 100%;
+        background: linear-gradient(180deg, $color-primary 0%, $color-secondary 100%);
+    }
+    
+    .timeline-item {
+        position: relative;
+        margin-bottom: $spacing-8;
+        
+        &::before {
+            content: '';
+            position: absolute;
+            left: calc(-#{$spacing-8} - 5px);
+            top: 4px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: $color-white;
+            border: 3px solid $color-primary;
+            box-shadow: $shadow-sm;
+        }
+        
+        .timeline-content {
+            background: $color-white;
+            padding: $spacing-4;
+            border-radius: $border-radius-lg;
+            box-shadow: $shadow-sm;
+            
+            .timeline-date {
+                font-size: $font-size-xs;
+                color: $text-muted;
+                margin-bottom: $spacing-2;
+                font-weight: $font-weight-medium;
+            }
+            
+            .timeline-title {
+                font-size: $font-size-base;
+                font-weight: $font-weight-semibold;
+                color: $color-dark;
+                margin-bottom: $spacing-1;
+            }
+        }
+    }
+}
+
+/* ============================================================================
+   FIN DU FICHIER
+   ============================================================================ */

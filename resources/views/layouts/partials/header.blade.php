@@ -1,6 +1,7 @@
 <!-- Navigation Globale - Niveau 1 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-bottom">
-    <div class="container-fluid">
+    
+<div class="container-fluid">
         <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
             <i class="fas fa-swimmer text-primary me-2" style="font-size: 1.5rem;"></i>
@@ -238,16 +239,16 @@
 }
 
 .navbar-nav .nav-link.active {
-    color: #0d6efd !important;
+    color: #11767e !important;
     font-weight: 500;
 }
 
 .dropdown-item.active {
     background-color: #e7f1ff;
-    color: #0d6efd;
+    color: #11767e;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
-    color: #0d6efd;
+    color: #11767e;
 }
 </style>

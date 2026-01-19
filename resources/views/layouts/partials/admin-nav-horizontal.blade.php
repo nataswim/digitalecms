@@ -1,6 +1,9 @@
 {{-- Navigation Admin Horizontale - Digital’SOS (Digital Sport Organisation System) - Plateforme tout-en-un --}}
-<nav class="navbar navbar-expand-lg" style="border-left: 20px solid #f9f5f4;border-right: 20px solid #f9f5f4;background-color: #fff !important;border-bottom: 20px solid #00acc0;border-top: 20px solid #00acc0;">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg" style="border-left: 20px solid #f9f5f4;border-right: 20px solid #f9f5f4;border-bottom: 5px solid #4fa79b;border-top: 5px solid #4fa79b;">    
+
+
+
+<div class="container-fluid">
         <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center" href="{{ route('admin.dashboard') }}">
             <img src="{{ asset('assets/images/Digital-sOs-logo13.png') }}"

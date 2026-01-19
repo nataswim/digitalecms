@@ -284,7 +284,7 @@
 /* Dark mode support (optionnel) */
 @media (prefers-color-scheme: dark) {
     .admin-footer {
-        background: #303030 !important;
+        background: linear-gradient(to bottom, #2c3e50 0%, #34495e 100%);
         color: #ecf0f1;
     }
     

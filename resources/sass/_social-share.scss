@@ -1,0 +1,138 @@
+/* ========== BANDEAU DE PARTAGE SOCIAL STICKY - CHARTE AQUATIQUE ========== */
+
+.social-share-sticky {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+/* Bouton toggle principal (Utilise votre dégradé bleu pétrole) */
+.social-share-toggle {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(48, 48, 48, 0.2); /* Ombre basée sur votre #303030 */
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.social-share-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(48, 48, 48, 0.3);
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+}
+
+.social-share-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Conteneur des boutons de partage */
+.social-share-buttons {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: var(--color-lighter, #ffffff);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 8px 30px rgba(48, 48, 48, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    min-width: 180px;
+}
+
+.social-share-sticky.active .social-share-buttons {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Boutons individuels */
+.social-share-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+}
+
+.social-share-btn i {
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.social-share-btn:hover {
+    transform: translateX(-5px);
+    filter: brightness(1.1);
+    color: white;
+}
+
+/* Couleurs spécifiques aux réseaux (Gardées pour l'identité visuelle) */
+.social-share-btn.facebook { background: #1877f2; }
+.social-share-btn.twitter { background: #1da1f2; }
+.social-share-btn.linkedin { background: #0077b5; }
+.social-share-btn.whatsapp { background: #25d366; }
+.social-share-btn.email { background: var(--color-dark); } /* Utilise votre #303030 */
+
+/* Bouton Copier (Utilise votre couleur Accent Vert/Teal) */
+.social-share-btn.copy {
+    background: var(--color-accent); /* Votre #4fa79c */
+}
+
+/* Indicateur de copie réussie */
+.social-share-btn.copy.copied {
+    background: #10b981; /* Vert succès standard */
+}
+
+.social-share-btn.copy.copied::after {
+    content: '✓ Copié !';
+    position: absolute;
+    right: 105%;
+    background: var(--color-dark);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    animation: fadeOut 2s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translateX(0); }
+    70% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(-10px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .social-share-sticky {
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .social-share-toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+}

@@ -258,7 +258,7 @@
 }
 
 .form-check-input:checked ~ .form-check-label {
-    color: #0d6efd;
+    color: #11767e;
 }
 </style>
 @endpush

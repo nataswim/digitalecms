@@ -1,8 +1,7 @@
 {{-- Footer User - Digital’SOS (Digital Sport Organisation System) - Plateforme tout-en-un (Utilisateurs standards) --}}
 
 
-<footer class="admin-footer mt-5" style="border-left: 20px solid #4dadc1;border-right: 20px solid #4dadc1;background-color: #4dadc1 !important;border-bottom: 20px solid #378399;border-top: 20px solid #378399;padding-top: 20px;">    
-
+<footer class="admin-footer mt-5" style="border-left: 20px solid #4fa79b;border-right: 20px solid #4fa79b;background-color: #303030 !important;border-bottom: 20px solid #f9f5f4;border-top: 20px solid #f9f5f4;padding-top: 20px;"> 
 
 
 
@@ -106,8 +105,8 @@
     </div>
 
     <!-- Barre de copyright -->
-    <div style="background-color: #093b4d;">
-        <div class="container-lg py-4">
+<div style="background-color: #148992;border-top: 10px solid #45b2fb;border-bottom: 10px solid #3fa5eb;border-left: 10px solid #de9933;border-right: 10px solid #dd3b33;">
+            <div class="container-lg py-4">
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start">
                     <p class="mb-0 text-light opacity-75">
