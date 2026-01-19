@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 
 class User extends Authenticatable
 {
@@ -39,6 +40,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /**
+     * Cache des permissions chargées
+     */
+    protected ?Collection $cachedPermissions = null;
+
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
@@ -50,24 +56,60 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    /**
+     * Récupère toutes les permissions (directes + via rôle) avec CACHE
+     */
+    public function getAllPermissions(): Collection
+    {
+        if ($this->cachedPermissions !== null) {
+            return $this->cachedPermissions;
+        }
+
+        // Permissions directes actives
+        $directPermissions = $this->permissions()
+            ->where('is_active', true)
+            ->get();
+
+        // Permissions via le rôle (avec eager loading)
+        $rolePermissions = collect();
+        if ($this->role) {
+            $rolePermissions = $this->role->permissions()
+                ->where('is_active', true)
+                ->get();
+        }
+
+        // Fusionner et dédupliquer par ID
+        $this->cachedPermissions = $directPermissions
+            ->merge($rolePermissions)
+            ->unique('id');
+
+        return $this->cachedPermissions;
+    }
+
+    /**
+     * Vérifie si l'utilisateur a une permission (OPTIMISÉ)
+     */
+    public function hasPermission(string $permissionSlug): bool
+    {
+        return $this->getAllPermissions()
+            ->contains('slug', $permissionSlug);
+    }
+
     public function hasRole(string $roleSlug): bool
     {
         return $this->role?->slug === $roleSlug;
     }
 
-    public function hasPermission(string $permissionSlug): bool
-    {
-        // Vérifier permission directe
-        if ($this->permissions()->where('slug', $permissionSlug)->where('is_active', true)->exists()) {
-            return true;
-        }
-
-        // Vérifier permission via rôle
-        return $this->role?->hasPermission($permissionSlug) ?? false;
-    }
-
     public function isAdmin(): bool
     {
         return $this->hasRole('admin');
+    }
+
+    /**
+     * Vide le cache des permissions (après modification)
+     */
+    public function clearPermissionCache(): void
+    {
+        $this->cachedPermissions = null;
     }
 }

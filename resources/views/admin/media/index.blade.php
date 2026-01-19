@@ -24,6 +24,90 @@
 
 @section('content')
 <div class="py-4">
+
+
+
+
+
+
+
+<div class="container-fluid">
+        {{-- ============================================
+            ACTIONS RAPIDES
+            ============================================ --}}
+        <div class="row g-3 mb-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-images fa-lg text-primary"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Tous les médias</h6>
+                        <p class="text-muted small mb-3">Voir tous les médias uploadés</p>
+                        <a href="{{ route('admin.media.index') }}" class="btn btn-sm btn-outline-primary w-100">
+                            <i class="fas fa-arrow-right me-1"></i>Voir tout
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-cloud-upload-alt fa-lg text-success"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Uploader un média</h6>
+                        <p class="text-muted small mb-3">Ajouter de nouveaux médias</p>
+                        <a href="{{ route('admin.media.create') }}" class="btn btn-sm btn-outline-success w-100">
+                            <i class="fas fa-upload me-1"></i>Upload
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-folder fa-lg text-info"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Catégories</h6>
+                        <p class="text-muted small mb-3">Gérer les catégories</p>
+                        <a href="{{ route('admin.media.categories') }}" class="btn btn-sm btn-outline-info w-100">
+                            <i class="fas fa-arrow-right me-1"></i>Gérer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-chart-bar fa-lg text-warning"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Statistiques</h6>
+                        <p class="text-muted small mb-3">Voir les statistiques</p>
+                        <a href="#stats-section" class="btn btn-sm btn-outline-warning w-100">
+                            <i class="fas fa-arrow-down me-1"></i>Voir stats
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
     <div class="container-fluid">
         <!-- Statistiques -->
         <div class="row g-3 mb-4">

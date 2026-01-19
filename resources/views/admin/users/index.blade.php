@@ -1,3 +1,4 @@
+{{-- Utilisateurs - Index avec Actions Rapides --}}
 @extends('layouts.app')
 
 @section('title', 'Gestion des utilisateurs')
@@ -19,6 +20,76 @@
 @section('content')
 <div class="py-4">
     <div class="container-fluid">
+        {{-- ACTIONS RAPIDES --}}
+        <div class="row g-3 mb-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-users fa-lg text-primary"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Tous les utilisateurs</h6>
+                        <p class="text-muted small mb-3">Liste complète des utilisateurs</p>
+                        <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-outline-primary w-100">
+                            <i class="fas fa-arrow-right me-1"></i>Voir tout
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-user-plus fa-lg text-success"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Nouvel utilisateur</h6>
+                        <p class="text-muted small mb-3">Créer un compte utilisateur</p>
+                        @if(auth()->user()->hasPermission('users.create'))
+                        <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-outline-success w-100">
+                            <i class="fas fa-plus me-1"></i>Créer
+                        </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-user-shield fa-lg text-info"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Rôles</h6>
+                        <p class="text-muted small mb-3">Gérer les rôles</p>
+                        <a href="{{ route('admin.roles.index') }}" class="btn btn-sm btn-outline-info w-100">
+                            <i class="fas fa-arrow-right me-1"></i>Gérer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-key fa-lg text-warning"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Permissions</h6>
+                        <p class="text-muted small mb-3">Gérer les permissions</p>
+                        <a href="{{ route('admin.permissions.index') }}" class="btn btn-sm btn-outline-warning w-100">
+                            <i class="fas fa-arrow-right me-1"></i>Gérer
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- LISTE DES UTILISATEURS --}}
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white border-bottom p-4">
                 <div class="row align-items-center">
@@ -195,6 +266,15 @@
 .dropdown-item:hover {
     background-color: rgba(13, 110, 253, 0.1);
     padding-left: 1.5rem;
+}
+
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
 }
 </style>
 @endpush

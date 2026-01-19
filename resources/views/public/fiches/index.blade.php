@@ -1,416 +1,282 @@
-@extends('layouts.public')
+@extends('layouts.app')
 
-@section('title', 'Fiches Pratiques - Digital\'SOS')
-@section('meta_description', 'Découvrez nos fiches pratiques organisées par thématique pour optimiser votre gestion sportive avec la méthode M2PC.')
+@section('title', 'Toutes les Fiches')
 
 @section('content')
-
-{{-- Hero Section avec vidéo background --}}
-<section class="position-relative text-white py-5 nataswim-titre3 overflow-hidden" style="min-height: 500px;">
-    {{-- Overlay pour meilleure lisibilité --}}
-    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25" style="z-index: 1;"></div>
-
-    {{-- Contenu Hero --}}
-    <div class="container-lg py-5 position-relative" style="z-index: 2;">
-        <div class="row align-items-center">
+{{-- Hero Section --}}
+<section class="bg-gradient text-white py-5">
+    <div class="container">
+        <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                {{-- Icône principale --}}
-                <div class="mb-4">
-                    <i class="fas fa-file-alt fa-4x text-white opacity-75"></i>
-                </div>
-
-                {{-- Titre principal --}}
-                <h1 class="display-3 fw-bold mb-4" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
-                    Fiches Pratiques
+                <h1 class="display-4 fw-bold mb-3">
+                    <i class="fas fa-file-alt me-3"></i>
+                    Bibliothèque de Fiches
                 </h1>
-
-                {{-- Sous-titre --}}
-                <p class="lead mb-4 fs-4">
-                    Optimisez votre gestion sportive avec nos fiches organisées selon la méthode M2PC : 
-                    Matériel, Planning, Personnel, Contenu.
+                <p class="lead mb-0">
+                    Découvrez nos ressources documentaires pour votre organisation sportive
                 </p>
-
-                {{-- Stats rapides --}}
-                <div class="d-flex flex-wrap justify-content-center gap-4 mt-4">
-                    <div class="badge bg-light bg-opacity-25 text-white px-4 py-3 fs-6">
-                        <i class="fas fa-folder me-2"></i>
-                        {{ $categories->count() }} catégorie{{ $categories->count() > 1 ? 's' : '' }}
-                    </div>
-                    <div class="badge bg-light bg-opacity-25 text-white px-4 py-3 fs-6">
-                        <i class="fas fa-star me-2"></i>
-                        {{ $featuredFiches->count() }} en vedette
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </section>
 
-{{-- Fiches en vedette --}}
-@if($featuredFiches->count() > 0)
-<section class="py-5 bg-light">
-    <div class="container-lg">
-        {{-- En-tête de section --}}
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                        <h2 class="h3 mb-2">
-                            <i class="fas fa-star text-warning me-2"></i>Fiches en Vedette
-                        </h2>
-                        <p class="text-muted mb-0">Les ressources essentielles pour votre organisation</p>
-                    </div>
+{{-- Filtres et Recherche --}}
+<section class="py-4 bg-light border-bottom">
+    <div class="container">
+        <form method="GET" action="{{ route('public.fiches.index') }}" class="row g-3">
+            {{-- Barre de recherche --}}
+            <div class="col-lg-5">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-text bg-white">
+                        <i class="fas fa-search text-muted"></i>
+                    </span>
+                    <input type="text" 
+                           name="search" 
+                           class="form-control" 
+                           placeholder="Rechercher une fiche..."
+                           value="{{ $search }}">
                 </div>
+            </div>
+
+            {{-- Filtre Catégorie --}}
+            <div class="col-lg-3">
+                <select name="category" class="form-select form-select-lg">
+                    <option value="">Toutes les catégories</option>
+                    @foreach($categories as $cat)
+                        <option value="{{ $cat->slug }}" {{ $categorySlug == $cat->slug ? 'selected' : '' }}>
+                            {{ $cat->name }} ({{ $cat->fiches_count }})
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            {{-- Filtre Sous-Catégorie --}}
+            <div class="col-lg-3">
+                <select name="sous_category" class="form-select form-select-lg">
+                    <option value="">Toutes les sous-catégories</option>
+                    @foreach($sousCategories as $sousCat)
+                        <option value="{{ $sousCat->slug }}" {{ $sousCategorySlug == $sousCat->slug ? 'selected' : '' }}>
+                            {{ $sousCat->name }} ({{ $sousCat->fiches_count }})
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            {{-- Bouton Rechercher --}}
+            <div class="col-lg-1">
+                <button type="submit" class="btn btn-primary btn-lg w-100">
+                    <i class="fas fa-filter"></i>
+                </button>
+            </div>
+        </form>
+
+        {{-- Affichage des filtres actifs --}}
+        @if($search || $categorySlug || $sousCategorySlug)
+            <div class="mt-3">
+                <span class="text-muted me-2">Filtres actifs :</span>
+                @if($search)
+                    <span class="badge bg-primary me-2">
+                        Recherche : {{ $search }}
+                        <a href="{{ route('public.fiches.index', array_filter(['category' => $categorySlug, 'sous_category' => $sousCategorySlug])) }}" 
+                           class="text-white ms-1">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </span>
+                @endif
+                @if($categorySlug)
+                    <span class="badge bg-info me-2">
+                        Catégorie : {{ $categories->firstWhere('slug', $categorySlug)->name ?? $categorySlug }}
+                        <a href="{{ route('public.fiches.index', array_filter(['search' => $search, 'sous_category' => $sousCategorySlug])) }}" 
+                           class="text-white ms-1">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </span>
+                @endif
+                @if($sousCategorySlug)
+                    <span class="badge bg-success me-2">
+                        Sous-catégorie : {{ $sousCategories->firstWhere('slug', $sousCategorySlug)->name ?? $sousCategorySlug }}
+                        <a href="{{ route('public.fiches.index', array_filter(['search' => $search, 'category' => $categorySlug])) }}" 
+                           class="text-white ms-1">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </span>
+                @endif
+                <a href="{{ route('public.fiches.index') }}" class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-redo me-1"></i>Réinitialiser
+                </a>
+            </div>
+        @endif
+    </div>
+</section>
+
+{{-- Résultats --}}
+<section class="py-5">
+    <div class="container">
+        {{-- Compteur de résultats --}}
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="mb-0">
+                <span class="text-muted">{{ $fiches->total() }}</span> fiche(s) trouvée(s)
+            </h5>
+            <div class="text-muted small">
+                Page {{ $fiches->currentPage() }} sur {{ $fiches->lastPage() }}
             </div>
         </div>
 
-        {{-- Grille de fiches --}}
-        <div class="row g-4">
-            @foreach($featuredFiches as $fiche)
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 border-0 shadow-lg hover-lift">
-                        {{-- Image --}}
-                        @if($fiche->image)
-                            <img src="{{ $fiche->image }}" 
-                                 class="card-img-top" 
-                                 style="height: 220px; object-fit: cover;"
-                                 alt="{{ $fiche->title }}">
-                        @else
-                            <div class="card-img-top bg-gradient-primary d-flex align-items-center justify-content-center" 
-                                 style="height: 220px;">
-                                <i class="fas fa-file-alt fa-4x text-white opacity-50"></i>
-                            </div>
-                        @endif
-                        
-                        {{-- Corps de la carte --}}
-                        <div class="card-body d-flex flex-column">
-                            {{-- Badges --}}
-                            <div class="d-flex flex-wrap gap-2 mb-3">
-                                @if($fiche->category)
-                                    <span class="badge bg-primary">
-                                        <i class="fas fa-folder me-1"></i>{{ $fiche->category->name }}
-                                    </span>
-                                @endif
-                                @if($fiche->sousCategory)
-                                    <span class="badge bg-info">
-                                        <i class="fas fa-layer-group me-1"></i>{{ $fiche->sousCategory->name }}
-                                    </span>
-                                @endif
-                                @if($fiche->visibility === 'authenticated')
-                                    <span class="badge bg-warning">
-                                        <i class="fas fa-lock me-1"></i>Membres
-                                    </span>
-                                @endif
-                                <span class="badge bg-success">
-                                    <i class="fas fa-star me-1"></i>Vedette
-                                </span>
-                            </div>
-                            
-                            {{-- Titre --}}
-                            <h5 class="card-title mb-3">{{ $fiche->title }}</h5>
-                            
-                            {{-- Description --}}
-                            <p class="card-text text-muted flex-grow-1">
-                                {!! Str::limit(strip_tags($fiche->short_description), 120) !!}
-                            </p>
-                            
-                            {{-- Footer --}}
-                            <div class="d-flex align-items-center justify-content-between mt-3 pt-3 border-top">
-                                <small class="text-muted">
-                                    <i class="fas fa-eye me-1"></i>{{ number_format($fiche->views_count) }} lecture{{ $fiche->views_count > 1 ? 's' : '' }}
-                                </small>
-                                @if($fiche->category)
-                                    <a href="{{ route('public.fiches.show', [$fiche->category, $fiche]) }}" 
-                                       class="btn btn-sm btn-primary">
-                                        Découvrir <i class="fas fa-arrow-right ms-1"></i>
+        @if($fiches->count() > 0)
+            {{-- Grille de fiches --}}
+            <div class="row g-4 mb-4">
+                @foreach($fiches as $fiche)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card border-0 shadow-sm h-100 hover-card">
+                            {{-- Image à la une --}}
+                            @if($fiche->featured_image)
+                                <div class="card-img-top overflow-hidden" style="height: 200px;">
+                                    <img src="{{ $fiche->featured_image }}" 
+                                         alt="{{ $fiche->title }}"
+                                         class="w-100 h-100 object-fit-cover">
+                                </div>
+                            @else
+                                <div class="card-img-top bg-gradient d-flex align-items-center justify-content-center" 
+                                     style="height: 200px;">
+                                    <i class="fas fa-file-alt fa-3x text-white opacity-50"></i>
+                                </div>
+                            @endif
+
+                            <div class="card-body p-4">
+                                {{-- Catégories --}}
+                                <div class="mb-2">
+                                    @if($fiche->category)
+                                        <span class="badge bg-primary-subtle text-primary">
+                                            <i class="fas fa-folder me-1"></i>
+                                            {{ $fiche->category->name }}
+                                        </span>
+                                    @endif
+                                    @if($fiche->sousCategory)
+                                        <span class="badge bg-success-subtle text-success">
+                                            {{ $fiche->sousCategory->name }}
+                                        </span>
+                                    @endif
+                                </div>
+
+                                {{-- Titre --}}
+                                <h5 class="card-title mb-3">
+                                    <a href="{{ route('public.fiches.show', [$fiche->category->slug ?? 'general', $fiche->slug]) }}" 
+                                       class="text-decoration-none text-dark hover-primary stretched-link">
+                                        {{ $fiche->title }}
                                     </a>
+                                </h5>
+
+                                {{-- Extrait --}}
+                                @if($fiche->excerpt)
+                                    <p class="card-text text-muted small mb-3">
+                                        {{ Str::limit($fiche->excerpt, 120) }}
+                                    </p>
                                 @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-@endif
 
-{{-- Navigation par Catégories --}}
-<section class="py-5 {{ $featuredFiches->count() > 0 ? 'bg-white' : 'bg-light' }}">
-    <div class="container-lg">
-        {{-- En-tête de section --}}
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="text-center">
-                    <h2 class="h3 mb-2">
-                        <i class="fas fa-th-large me-2 text-primary"></i>Explorer par Catégorie
-                    </h2>
-                    <p class="text-muted mb-0">Organisé selon la méthode M2PC pour une gestion optimale</p>
-                </div>
-            </div>
-        </div>
-
-        {{-- Catégories --}}
-        @if($categories->count() > 0)
-            <div class="row g-4">
-                @foreach($categories as $category)
-                    <div class="col-12">
-                        <div class="card border-0 shadow-sm hover-category-fiche">
-                            <div class="row g-0">
-                                {{-- Image de la catégorie --}}
-                                <div class="col-12 col-md-3">
-                                    <div class="category-image-wrapper-fiche position-relative">
-                                        @if($category->image)
-                                            <img src="{{ $category->image }}" 
-                                                 alt="{{ $category->name }}"
-                                                 class="category-image-fiche">
-                                        @else
-                                            <div class="category-image-placeholder-fiche d-flex align-items-center justify-content-center text-white"
-                                                 style="background: linear-gradient(135deg, {{ $loop->index % 4 == 0 ? '#11767e' : ($loop->index % 4 == 1 ? '#198754' : ($loop->index % 4 == 2 ? '#0dcaf0' : '#ffc107')) }} 0%, {{ $loop->index % 4 == 0 ? '#084298' : ($loop->index % 4 == 1 ? '#0f5132' : ($loop->index % 4 == 2 ? '#087990' : '#cc9a06')) }} 100%);">
-                                                <i class="fas fa-folder fa-4x"></i>
-                                            </div>
-                                        @endif
-                                        
-                                        {{-- Badge nombre de fiches --}}
-                                        <div class="position-absolute top-0 end-0 m-3">
-                                            <span class="badge bg-success shadow-sm fs-6">
-                                                <i class="fas fa-file-alt me-1"></i>
-                                                {{ $category->published_fiches_count }} fiche{{ $category->published_fiches_count > 1 ? 's' : '' }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{-- Contenu central --}}
-                                <div class="col-12 col-md-7">
-                                    <div class="card-body p-4">
-                                        {{-- Nom de la catégorie --}}
-                                        <h3 class="card-title h4 mb-3">
-                                            <a href="{{ route('public.fiches.category', $category) }}" 
-                                               class="text-decoration-none text-dark category-link-fiche">
-                                                {{ $category->name }}
-                                            </a>
-                                        </h3>
-
-                                        {{-- Description --}}
-                                        @if($category->description)
-                                            <p class="card-text text-muted mb-3">
-                                                {!! Str::limit(strip_tags($category->description), 180) !!}
-                                            </p>
-                                        @else
-                                            <p class="card-text text-muted mb-3">
-                                                Découvrez nos fiches pratiques dans la catégorie {{ $category->name }}.
-                                            </p>
-                                        @endif
-
-                                        {{-- Métadonnées --}}
-                                        <div class="d-flex flex-wrap gap-3 text-muted small">
-                                            <span>
-                                                <i class="fas fa-folder me-1"></i>
-                                                Catégorie principale
-                                            </span>
-                                            @if($category->activeSousCategories()->count() > 0)
-                                                <span>
-                                                    <i class="fas fa-layer-group me-1"></i>
-                                                    {{ $category->activeSousCategories()->count() }} sous-catégorie{{ $category->activeSousCategories()->count() > 1 ? 's' : '' }}
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{-- Bouton à droite --}}
-                                <div class="col-12 col-md-2 d-flex align-items-center justify-content-center">
-                                    <div class="p-3 w-100">
-                                        <a href="{{ route('public.fiches.category', $category) }}" 
-                                           class="btn btn-outline-primary w-100 btn-category-fiche">
-                                            <i class="fas fa-arrow-right me-2"></i>
-                                            <span class="d-none d-lg-inline">Découvrir</span>
-                                            <span class="d-inline d-lg-none">Voir les fiches</span>
-                                        </a>
-                                    </div>
+                                {{-- Meta --}}
+                                <div class="d-flex justify-content-between align-items-center text-muted small">
+                                    <span>
+                                        <i class="fas fa-calendar-alt me-1"></i>
+                                        {{ $fiche->created_at->format('d/m/Y') }}
+                                    </span>
+                                    <span>
+                                        <i class="fas fa-eye me-1"></i>
+                                        Lire
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
+
+            {{-- Pagination --}}
+            <div class="d-flex justify-content-center">
+                {{ $fiches->appends(request()->query())->links() }}
+            </div>
         @else
-            {{-- Aucune catégorie --}}
+            {{-- Aucun résultat --}}
             <div class="text-center py-5">
-                <i class="fas fa-folder-open fa-3x text-muted mb-3 opacity-25"></i>
-                <h5 class="text-muted">Aucune catégorie disponible pour le moment</h5>
-                <p class="text-muted">Les fiches seront bientôt disponibles.</p>
+                <i class="fas fa-search fa-4x text-muted mb-4"></i>
+                <h5 class="text-muted mb-3">Aucune fiche trouvée</h5>
+                <p class="text-muted">Essayez de modifier vos critères de recherche</p>
+                <a href="{{ route('public.fiches.index') }}" class="btn btn-primary">
+                    <i class="fas fa-redo me-2"></i>Voir toutes les fiches
+                </a>
             </div>
         @endif
     </div>
 </section>
 
-{{-- Section Call to Action --}}
-<section class="py-5 nataswim-titre5">
-    <div class="container-lg">
-        <div class="row align-items-center">
-            <div class="col-lg-8 mx-auto text-center">
-                <h2 class="h3 mb-3 text-white">
-                    <i class="fas fa-lightbulb me-2"></i>Besoin d'aide ?
-                </h2>
-                <p class="lead text-white mb-4">
-                    Nos fiches pratiques vous accompagnent dans l'optimisation de votre organisation sportive selon la méthode M2PC.
-                </p>
-                <div class="d-flex flex-wrap justify-content-center gap-3">
-                    @auth
-                        <a href="{{ route('dashboard') }}" class="btn btn-light btn-lg">
-                            <i class="fas fa-tachometer-alt me-2"></i>Mon Tableau de Bord
-                        </a>
-                    @else
-                        <a href="{{ route('register') }}" class="btn btn-light btn-lg">
-                            <i class="fas fa-user-plus me-2"></i>Créer un Compte
-                        </a>
-                        <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-sign-in-alt me-2"></i>Se Connecter
-                        </a>
-                    @endauth
+{{-- Catégories en bas de page --}}
+@if($categories->count() > 0)
+<section class="py-5 bg-light">
+    <div class="container">
+        <h4 class="mb-4 text-center">
+            <i class="fas fa-folder-open text-primary me-2"></i>
+            Explorer par Catégorie
+        </h4>
+        <div class="row g-3">
+            @foreach($categories as $category)
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="{{ route('public.fiches.category', $category->slug) }}" 
+                       class="d-block p-3 bg-white border rounded hover-shadow text-decoration-none h-100">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3">
+                                <i class="fas fa-folder fa-2x text-primary"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 text-dark">{{ $category->name }}</h6>
+                                <small class="text-muted">
+                                    {{ $category->fiches_count }} fiche(s)
+                                </small>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
-
+@endif
 @endsection
 
 @push('styles')
 <style>
-/* ========================================
-   CATÉGORIES FICHES - STYLES PERSONNALISÉS
-   ======================================== */
-
-/* Espacement entre les catégories */
-.category-row {
-    margin-bottom: 2rem;
+.bg-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-/* Card catégorie avec effet hover */
-.hover-category-fiche {
+.hover-card {
     transition: all 0.3s ease;
-    border-radius: 12px;
-    overflow: hidden;
 }
 
-.hover-category-fiche:hover {
-    box-shadow: 0 0.5rem 2rem rgba(4, 173, 185, 0.25) !important;
-    background-color: #f0fbfc;
+.hover-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
 }
 
-/* Image de la catégorie */
-.category-image-wrapper-fiche {
-    position: relative;
-    height: 100%;
-    min-height: 250px;
+.hover-primary:hover {
+    color: var(--bs-primary) !important;
 }
 
-.category-image-fiche {
-    width: 100%;
-    height: 100%;
+.hover-shadow:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-color: var(--bs-primary) !important;
+}
+
+.object-fit-cover {
     object-fit: cover;
 }
 
-.category-image-placeholder-fiche {
-    width: 100%;
-    height: 100%;
-    min-height: 250px;
-}
-
-/* Liens avec effet hover */
-.category-link-fiche {
-    transition: color 0.3s ease;
-}
-
-.hover-category-fiche:hover .category-link-fiche {
-    color: #04adb9 !important;
-}
-
-/* Bouton avec effet hover */
-.btn-category-fiche {
-    transition: all 0.3s ease;
-}
-
-.hover-category-fiche:hover .btn-category-fiche {
-    background-color: #04adb9;
-    border-color: #04adb9;
-    color: white;
-}
-
-/* ========================================
-   FICHES EN VEDETTE
-   ======================================== */
-
-.hover-lift {
-    transition: all 0.3s ease;
-}
-
-.hover-lift:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
-}
-
-.bg-gradient-primary {
-    background: linear-gradient(135deg, #0ea5e9 0%, #0f172a 100%);
-}
-
-/* ========================================
-   RESPONSIVE
-   ======================================== */
-
-@media (max-width: 767px) {
-    /* Image centrée en haut sur mobile */
-    .category-image-wrapper-fiche {
-        min-height: 200px;
-    }
-    
-    .category-image-fiche,
-    .category-image-placeholder-fiche {
-        border-radius: 12px 12px 0 0;
-        min-height: 200px;
-    }
-}
-
-@media (min-width: 768px) {
-    /* Image à gauche sur desktop */
-    .category-image-wrapper-fiche,
-    .category-image-fiche,
-    .category-image-placeholder-fiche {
-        border-radius: 12px 0 0 12px;
-    }
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    content: "";
 }
 </style>
-@endpush
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Animation d'entrée pour les cards
-    const cards = document.querySelectorAll('.hover-category-fiche, .hover-lift');
-    
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    cards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'all 0.6s ease';
-        observer.observe(card);
-    });
-});
-</script>
 @endpush

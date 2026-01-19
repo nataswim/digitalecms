@@ -44,7 +44,26 @@ class MediaController extends Controller
 
         return view('admin.media.index', compact('media', 'categories', 'stats', 'search', 'categoryId'));
     }
+/**
+ * Afficher le formulaire d'upload
+ */
+public function create()
+{
+    $categories = MediaCategory::active()->ordered()->get();
+    
+    return view('admin.media.create', compact('categories'));
+}
 
+/**
+ * Afficher le formulaire d'édition
+ */
+public function edit(Media $media)
+{
+    $media->load(['category', 'uploader']);
+    $categories = MediaCategory::active()->ordered()->get();
+    
+    return view('admin.media.edit', compact('media', 'categories'));
+}
     /**
      * Upload de fichiers
      */

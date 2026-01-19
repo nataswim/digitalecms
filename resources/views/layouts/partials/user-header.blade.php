@@ -30,8 +30,8 @@
 
                 <!-- Fiches -->
                 <li class="nav-item">
-                    <a class="nav-link px-3 py-2 {{ request()->routeIs('fiches.*') ? 'active bg-primary text-white' : 'text-dark' }}"
-                        href="{{ route('fiches.index') }}">
+                    <a class="nav-link px-3 py-2 {{ request()->routeIs('public.fiches.*') ? 'active bg-primary text-white' : 'text-dark' }}"
+                        href="{{ route('public.fiches.index') }}">
                         <i class="fas fa-file-alt me-2"></i>Fiches
                     </a>
                 </li>

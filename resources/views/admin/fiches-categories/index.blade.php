@@ -1,3 +1,4 @@
+{{-- Catégories de Fiches - Index avec Actions Rapides --}}
 @extends('layouts.app')
 
 @section('title', 'Catégories de fiches')
@@ -17,7 +18,74 @@
 @section('content')
 <div class="py-4">
     <div class="container-fluid">
-        <!-- Statistiques -->
+        {{-- ACTIONS RAPIDES --}}
+        <div class="row g-3 mb-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-list fa-lg text-primary"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Toutes les fiches</h6>
+                        <p class="text-muted small mb-3">Voir et gérer toutes les fiches</p>
+                        <a href="{{ route('admin.fiches.index') }}" class="btn btn-sm btn-outline-primary w-100">
+                            <i class="fas fa-arrow-right me-1"></i>Accéder
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-plus-circle fa-lg text-success"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Créer une fiche</h6>
+                        <p class="text-muted small mb-3">Nouvelle fiche d'information</p>
+                        <a href="{{ route('admin.fiches.create') }}" class="btn btn-sm btn-outline-success w-100">
+                            <i class="fas fa-plus me-1"></i>Créer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-folder-open fa-lg text-info"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Sous-catégories</h6>
+                        <p class="text-muted small mb-3">Gérer les sous-catégories</p>
+                        <a href="{{ route('admin.fiches-sous-categories.index') }}" class="btn btn-sm btn-outline-info w-100">
+                            <i class="fas fa-arrow-right me-1"></i>Gérer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-plus fa-lg text-warning"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Nouvelle catégorie</h6>
+                        <p class="text-muted small mb-3">Créer une nouvelle catégorie</p>
+                        <a href="{{ route('admin.fiches-categories.create') }}" class="btn btn-sm btn-outline-warning w-100">
+                            <i class="fas fa-plus me-1"></i>Ajouter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- STATISTIQUES --}}
         <div class="row g-3 mb-4">
             <div class="col-lg-4 col-md-6">
                 <div class="card border-0 shadow-sm">
@@ -66,7 +134,7 @@
             </div>
         </div>
 
-        <!-- Filtres et recherche -->
+        {{-- FILTRES --}}
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-body">
                 <form method="GET" action="{{ route('admin.fiches-categories.index') }}" class="row g-3">
@@ -96,7 +164,7 @@
             </div>
         </div>
 
-        <!-- Liste des catégories -->
+        {{-- LISTE DES CATÉGORIES --}}
         <div class="card border-0 shadow-sm">
             <div class="card-body p-0">
                 @if($categories->count() > 0)
@@ -188,7 +256,6 @@
                         </table>
                     </div>
 
-                    <!-- Pagination -->
                     @if($categories->hasPages())
                         <div class="border-top p-4">
                             {{ $categories->appends(request()->query())->links() }}
@@ -217,3 +284,16 @@
     </div>
 </div>
 @endsection
+
+@push('styles')
+<style>
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+</style>
+@endpush

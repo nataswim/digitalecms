@@ -5,162 +5,115 @@ namespace App\Http\Controllers;
 use App\Models\Fiche;
 use App\Models\FichesCategory;
 use App\Models\FichesSousCategory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 /**
- * Controller pour la partie publique des fiches
- * 
- * Gère l'affichage des fiches pour les visiteurs et utilisateurs authentifiés
- * Respecte les niveaux de visibilité (public/authenticated)
+ * Controller pour les fiches publiques
  */
 class PublicFicheController extends Controller
 {
     /**
-     * Affiche la page d'accueil des fiches avec les catégories et fiches en vedette
+     * Liste complète des fiches avec filtres
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        // Récupérer les catégories actives avec le nombre de fiches publiées
-        $categories = FichesCategory::active()
-            ->ordered()
-            ->withCount(['fiches' => function ($query) {
-                $query->published()
-                    ->visibleTo(Auth::user());
-            }])
-            ->get()
-            ->map(function ($category) {
-                // Renommer le compteur pour plus de clarté
-                $category->published_fiches_count = $category->fiches_count;
-                return $category;
+        $search = $request->input('search');
+        $categorySlug = $request->input('category');
+        $sousCategorySlug = $request->input('sous_category');
+
+        // Query de base
+        $query = Fiche::with(['category', 'sousCategory']);
+
+        // Filtre par recherche
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('excerpt', 'like', "%{$search}%")
+                  ->orWhere('content', 'like', "%{$search}%");
             });
+        }
 
-        // Récupérer les fiches en vedette
-        $featuredFiches = Fiche::with(['category', 'sousCategory'])
-            ->published()
-            ->featured()
-            ->visibleTo(Auth::user())
-            ->ordered()
-            ->limit(6)
-            ->get();
+        // Filtre par catégorie
+        if ($categorySlug) {
+            $category = FichesCategory::where('slug', $categorySlug)->first();
+            if ($category) {
+                $query->where('fiches_category_id', $category->id);
+            }
+        }
 
-        return view('public.fiches.index', compact('categories', 'featuredFiches'));
+        // Filtre par sous-catégorie
+        if ($sousCategorySlug) {
+            $sousCategory = FichesSousCategory::where('slug', $sousCategorySlug)->first();
+            if ($sousCategory) {
+                $query->where('fiches_sous_category_id', $sousCategory->id);
+            }
+        }
+
+        // Pagination
+        $fiches = $query->latest()->paginate(12);
+
+        // Récupérer toutes les catégories et sous-catégories pour les filtres
+        $categories = FichesCategory::withCount('fiches')->orderBy('name')->get();
+        $sousCategories = FichesSousCategory::withCount('fiches')->orderBy('name')->get();
+
+        return view('public.fiches.index', compact(
+            'fiches', 
+            'categories', 
+            'sousCategories', 
+            'search', 
+            'categorySlug', 
+            'sousCategorySlug'
+        ));
     }
 
     /**
-     * Affiche les fiches d'une catégorie
+     * Fiches par catégorie
      */
-    public function category(FichesCategory $category): View|RedirectResponse
+    public function category(FichesCategory $category): View
     {
-        // Vérifier que la catégorie est active
-        if (!$category->is_active) {
-            return redirect()->route('public.fiches.index')
-                ->with('error', 'Cette catégorie n\'est pas accessible.');
-        }
-
-        // Récupérer les sous-catégories actives avec le nombre de fiches publiées
-        $sousCategories = $category->activeSousCategories()
-            ->withCount(['fiches' => function ($query) {
-                $query->published()
-                    ->visibleTo(Auth::user());
-            }])
-            ->get()
-            ->map(function ($sousCategory) {
-                $sousCategory->published_fiches_count = $sousCategory->fiches_count;
-                return $sousCategory;
-            });
-
-        // Récupérer les fiches de la catégorie
-        $fiches = Fiche::with(['category', 'sousCategory', 'creator'])
+        $fiches = Fiche::with(['category', 'sousCategory'])
             ->where('fiches_category_id', $category->id)
-            ->published()
-            ->visibleTo(Auth::user())
-            ->ordered()
+            ->latest()
             ->paginate(12);
 
-        return view('public.fiches.category', compact('category', 'sousCategories', 'fiches'));
+        $sousCategories = $category->sousCategories()
+            ->withCount('fiches')
+            ->orderBy('name')
+            ->get();
+
+        return view('public.fiches.category', compact('category', 'fiches', 'sousCategories'));
     }
 
     /**
-     * Affiche les fiches d'une sous-catégorie
+     * Fiches par sous-catégorie
      */
-    public function sousCategory(
-        FichesCategory $category,
-        FichesSousCategory $sousCategory
-    ): View|RedirectResponse {
-        // Vérifier que la catégorie est active
-        if (!$category->is_active) {
-            return redirect()->route('public.fiches.index')
-                ->with('error', 'Cette catégorie n\'est pas accessible.');
-        }
-
-        // Vérifier que la sous-catégorie est active
-        if (!$sousCategory->is_active) {
-            return redirect()->route('public.fiches.category', $category)
-                ->with('error', 'Cette sous-catégorie n\'est pas accessible.');
-        }
-
-        // Vérifier que la sous-catégorie appartient bien à la catégorie
-        if ($sousCategory->fiches_category_id !== $category->id) {
-            return redirect()->route('public.fiches.index')
-                ->with('error', 'Sous-catégorie invalide.');
-        }
-
-        // Récupérer les fiches de la sous-catégorie
-        $fiches = Fiche::with(['category', 'sousCategory', 'creator'])
+    public function sousCategory(FichesCategory $category, FichesSousCategory $sousCategory): View
+    {
+        $fiches = Fiche::with(['category', 'sousCategory'])
+            ->where('fiches_category_id', $category->id)
             ->where('fiches_sous_category_id', $sousCategory->id)
-            ->published()
-            ->visibleTo(Auth::user())
-            ->ordered()
+            ->latest()
             ->paginate(12);
 
         return view('public.fiches.sous-category', compact('category', 'sousCategory', 'fiches'));
     }
 
     /**
-     * Affiche le détail d'une fiche
+     * Détail d'une fiche
      */
-    public function show(FichesCategory $category, Fiche $fiche): View|RedirectResponse
+    public function show(FichesCategory $category, Fiche $fiche): View
     {
-        // Vérifier que la catégorie est active
-        if (!$category->is_active) {
-            return redirect()->route('public.fiches.index')
-                ->with('error', 'Cette catégorie n\'est pas accessible.');
-        }
+        $fiche->load(['category', 'sousCategory']);
 
-        // Vérifier que la fiche appartient bien à la catégorie
-        if ($fiche->fiches_category_id !== $category->id) {
-            return redirect()->route('public.fiches.index')
-                ->with('error', 'Fiche invalide.');
-        }
-
-        // Vérifier que la fiche est publiée (sauf pour admin/editor)
-        $user = Auth::user();
-        if (!$fiche->is_published && (!$user || (!$user->hasRole('admin') && !$user->hasRole('editor')))) {
-            return redirect()->route('public.fiches.category', $category)
-                ->with('error', 'Cette fiche n\'est pas encore publiée.');
-        }
-
-        // Charger les relations
-        $fiche->load(['category', 'sousCategory', 'creator', 'updater']);
-
-        // Incrémenter le compteur de vues (seulement pour les visiteurs)
-        // Ne pas compter les vues des admins/editors
-        if (!$user || (!$user->hasRole('admin') && !$user->hasRole('editor'))) {
-            $fiche->incrementViews();
-        }
-
-        // Récupérer les fiches associées (même catégorie, exclure la fiche actuelle)
+        // Fiches similaires (même catégorie)
         $relatedFiches = Fiche::with(['category'])
-            ->where('fiches_category_id', $category->id)
+            ->where('fiches_category_id', $fiche->fiches_category_id)
             ->where('id', '!=', $fiche->id)
-            ->published()
-            ->visibleTo($user)
-            ->inRandomOrder()
+            ->latest()
             ->limit(3)
             ->get();
 
-        return view('public.fiches.show', compact('fiche', 'category', 'relatedFiches'));
+        return view('public.fiches.show', compact('fiche', 'relatedFiches'));
     }
 }

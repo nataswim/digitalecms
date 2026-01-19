@@ -11,18 +11,20 @@ class StoreMediaCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->check() && auth()->user()->hasPermission('media.manage');
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'unique:media_categories,name'],
+            'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:1000'],
-            'color' => ['nullable', 'string', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'color' => ['nullable', 'string', 'regex:/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/'],
             'order' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['nullable', 'boolean'],
         ];
@@ -30,17 +32,14 @@ class StoreMediaCategoryRequest extends FormRequest
 
     /**
      * Get custom messages for validator errors.
+     *
+     * @return array<string, string>
      */
     public function messages(): array
     {
         return [
-            'name.required' => 'Le nom de la catégorie est obligatoire.',
-            'name.unique' => 'Cette catégorie existe déjà.',
-            'name.max' => 'Le nom ne peut pas dépasser 255 caractères.',
-            'description.max' => 'La description ne peut pas dépasser 1000 caractères.',
-            'color.regex' => 'Le format de couleur doit être hexadécimal (#000000).',
-            'order.integer' => 'L\'ordre doit être un nombre entier.',
-            'order.min' => 'L\'ordre doit être supérieur ou égal à 0.',
+            'name.required' => 'Le nom de la catégorie est requis.',
+            'color.regex' => 'La couleur doit être au format hexadécimal valide (ex: #6366f1).',
         ];
     }
 
@@ -49,10 +48,12 @@ class StoreMediaCategoryRequest extends FormRequest
      */
     protected function prepareForValidation(): void
     {
-        if ($this->has('is_active')) {
-            $this->merge([
-                'is_active' => $this->boolean('is_active'),
-            ]);
+        if ($this->has('is_active') && $this->is_active === null) {
+            $this->merge(['is_active' => false]);
+        }
+        
+        if (!$this->has('is_active')) {
+            $this->merge(['is_active' => true]);
         }
     }
 }

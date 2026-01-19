@@ -41,7 +41,7 @@
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="{{ route('fiches.index') }}" class="footer-link">
+                            <a href="{{ route('public.fiches.index') }}" class="footer-link">
                                 <i class="fas fa-file-alt me-2"></i>Fiches
                             </a>
                         </li>

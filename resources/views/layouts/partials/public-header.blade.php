@@ -25,7 +25,12 @@
                         <i class="fas fa-home me-2"></i>Accueil
                     </a>
                 </li>
-
+<li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('public.fiches.*') ? 'active' : '' }}" 
+                       href="{{ route('public.fiches.index') }}">
+                        <i class="fas fa-file-alt me-1"></i>Fiches
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link px-3 py-2 {{ request()->routeIs('about') ? 'active text-primary fw-bold' : '' }}" 
                        href="{{ route('about') }}">

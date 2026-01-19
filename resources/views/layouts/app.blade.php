@@ -213,17 +213,10 @@
         @include('layouts.partials.public-footer')
     @endauth
     
-    <!-- Scripts -->
-    
-    <!-- Bootstrap Bundle (inclut Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- jQuery (si nécessaire) -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    
+   
     <!-- Scripts personnalisés -->
 
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}"></script>
     <script>
         // Auto-hide alerts après 5 secondes
         document.addEventListener('DOMContentLoaded', function() {

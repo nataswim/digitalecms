@@ -11,23 +11,19 @@ class StoreMediaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->check() && auth()->user()->hasPermission('media.upload');
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
             'files' => ['required', 'array', 'min:1'],
-            'files.*' => [
-                'required',
-                'file',
-                'image',
-                'mimes:jpeg,png,jpg,gif,webp',
-                'max:5120' // 5MB
-            ],
+            'files.*' => ['required', 'file', 'mimes:jpeg,jpg,png,gif,webp,svg', 'max:5120'], // 5MB
             'names' => ['nullable', 'array'],
             'names.*' => ['nullable', 'string', 'max:255'],
             'alt_texts' => ['nullable', 'array'],
@@ -38,15 +34,15 @@ class StoreMediaRequest extends FormRequest
 
     /**
      * Get custom messages for validator errors.
+     *
+     * @return array<string, string>
      */
     public function messages(): array
     {
         return [
-            'files.required' => 'Vous devez sélectionner au moins un fichier.',
-            'files.*.image' => 'Le fichier doit être une image.',
-            'files.*.mimes' => 'Format accepté : JPEG, PNG, JPG, GIF, WebP.',
-            'files.*.max' => 'La taille maximale par fichier est de 5 Mo.',
-            'media_category_id.exists' => 'La catégorie sélectionnée n\'existe pas.',
+            'files.required' => 'Veuillez sélectionner au moins un fichier.',
+            'files.*.mimes' => 'Le fichier doit être une image (JPEG, PNG, GIF, WebP, SVG).',
+            'files.*.max' => 'Le fichier ne doit pas dépasser 5 MB.',
         ];
     }
 }

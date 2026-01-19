@@ -1,4 +1,4 @@
-{{-- resources/views/admin/roles/index.blade.php --}}
+{{-- Rôles - Index avec Actions Rapides --}}
 @extends('layouts.app')
 
 @section('title', 'Gestion des rôles')
@@ -20,6 +20,60 @@
 @section('content')
 <div class="py-4">
     <div class="container-fluid">
+        {{-- ACTIONS RAPIDES --}}
+        <div class="row g-3 mb-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-user-shield fa-lg text-primary"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Tous les rôles</h6>
+                        <p class="text-muted small mb-3">Liste complète des rôles</p>
+                        <a href="{{ route('admin.roles.index') }}" class="btn btn-sm btn-outline-primary w-100">
+                            <i class="fas fa-arrow-right me-1"></i>Voir tout
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-plus-circle fa-lg text-success"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Nouveau rôle</h6>
+                        <p class="text-muted small mb-3">Créer un nouveau rôle</p>
+                        @if(auth()->user()->hasPermission('roles.manage'))
+                        <a href="{{ route('admin.roles.create') }}" class="btn btn-sm btn-outline-success w-100">
+                            <i class="fas fa-plus me-1"></i>Créer
+                        </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-key fa-lg text-info"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Permissions</h6>
+                        <p class="text-muted small mb-3">Gérer les permissions</p>
+                        <a href="{{ route('admin.permissions.index') }}" class="btn btn-sm btn-outline-info w-100">
+                            <i class="fas fa-arrow-right me-1"></i>Gérer
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Reste du contenu identique à l'original --}}
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white border-bottom p-4">
                 <div class="row align-items-center">
@@ -160,7 +214,7 @@
             @endif
         </div>
         
-        <!-- Statistiques des rôles -->
+        {{-- Statistiques des rôles --}}
         <div class="row g-4 mt-4">
             @foreach($roles->take(4) as $role)
             <div class="col-md-6 col-lg-3">

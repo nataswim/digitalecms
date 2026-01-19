@@ -1,3 +1,4 @@
+{{-- Catégories de Médias - Index avec Actions Rapides --}}
 @extends('layouts.app')
 
 @section('title', 'Catégories de médias')
@@ -25,12 +26,82 @@
 @section('content')
 <div class="py-4">
     <div class="container-fluid">
+        {{-- ACTIONS RAPIDES --}}
+        <div class="row g-3 mb-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-images fa-lg text-primary"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Tous les médias</h6>
+                        <p class="text-muted small mb-3">Voir tous les médias</p>
+                        <a href="{{ route('admin.media.index') }}" class="btn btn-sm btn-outline-primary w-100">
+                            <i class="fas fa-arrow-right me-1"></i>Accéder
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-cloud-upload-alt fa-lg text-success"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Uploader un média</h6>
+                        <p class="text-muted small mb-3">Ajouter de nouveaux médias</p>
+                        <a href="{{ route('admin.media.create') }}" class="btn btn-sm btn-outline-success w-100">
+                            <i class="fas fa-upload me-1"></i>Upload
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-folder fa-lg text-info"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Catégories</h6>
+                        <p class="text-muted small mb-3">Gérer les catégories</p>
+                        <a href="{{ route('admin.media.categories') }}" class="btn btn-sm btn-outline-info w-100">
+                            <i class="fas fa-arrow-right me-1"></i>Gérer
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card border-0 shadow-sm h-100 hover-lift">
+                    <div class="card-body p-4 text-center">
+                        <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-plus fa-lg text-warning"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2">Nouvelle catégorie</h6>
+                        <p class="text-muted small mb-3">Créer une catégorie</p>
+                        <button type="button" 
+                                class="btn btn-sm btn-outline-warning w-100" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#categoryModal">
+                            <i class="fas fa-plus me-1"></i>Créer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- LISTE DES CATÉGORIES --}}
         @if($categories->count() > 0)
             <div class="row g-4">
                 @foreach($categories as $category)
                     <div class="col-lg-6">
                         <div class="card border-0 shadow-sm h-100">
-                            <!-- En-tête de la catégorie -->
                             <div class="card-header d-flex justify-content-between align-items-center p-4" 
                                  style="background-color: {{ $category->color }}15; border-left: 4px solid {{ $category->color }}">
                                 <div class="d-flex align-items-center">
@@ -64,14 +135,12 @@
                                 </div>
                             </div>
 
-                            <!-- Description -->
                             @if($category->description)
                                 <div class="card-body py-2 border-bottom">
                                     <small class="text-muted">{{ $category->description }}</small>
                                 </div>
                             @endif
 
-                            <!-- Miniatures des médias -->
                             <div class="card-body p-4">
                                 @if($category->media_count > 0)
                                     <div class="row g-2">
@@ -107,7 +176,6 @@
                                 @endif
                             </div>
 
-                            <!-- Footer -->
                             <div class="card-footer bg-light p-3">
                                 <div class="row text-center small text-muted">
                                     <div class="col-4">
@@ -147,7 +215,7 @@
     </div>
 </div>
 
-<!-- Modal Catégorie -->
+{{-- Modal Catégorie --}}
 @include('admin.media.modals.category')
 @endsection
 
@@ -159,6 +227,15 @@
 
 .media-thumb:hover .media-thumb-overlay i {
     display: block !important;
+}
+
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
 }
 </style>
 @endpush
