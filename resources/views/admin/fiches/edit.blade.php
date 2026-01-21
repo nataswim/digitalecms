@@ -340,7 +340,7 @@
                         </div>
                     </div>
 
-                    <!-- Image -->
+                    <!-- Image - Nouveau sélecteur de médias -->
                     <div class="card border-0 shadow-sm">
                         <div class="card-header bg-white border-bottom p-4">
                             <h5 class="mb-0">
@@ -349,26 +349,14 @@
                             </h5>
                         </div>
                         <div class="card-body p-4">
-                            <div class="mb-3">
-                                <label for="image" class="form-label fw-semibold">
-                                    URL de l'image
-                                </label>
-                                <input type="text" 
-                                       class="form-control @error('image') is-invalid @enderror" 
-                                       id="image" 
-                                       name="image" 
-                                       value="{{ old('image', $fiche->image) }}" 
-                                       placeholder="https://...">
-                                @error('image')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div id="imagePreview" class="{{ $fiche->image ? '' : 'd-none' }}">
-                                <img id="imagePreviewImg" 
-                                     src="{{ $fiche->image }}" 
-                                     alt="Aperçu" 
-                                     class="img-fluid rounded">
-                            </div>
+                            @include('components.media-selector', [
+                                'inputName' => 'media_id',
+                                'inputId' => 'media_id',
+                                'selectedMediaId' => old('media_id', $fiche->media_id),
+                                'selectedMediaUrl' => old('media_id') ? null : ($fiche->media->url ?? $fiche->image ?? null),
+                                'label' => 'Image de la fiche',
+                                'required' => false
+                            ])
                         </div>
                     </div>
                 </div>
@@ -382,16 +370,12 @@
                             <a href="{{ route('admin.fiches.index') }}" class="btn btn-outline-secondary">
                                 <i class="fas fa-times me-2"></i>Annuler
                             </a>
-                            <form action="{{ route('admin.fiches.destroy', $fiche) }}" 
-                                  method="POST" 
-                                  class="d-inline"
-                                  onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette fiche ?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-outline-danger">
-                                    <i class="fas fa-trash me-2"></i>Supprimer
-                                </button>
-                            </form>
+                            
+                            <button type="button" 
+                                    class="btn btn-outline-danger" 
+                                    onclick="if(confirm('Êtes-vous sûr de vouloir supprimer cette fiche ?')) document.getElementById('delete-fiche-form').submit();">
+                                <i class="fas fa-trash me-2"></i>Supprimer
+                            </button>
                         </div>
                         <div class="d-flex gap-2">
                             <button type="submit" name="action" value="save" class="btn btn-primary">
@@ -404,7 +388,11 @@
                     </div>
                 </div>
             </div>
+        </form> <form id="delete-fiche-form" action="{{ route('admin.fiches.destroy', $fiche) }}" method="POST" style="display:none;">
+            @csrf
+            @method('DELETE')
         </form>
+
     </div>
 </div>
 @endsection
@@ -455,20 +443,6 @@ window.addEventListener('DOMContentLoaded', function() {
     const categoryId = document.getElementById('fiches_category_id').value;
     if (categoryId) {
         document.getElementById('fiches_category_id').dispatchEvent(new Event('change'));
-    }
-});
-
-// Prévisualisation de l'image
-document.getElementById('image')?.addEventListener('input', function() {
-    const url = this.value;
-    const preview = document.getElementById('imagePreview');
-    const img = document.getElementById('imagePreviewImg');
-    
-    if (url) {
-        img.src = url;
-        preview.classList.remove('d-none');
-    } else {
-        preview.classList.add('d-none');
     }
 });
 </script>

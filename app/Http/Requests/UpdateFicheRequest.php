@@ -25,6 +25,7 @@ class UpdateFicheRequest extends FormRequest
             'short_description' => 'required|string',
             'long_description' => 'nullable|string',
             'image' => 'nullable|string|max:2048',
+            'media_id' => 'nullable|exists:media,id',
             'visibility' => 'required|string|in:public,authenticated',
             'is_published' => 'nullable|boolean',
             'is_featured' => 'nullable|boolean',
@@ -65,6 +66,7 @@ class UpdateFicheRequest extends FormRequest
             'visibility.in' => 'La visibilité doit être "public" ou "authenticated".',
             'fiches_category_id.exists' => 'La catégorie sélectionnée n\'existe pas.',
             'fiches_sous_category_id.exists' => 'La sous-catégorie sélectionnée n\'existe pas.',
+            'media_id.exists' => 'Le média sélectionné n\'existe pas.',
         ];
     }
 

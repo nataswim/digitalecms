@@ -39,31 +39,39 @@ class MediaController extends Controller
         }
 
         $media = $query->paginate($perPage);
+        
+        // ⭐ MODIFICATION : Retourner JSON si requête AJAX
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json($media);
+        }
+
         $categories = MediaCategory::active()->ordered()->get();
         $stats = $this->getMediaStats();
 
         return view('admin.media.index', compact('media', 'categories', 'stats', 'search', 'categoryId'));
     }
-/**
- * Afficher le formulaire d'upload
- */
-public function create()
-{
-    $categories = MediaCategory::active()->ordered()->get();
-    
-    return view('admin.media.create', compact('categories'));
-}
 
-/**
- * Afficher le formulaire d'édition
- */
-public function edit(Media $media)
-{
-    $media->load(['category', 'uploader']);
-    $categories = MediaCategory::active()->ordered()->get();
-    
-    return view('admin.media.edit', compact('media', 'categories'));
-}
+    /**
+     * Afficher le formulaire d'upload
+     */
+    public function create()
+    {
+        $categories = MediaCategory::active()->ordered()->get();
+        
+        return view('admin.media.create', compact('categories'));
+    }
+
+    /**
+     * Afficher le formulaire d'édition
+     */
+    public function edit(Media $media)
+    {
+        $media->load(['category', 'uploader']);
+        $categories = MediaCategory::active()->ordered()->get();
+        
+        return view('admin.media.edit', compact('media', 'categories'));
+    }
+
     /**
      * Upload de fichiers
      */
@@ -177,11 +185,16 @@ public function edit(Media $media)
     /**
      * Gestion des catégories
      */
-    public function categories()
+    public function categories(Request $request)
     {
         $categories = MediaCategory::withCount('media')
             ->ordered()
             ->get();
+
+        // ⭐ MODIFICATION : Retourner JSON si requête AJAX
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json($categories);
+        }
 
         return view('admin.media.categories', compact('categories'));
     }

@@ -18,7 +18,6 @@ class Fiche extends Model
         'short_description',
         'long_description',
         'image',
-        'media_id',
         'visibility',
         'is_published',
         'is_featured',
@@ -116,14 +115,6 @@ class Fiche extends Model
     }
 
     /**
-     * Obtenir le média (image) de cette fiche
-     */
-    public function media(): BelongsTo
-    {
-        return $this->belongsTo(Media::class, 'media_id');
-    }
-
-    /**
      * Obtenir le créateur de cette fiche
      */
     public function creator(): BelongsTo
@@ -137,25 +128,6 @@ class Fiche extends Model
     public function updater(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
-    }
-
-    /**
-     * Obtenir l'URL de l'image (priorité au media, sinon URL directe)
-     */
-    public function getImageUrlAttribute(): ?string
-    {
-        // Priorité 1: Media de la bibliothèque
-        if ($this->media_id && $this->media) {
-            return $this->media->url;
-        }
-        
-        // Priorité 2: URL directe (rétrocompatibilité)
-        if ($this->image) {
-            return $this->image;
-        }
-        
-        // Aucune image
-        return null;
     }
 
     /**

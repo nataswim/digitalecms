@@ -300,7 +300,7 @@
                         </div>
                     </div>
 
-                    <!-- Image -->
+                    <!-- Image - Nouveau sélecteur de médias -->
                     <div class="card border-0 shadow-sm">
                         <div class="card-header bg-white border-bottom p-4">
                             <h5 class="mb-0">
@@ -309,23 +309,14 @@
                             </h5>
                         </div>
                         <div class="card-body p-4">
-                            <div class="mb-3">
-                                <label for="image" class="form-label fw-semibold">
-                                    URL de l'image
-                                </label>
-                                <input type="text" 
-                                       class="form-control @error('image') is-invalid @enderror" 
-                                       id="image" 
-                                       name="image" 
-                                       value="{{ old('image') }}" 
-                                       placeholder="https://...">
-                                @error('image')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div id="imagePreview" class="d-none">
-                                <img id="imagePreviewImg" src="" alt="Aperçu" class="img-fluid rounded">
-                            </div>
+                            @include('components.media-selector', [
+                                'inputName' => 'media_id',
+                                'inputId' => 'media_id',
+                                'selectedMediaId' => old('media_id'),
+                                'selectedMediaUrl' => null,
+                                'label' => 'Image de la fiche',
+                                'required' => false
+                            ])
                         </div>
                     </div>
                 </div>
@@ -389,20 +380,6 @@ document.getElementById('fiches_category_id')?.addEventListener('change', functi
                 sousCategorySelect.appendChild(option);
             });
         });
-});
-
-// Prévisualisation de l'image
-document.getElementById('image')?.addEventListener('input', function() {
-    const url = this.value;
-    const preview = document.getElementById('imagePreview');
-    const img = document.getElementById('imagePreviewImg');
-    
-    if (url) {
-        img.src = url;
-        preview.classList.remove('d-none');
-    } else {
-        preview.classList.add('d-none');
-    }
 });
 </script>
 @endpush

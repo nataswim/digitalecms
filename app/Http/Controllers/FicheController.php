@@ -148,7 +148,7 @@ class FicheController extends Controller
     {
         $this->checkAdminAccess();
         
-        $fiche->load(['category', 'sousCategory', 'creator', 'updater']);
+        $fiche->load(['category', 'sousCategory', 'creator', 'updater', 'media']);
         
         return view('admin.fiches.show', compact('fiche'));
     }

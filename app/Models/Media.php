@@ -34,6 +34,18 @@ class Media extends Model
     ];
 
     /**
+     * AJOUT CRUCIAL : Ces attributs seront inclus dans les réponses JSON
+     * C'est ce qui permet au JavaScript de lire "item.url"
+     */
+    protected $appends = [
+        'url', 
+        'full_url', 
+        'formatted_size', 
+        'is_image', 
+        'dimensions'
+    ];
+
+    /**
      * Relation avec la catégorie
      */
     public function category()
@@ -51,10 +63,11 @@ class Media extends Model
 
     /**
      * URL publique du fichier
+     * Utilisé par le sélecteur de média
      */
     public function getUrlAttribute()
     {
-        if (Storage::disk('public')->exists($this->path)) {
+        if ($this->path && Storage::disk('public')->exists($this->path)) {
             return asset('storage/' . $this->path);
         }
         
@@ -62,21 +75,22 @@ class Media extends Model
     }
 
     /**
-     * URL complète
+     * URL complète (avec domaine)
      */
     public function getFullUrlAttribute()
     {
-        return url($this->url);
+        return $this->url;
     }
 
     /**
-     * Taille formatée
+     * Taille formatée (ex: 1.2 MB)
      */
     public function getFormattedSizeAttribute()
     {
         $bytes = $this->size;
-        $units = ['B', 'KB', 'MB', 'GB'];
+        if ($bytes <= 0) return '0 B';
         
+        $units = ['B', 'KB', 'MB', 'GB'];
         for ($i = 0; $bytes > 1024 && $i < count($units) - 1; $i++) {
             $bytes /= 1024;
         }
@@ -113,44 +127,40 @@ class Media extends Model
     }
 
     /**
-     * Scope pour les images
+     * Scopes pour filtrer les requêtes
      */
     public function scopeImages($query)
     {
         return $query->where('mime_type', 'like', 'image/%');
     }
 
-    /**
-     * Scope par catégorie
-     */
     public function scopeInCategory($query, $categoryId)
     {
         return $query->where('media_category_id', $categoryId);
     }
 
-    /**
-     * Scope récents
-     */
     public function scopeRecent($query, $days = 30)
     {
         return $query->where('created_at', '>=', now()->subDays($days));
     }
 
     /**
-     * Boot method
+     * Boot method pour gérer les événements du modèle
      */
     protected static function boot()
     {
         parent::boot();
 
+        // Attribuer automatiquement l'ID de l'utilisateur lors de l'upload
         static::creating(function ($media) {
             if (auth()->check()) {
                 $media->uploaded_by = auth()->id();
             }
         });
 
+        // Supprimer physiquement le fichier du disque lors de la suppression en BDD
         static::deleting(function ($media) {
-            if (Storage::disk('public')->exists($media->path)) {
+            if ($media->path && Storage::disk('public')->exists($media->path)) {
                 Storage::disk('public')->delete($media->path);
             }
         });
