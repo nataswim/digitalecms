@@ -9,5 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Digital’SOS JS chargé avec succès !');
 });
 
-// import './bootstrap';
-// import 'bootstrap';
+import Quill from 'quill';
+import 'quill/dist/quill.snow.css'; // Importe le CSS directement dans votre JS
+
+window.Quill = Quill;

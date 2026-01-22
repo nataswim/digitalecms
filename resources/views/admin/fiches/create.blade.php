@@ -81,17 +81,18 @@
 
                                 <!-- Description longue -->
                                 <div class="col-12">
-                                    <label for="long_description" class="form-label fw-semibold">
-                                        Description détaillée
-                                    </label>
-                                    <textarea class="form-control @error('long_description') is-invalid @enderror" 
-                                              id="long_description" 
-                                              name="long_description" 
-                                              rows="10">{{ old('long_description') }}</textarea>
-                                    @error('long_description')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+    <label class="form-label fw-semibold">Description détaillée</label>
+    
+    <div id="quill-editor" style="height: 300px; background: white;">
+        {!! old('long_description', $fiche->long_description ?? '') !!}
+    </div>
+
+    <input type="hidden" name="long_description" id="long_description_input">
+    
+    @error('long_description')
+        <div class="text-danger small mt-1">{{ $message }}</div>
+    @enderror
+</div>
                             </div>
                         </div>
                     </div>
@@ -382,4 +383,37 @@ document.getElementById('fiches_category_id')?.addEventListener('change', functi
         });
 });
 </script>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Configuration de la barre d'outils (Toutes ces options sont gratuites)
+    const toolbarOptions = [
+        [{ 'header': [1, 2, 3, false] }],
+        ['bold', 'italic', 'underline', 'strike'],        // Styles
+        [{ 'color': [] }, { 'background': [] }],          // Couleurs
+        [{ 'align': [] }],                                // Alignement
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],     // Listes
+        ['link', 'blockquote', 'code-block'],
+        ['clean']                                         // Bouton pour effacer le formatage
+    ];
+
+    // Initialisation de l'éditeur
+    const quill = new Quill('#quill-editor', {
+        modules: { toolbar: toolbarOptions },
+        theme: 'snow'
+    });
+
+    // Synchronisation avec le formulaire
+    const form = document.querySelector('#ficheForm'); // Vérifiez que l'ID de votre form est bien ficheForm
+    const input = document.querySelector('#long_description_input');
+
+    form.addEventListener('submit', function() {
+        // On récupère le contenu HTML de Quill pour le mettre dans l'input hidden
+        input.value = quill.root.innerHTML;
+    });
+});
+</script>
+
 @endpush
